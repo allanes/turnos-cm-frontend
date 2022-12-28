@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { roomsList_initial_states } from '../../services/roomsList_initial_states'
+import { RoomDescription } from '../RoomDescription/RoomDescription'
 
 interface Room {
   roomGroup: number
@@ -21,19 +22,7 @@ export const RoomContainer = () => {
 
   return (
     <>
-      <div>RoomContainer</div>
-      <ul>
-        {
-          roomsList.map((room, index) => {
-            return (
-              <li key={index}>
-                <h1>{`Consultorio ${room.roomGroup}-${room.roomSubGroup}`}</h1>
-                <h4><small>{room.doctorName}</small></h4>
-              </li>
-            )
-          })
-        }
-      </ul>
+      <RoomDescription roomsList={roomsList} />
     </>
   )
 }
