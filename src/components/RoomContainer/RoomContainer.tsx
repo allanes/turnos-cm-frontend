@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { roomsList_initial_states } from '../../services/roomsList_initial_states'
-import { RoomDescription } from '../RoomDescription/RoomDescription'
-
-interface Room {
-  roomGroup: number
-  roomSubGroup: string
-  doctorName?: string
-}
+import { RoomDescription } from './RoomDescription'
+import { Room } from '../../types/types'
 
 interface RoomState {
   rooms: Array<Room>
