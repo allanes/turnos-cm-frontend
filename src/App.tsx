@@ -1,11 +1,12 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { NavBar } from './components/NavBar/NavBar';
+import { Header } from './components/Header/Header';
 
 function App() {
   return (
-    <div className="container">
-     <p className=''>Bueno empezamos</p>
-     <p className=''>Bueno empezamos?</p>
+    <div>
+      <Header />
     </div>
   );
 }
