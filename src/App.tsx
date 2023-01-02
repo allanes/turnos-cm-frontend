@@ -1,11 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Header } from './components/Header/Header';
+import { RoomContainer } from './components/RoomContainer/RoomContainer';
 
 function App() {
   return (
-    <div className="container">
-     <p className=''>Bueno empezamos</p>
-     <p className=''>Bueno empezamos?</p>
+    <div>
+      <Header />
+      <RoomContainer />      
     </div>
   );
 }

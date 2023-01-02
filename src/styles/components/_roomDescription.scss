@@ -1,0 +1,13 @@
+.cardRoom {
+    height: 500px;
+    border: 2px solid ;
+    border-color: $mi-grey-smoke;
+    border-radius: 2rem;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.cardRoom-Top{
+    background: $mi-orange;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+}
