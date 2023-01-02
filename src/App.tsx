@@ -1,12 +1,13 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { NavBar } from './components/NavBar/NavBar';
 import { Header } from './components/Header/Header';
+import { RoomContainer } from './components/RoomContainer/RoomContainer';
 
 function App() {
   return (
     <div>
       <Header />
+      <RoomContainer />      
     </div>
   );
 }
