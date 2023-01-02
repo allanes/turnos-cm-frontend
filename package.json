@@ -23,7 +23,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "generate-client": "rm -r src/codegen_output && openapi --input http://localhost:8000/openapi.json --output src/codegen_output --client fetch --exportSchemas true"
   },
   "eslintConfig": {
     "extends": [
@@ -42,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "openapi-typescript-codegen": "^0.23.0"
   }
 }
