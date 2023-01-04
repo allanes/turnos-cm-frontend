@@ -2,12 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type MedicoUpdate = {
+export type RecepcionistaCreate = {
     id: number;
-    nombre?: string;
-    apellido?: string;
+    nombre: string;
+    apellido: string;
     email?: string;
     telefono?: string;
-    especialidad?: string;
 };
 

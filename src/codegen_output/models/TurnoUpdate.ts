@@ -2,12 +2,9 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type Turno = {
+export type TurnoUpdate = {
     id_consultorio?: number;
     id_medico?: number;
     motivo_consulta?: string;
-    id: number;
-    pendiente: boolean;
-    fecha: string;
 };
 

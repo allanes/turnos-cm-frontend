@@ -1,31 +1,31 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { Turno } from '../models/Turno';
-import type { TurnoCreate } from '../models/TurnoCreate';
-import type { TurnoUpdate } from '../models/TurnoUpdate';
+import type { Recepcionista } from '../models/Recepcionista';
+import type { RecepcionistaCreate } from '../models/RecepcionistaCreate';
+import type { RecepcionistaUpdate } from '../models/RecepcionistaUpdate';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
-export class TurnosService {
+export class RecepcionistasService {
 
     /**
-     * Read Turnos
-     * Retrieve turnos.
+     * Read Recepcionistas
+     * Retrieve recepcionistas.
      * @param skip
      * @param limit
-     * @returns Turno Successful Response
+     * @returns Recepcionista Successful Response
      * @throws ApiError
      */
-    public static readTurnosApiV1TurnsGet(
+    public static readRecepcionistasApiV1ReceptionistsGet(
         skip?: number,
         limit: number = 100,
-    ): CancelablePromise<Array<Turno>> {
+    ): CancelablePromise<Array<Recepcionista>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/v1/turns/',
+            url: '/api/v1/receptionists/',
             query: {
                 'skip': skip,
                 'limit': limit,
@@ -37,18 +37,18 @@ export class TurnosService {
     }
 
     /**
-     * Create Turno
-     * Create new turno.
+     * Create Recepcionista
+     * Create new recepcionista.
      * @param requestBody
-     * @returns Turno Successful Response
+     * @returns Recepcionista Successful Response
      * @throws ApiError
      */
-    public static createTurnoApiV1TurnsPost(
-        requestBody: TurnoCreate,
-    ): CancelablePromise<Turno> {
+    public static createRecepcionistaApiV1ReceptionistsPost(
+        requestBody: RecepcionistaCreate,
+    ): CancelablePromise<Recepcionista> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/api/v1/turns/',
+            url: '/api/v1/receptionists/',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
@@ -58,18 +58,18 @@ export class TurnosService {
     }
 
     /**
-     * Read Turno
-     * Get turno by ID.
+     * Read Recepcionista
+     * Get recepcionista by ID.
      * @param id
-     * @returns Turno Successful Response
+     * @returns Recepcionista Successful Response
      * @throws ApiError
      */
-    public static readTurnoApiV1TurnsIdGet(
+    public static readRecepcionistaApiV1ReceptionistsIdGet(
         id: number,
-    ): CancelablePromise<Turno> {
+    ): CancelablePromise<Recepcionista> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/v1/turns/{id}',
+            url: '/api/v1/receptionists/{id}',
             path: {
                 'id': id,
             },
@@ -80,20 +80,20 @@ export class TurnosService {
     }
 
     /**
-     * Update Turno
-     * Update an turno.
+     * Update Recepcionista
+     * Update an recepcionista.
      * @param id
      * @param requestBody
-     * @returns Turno Successful Response
+     * @returns Recepcionista Successful Response
      * @throws ApiError
      */
-    public static updateTurnoApiV1TurnsIdPut(
+    public static updateRecepcionistaApiV1ReceptionistsIdPut(
         id: number,
-        requestBody: TurnoUpdate,
-    ): CancelablePromise<Turno> {
+        requestBody: RecepcionistaUpdate,
+    ): CancelablePromise<Recepcionista> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/api/v1/turns/{id}',
+            url: '/api/v1/receptionists/{id}',
             path: {
                 'id': id,
             },
@@ -106,18 +106,18 @@ export class TurnosService {
     }
 
     /**
-     * Delete Turno
-     * Delete an turno.
+     * Delete Recepcionista
+     * Delete an recepcionista.
      * @param id
-     * @returns Turno Successful Response
+     * @returns Recepcionista Successful Response
      * @throws ApiError
      */
-    public static deleteTurnoApiV1TurnsIdDelete(
+    public static deleteRecepcionistaApiV1ReceptionistsIdDelete(
         id: number,
-    ): CancelablePromise<Turno> {
+    ): CancelablePromise<Recepcionista> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/api/v1/turns/{id}',
+            url: '/api/v1/receptionists/{id}',
             path: {
                 'id': id,
             },

@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 export type PacienteUpdate = {
-    dni?: number;
+    id: number;
     nombre?: string;
     apellido?: string;
     email?: string;

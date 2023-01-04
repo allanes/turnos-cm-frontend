@@ -3,7 +3,7 @@
 /* eslint-disable */
 export const $Medico = {
     properties: {
-        dni: {
+        id: {
             type: 'number',
             isRequired: true,
         },
@@ -25,10 +25,6 @@ export const $Medico = {
         },
         especialidad: {
             type: 'string',
-            isRequired: true,
-        },
-        id: {
-            type: 'number',
             isRequired: true,
         },
         activo: {

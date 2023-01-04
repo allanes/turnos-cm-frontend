@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $TurnoCreate = {
+export const $RegistroConsultorios = {
     properties: {
         id_consultorio: {
             type: 'number',
@@ -11,8 +11,14 @@ export const $TurnoCreate = {
             type: 'number',
             isRequired: true,
         },
-        motivo_consulta: {
+        id: {
+            type: 'number',
+            isRequired: true,
+        },
+        fecha: {
             type: 'string',
+            isRequired: true,
+            format: 'date-time',
         },
     },
 } as const;

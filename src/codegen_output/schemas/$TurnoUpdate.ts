@@ -1,15 +1,13 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $TurnoCreate = {
+export const $TurnoUpdate = {
     properties: {
         id_consultorio: {
             type: 'number',
-            isRequired: true,
         },
         id_medico: {
             type: 'number',
-            isRequired: true,
         },
         motivo_consulta: {
             type: 'string',

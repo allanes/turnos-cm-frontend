@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $TurnoCreate = {
+export const $RegistroConsultoriosCreate = {
     properties: {
         id_consultorio: {
             type: 'number',
@@ -10,9 +10,6 @@ export const $TurnoCreate = {
         id_medico: {
             type: 'number',
             isRequired: true,
-        },
-        motivo_consulta: {
-            type: 'string',
         },
     },
 } as const;

@@ -2,9 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export type TurnoCreate = {
+export type RegistroConsultorios = {
     id_consultorio: number;
     id_medico: number;
-    motivo_consulta?: string;
+    id: number;
+    fecha: string;
 };
 

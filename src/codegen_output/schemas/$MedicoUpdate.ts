@@ -3,8 +3,9 @@
 /* eslint-disable */
 export const $MedicoUpdate = {
     properties: {
-        dni: {
+        id: {
             type: 'number',
+            isRequired: true,
         },
         nombre: {
             type: 'string',

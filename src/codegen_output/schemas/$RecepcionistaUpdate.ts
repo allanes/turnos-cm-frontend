@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $MedicoCreate = {
+export const $RecepcionistaUpdate = {
     properties: {
         id: {
             type: 'number',
@@ -9,23 +9,15 @@ export const $MedicoCreate = {
         },
         nombre: {
             type: 'string',
-            isRequired: true,
         },
         apellido: {
             type: 'string',
-            isRequired: true,
         },
         email: {
             type: 'string',
         },
         telefono: {
             type: 'string',
-        },
-        especialidad: {
-            type: 'string',
-        },
-        activo: {
-            type: 'boolean',
         },
     },
 } as const;
