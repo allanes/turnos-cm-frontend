@@ -8,6 +8,7 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { Consultorio } from './models/Consultorio';
 export type { ConsultorioCreate } from './models/ConsultorioCreate';
+export type { ConsultorioDetallado } from './models/ConsultorioDetallado';
 export type { ConsultorioUpdate } from './models/ConsultorioUpdate';
 export type { HTTPValidationError } from './models/HTTPValidationError';
 export type { Medico } from './models/Medico';
@@ -22,6 +23,7 @@ export type { ValidationError } from './models/ValidationError';
 
 export { $Consultorio } from './schemas/$Consultorio';
 export { $ConsultorioCreate } from './schemas/$ConsultorioCreate';
+export { $ConsultorioDetallado } from './schemas/$ConsultorioDetallado';
 export { $ConsultorioUpdate } from './schemas/$ConsultorioUpdate';
 export { $HTTPValidationError } from './schemas/$HTTPValidationError';
 export { $Medico } from './schemas/$Medico';
