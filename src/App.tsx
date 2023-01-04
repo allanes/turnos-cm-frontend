@@ -17,13 +17,17 @@ function App() {
       <Header />
       <div className='mi-app'>
         <Router>
-          <SideBar />
-          <Routes>
-            <Route path='/' element={<OfficesContainer />} />
-            <Route path={categoriesList_sidebar[1].link} element={<DoctorsContainer />} />
-            <Route path={categoriesList_sidebar[2].link} element={<PatientsContainer />} />
-            <Route path={categoriesList_sidebar[3].link} element={<TurnsContainer />} />
-          </Routes>
+          <div className='sidebar-container'>
+            <SideBar />
+          </div>
+          <div className='pages-container'>
+            <Routes>
+              <Route path='/' element={<OfficesContainer />} />
+              <Route path={categoriesList_sidebar[1].link} element={<DoctorsContainer />} />
+              <Route path={categoriesList_sidebar[2].link} element={<PatientsContainer />} />
+              <Route path={categoriesList_sidebar[3].link} element={<TurnsContainer />} />
+            </Routes>
+          </div>
         </Router>
       </div>
     </>

@@ -1,3 +1,6 @@
 .mi-app{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
     background: $mi-grey-sky;
 }
