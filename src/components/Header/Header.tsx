@@ -1,10 +1,10 @@
 import React from 'react'
 
-import logocm from '../../assets/icons/logo-cm.png'
+import logocm from '../../assets/icons/logoCM.png'
 
 export const Header = () => {
 	return (
-		<div className="container-fluid bg-primary text-white py-4">
+		<div className="container-fluid container-header text-white py-4">
 			<div className="row align-items-center">
 				<div className="col d-flex align-items-center">
 					<img src={logocm} className="float-start mx-4 logocm" alt="Logo del centro médico esperanza" />

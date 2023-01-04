@@ -1,9 +1,12 @@
 // Default configurations and variables
 
 @import './base/settings';
+@import './base/pallete';
 
 // text, forms, and other styles
 
 // Components styles
 
+@import './components/header';
 @import './components/logocm';
+@import './components/roomDescription';
