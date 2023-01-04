@@ -7,8 +7,6 @@ interface OfficesState {
   offices: Array<ConsultorioDetallado>
 }
 
-// const consultoriosServices = new ConsultoriosService()
-
 export const OfficesContainer = () => {
 
   const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])

@@ -7,7 +7,7 @@ import { PatientContainer } from './components/PatientContainer/PatientContainer
 function App() {
 
   return (
-    <div>
+    <div className='mi-app'>
       <Header />
       {/* <PatientContainer /> */}
       <OfficesContainer />
