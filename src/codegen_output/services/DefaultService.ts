@@ -19,4 +19,16 @@ export class DefaultService {
         });
     }
 
+    /**
+     * Inicializar Db
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static inicializarDbCargarTurnosEjemploGet(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/cargar-turnos-ejemplo/',
+        });
+    }
+
 }
