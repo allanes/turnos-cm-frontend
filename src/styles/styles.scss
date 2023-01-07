@@ -2,6 +2,8 @@
 
 @import './base/settings';
 @import './base/pallete';
+@import './base/logocm';
+@import './base/icons';
 
 // text, forms, and other styles
 
@@ -11,5 +13,4 @@
 @import './components/sidebar';
 @import './components/pagesContainer';
 @import './components/header';
-@import './components/logocm';
 @import './components/roomDescription';
