@@ -1,13 +1,13 @@
 import React from 'react'
 
 interface Props{
-    patientsList: string[]
+    patientsList?: string[]
 }
 
-export const RoomPatientsList = ({patientsList}: Props) => {
+export const OfficesPatientsList = ({patientsList}: Props) => {
   return (
     <div>
-        {patientsList.map((patient, index) => {
+        {patientsList?.map((patient, index) => {
             return(
                 <div key={index}>
                     {patient}

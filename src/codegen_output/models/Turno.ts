@@ -3,10 +3,11 @@
 /* eslint-disable */
 
 export type Turno = {
-    id_paciente: number;
-    id_medico: number;
-    motivo_consulta: string;
-    fecha: string;
+    id_consultorio?: number;
+    id_medico?: number;
+    motivo_consulta?: string;
     id: number;
+    pendiente: boolean;
+    fecha: string;
 };
 

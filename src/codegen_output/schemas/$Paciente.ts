@@ -3,7 +3,7 @@
 /* eslint-disable */
 export const $Paciente = {
     properties: {
-        dni: {
+        id: {
             type: 'number',
             isRequired: true,
         },
@@ -21,10 +21,6 @@ export const $Paciente = {
         },
         telefono: {
             type: 'string',
-            isRequired: true,
-        },
-        id: {
-            type: 'number',
             isRequired: true,
         },
         turnos: {

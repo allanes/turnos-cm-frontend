@@ -3,7 +3,7 @@
 /* eslint-disable */
 export const $MedicoCreate = {
     properties: {
-        dni: {
+        id: {
             type: 'number',
             isRequired: true,
         },

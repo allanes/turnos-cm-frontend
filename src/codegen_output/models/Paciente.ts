@@ -5,12 +5,11 @@
 import type { Turno } from './Turno';
 
 export type Paciente = {
-    dni: number;
+    id: number;
     nombre: string;
     apellido: string;
     email: string;
     telefono: string;
-    id: number;
     turnos?: Array<Turno>;
 };
 

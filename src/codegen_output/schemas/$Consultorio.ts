@@ -19,14 +19,5 @@ export const $Consultorio = {
             type: 'number',
             isRequired: true,
         },
-        medico: {
-            type: 'string',
-        },
-        pacientes: {
-            type: 'array',
-            contains: {
-                type: 'string',
-            },
-        },
     },
 } as const;

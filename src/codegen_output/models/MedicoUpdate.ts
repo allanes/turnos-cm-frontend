@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 export type MedicoUpdate = {
-    dni?: number;
+    id: number;
     nombre?: string;
     apellido?: string;
     email?: string;

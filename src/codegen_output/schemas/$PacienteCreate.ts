@@ -3,7 +3,7 @@
 /* eslint-disable */
 export const $PacienteCreate = {
     properties: {
-        dni: {
+        id: {
             type: 'number',
             isRequired: true,
         },

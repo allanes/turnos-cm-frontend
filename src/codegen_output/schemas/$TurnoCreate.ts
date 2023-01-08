@@ -3,7 +3,7 @@
 /* eslint-disable */
 export const $TurnoCreate = {
     properties: {
-        id_paciente: {
+        id_consultorio: {
             type: 'number',
             isRequired: true,
         },
@@ -13,15 +13,6 @@ export const $TurnoCreate = {
         },
         motivo_consulta: {
             type: 'string',
-            isRequired: true,
-        },
-        fecha: {
-            type: 'string',
-            isRequired: true,
-            format: 'date-time',
-        },
-        pendiente: {
-            type: 'boolean',
         },
     },
 } as const;
