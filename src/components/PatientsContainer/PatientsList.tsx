@@ -19,7 +19,7 @@ export const PatientsList = ({patientsList, onDeletePatient}: Props) => {
   return (
     (
       <>
-        <table className='table table-striped table-hover table-xxl doc-table-container'>
+        <table className='table table-striped table-hover table-xxl table-container'>
           <thead>
             <tr>
               {keysTabPatients.map((item, index) => {
