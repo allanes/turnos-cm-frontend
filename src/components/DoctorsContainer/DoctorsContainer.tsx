@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Medico } from '../../codegen_output'
 import { MedicosService } from '../../codegen_output'
 import { DoctorsList } from './DoctorsList'
+import { DoctorsCreate } from './DoctorsCreate'
 
 interface DoctorsState {
   doctors: Array<Medico>
@@ -19,9 +20,21 @@ export const DoctorsContainer = () => {
     })
   }, [])
 
+  const handleNewDoctor = (newDoctor: Medico): void => {
+    MedicosService.createMedicoApiV1DoctorsPost(newDoctor)
+    console.log(newDoctor);
+    setDoctorsList( doctor => [...doctorsList, newDoctor])
+  } 
+
+  const handleDelete = (id: number): void => {
+    MedicosService.deleteMedicoApiV1DoctorsIdDelete(id)
+    setDoctorsList(doctorsList.filter((doctor) => doctor.id !== id));
+  }
+
   return (
     <>
-      <DoctorsList doctorsList={doctorsList} />
+      <DoctorsCreate onNewDoctor={handleNewDoctor} />
+      <DoctorsList doctorsList={doctorsList} onDeleteDoctor={handleDelete} />
     </>
   )
 }

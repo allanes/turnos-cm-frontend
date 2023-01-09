@@ -1,9 +1,11 @@
 import { type } from '@testing-library/user-event/dist/type'
 import React from 'react'
 import { Medico } from '../../codegen_output'
+import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 
 interface Props {
   doctorsList: Array<Medico>
+  onDeleteDoctor: (id: number) => void 
 }
 
 const keysTableDoctors = [
@@ -12,16 +14,14 @@ const keysTableDoctors = [
   "Email",
   "Teléfono",
   "Especialidad",
-  "Consultorio",
-  "Activo",
-  "Turnos"
+  "Consultorio"
 ]
 
-export const DoctorsList = ({ doctorsList }: Props) => {
+export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
 
   return (
     <>
-      <table className='table table-striped table-hover table-xxl doc-table-container'>
+      <table className='table table-striped table-hover table-xxl table-container'>
         <thead>
           <tr>
             {keysTableDoctors.map((item, index) => {
@@ -41,6 +41,12 @@ export const DoctorsList = ({ doctorsList }: Props) => {
                 <td>{doctor.telefono}</td>
                 <td>{doctor.especialidad}</td>
                 <td>{doctor.consultorio}</td>
+                <td><button className='icons-border icon--size icon--delete'
+                  type='button'
+                  onClick={() => { onDeleteDoctor(doctor.id) }} >
+                  <img className='icon-img--size' src={deleteIcon} alt="" />
+                </button>
+                </td>
               </tr>
             )
           })}

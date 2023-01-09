@@ -1,21 +1,21 @@
 import React, { useRef } from 'react'
-import { Paciente } from '../../codegen_output'
-import useNewPatientForm from '../../hooks/useNewPatientsForm'
+import { Medico } from '../../codegen_output'
+import useNewDoctorForm from '../../hooks/useNewDoctorsForm'
 
 import { Row, Col, Button, Form } from 'react-bootstrap'
 
 interface Props {
-  onNewPatient: (newPatient: Paciente) => void
+  onNewDoctor: (newDoctor: Medico) => void
 }
 
-export const PatientsCreate = ({ onNewPatient }: Props) => {
+export const DoctorsCreate = ({ onNewDoctor }: Props) => {
 
-  const [inputValues, dispatch] = useNewPatientForm()
+  const [inputValues, dispatch] = useNewDoctorForm()
   const formRef = useRef<HTMLFormElement>(null)
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = evt.target
-    
+
     dispatch({
       type: "change_value",
       payload: {
@@ -27,7 +27,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
-    onNewPatient(inputValues)
+    onNewDoctor(inputValues)
     formRef.current?.reset()
   }
 
@@ -65,6 +65,12 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
             <Form.Group className="mb-3" controlId="telefono">
               <Form.Label>Teléfono</Form.Label>
               <Form.Control onChange={handleChange} type="text" placeholder="Ingrese el teléfono" />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3" controlId="especialidad">
+              <Form.Label>Especialidad</Form.Label>
+              <Form.Control onChange={handleChange} type="text" placeholder="Ingrese la especialidad" />
             </Form.Group>
           </Col>
         </Row>
