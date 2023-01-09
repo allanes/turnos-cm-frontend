@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Paciente } from '../../codegen_output'
 import useNewPatientForm from '../../hooks/useNewPatientsForm'
 
@@ -11,6 +11,7 @@ interface Props {
 export const PatientsCreate = ({ onNewPatient }: Props) => {
 
   const [inputValues, dispatch] = useNewPatientForm()
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = evt.target
@@ -24,19 +25,15 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
     })
   }
 
-  const handleClear = () => {
-    dispatch({ type: "clear" })
-  }
-
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
     onNewPatient(inputValues)
-    handleClear()
+    formRef.current?.reset()
   }
 
   return (
     <div className='table-container'>
-      <Form onSubmit={handleSubmit} >
+      <Form ref={formRef} onSubmit={handleSubmit} >
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="id">

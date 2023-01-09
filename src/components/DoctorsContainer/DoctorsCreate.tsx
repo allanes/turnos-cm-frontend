@@ -1,20 +1,21 @@
-import React from 'react'
-import { Paciente } from '../../codegen_output'
-import useNewPatientForm from '../../hooks/useNewPatientsForm'
+import React, { useRef } from 'react'
+import { Medico } from '../../codegen_output'
+import useNewDoctorForm from '../../hooks/useNewDoctorsForm'
 
 import { Row, Col, Button, Form } from 'react-bootstrap'
 
 interface Props {
-  onNewPatient: (newPatient: Paciente) => void
+  onNewDoctor: (newDoctor: Medico) => void
 }
 
-export const PatientsCreate = ({ onNewPatient }: Props) => {
+export const DoctorsCreate = ({ onNewDoctor }: Props) => {
 
-  const [inputValues, dispatch] = useNewPatientForm()
+  const [inputValues, dispatch] = useNewDoctorForm()
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = evt.target
-    
+
     dispatch({
       type: "change_value",
       payload: {
@@ -24,19 +25,15 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
     })
   }
 
-  const handleClear = () => {
-    dispatch({ type: "clear" })
-  }
-
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
-    onNewPatient(inputValues)
-    handleClear()
+    onNewDoctor(inputValues)
+    formRef.current?.reset()
   }
 
   return (
     <div className='table-container'>
-      <Form onSubmit={handleSubmit} >
+      <Form ref={formRef} onSubmit={handleSubmit} >
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="id">
@@ -68,6 +65,20 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
             <Form.Group className="mb-3" controlId="telefono">
               <Form.Label>Teléfono</Form.Label>
               <Form.Control onChange={handleChange} type="text" placeholder="Ingrese el teléfono" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="especialidad">
+              <Form.Label>Especialidad</Form.Label>
+              <Form.Control onChange={handleChange} type="text" placeholder="Ingrese la especialidad" />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3" controlId="consultorio">
+              <Form.Label>Consultorio</Form.Label>
+              <Form.Control onChange={handleChange} type="text" placeholder="Ingrese el consultorio" />
             </Form.Group>
           </Col>
         </Row>
