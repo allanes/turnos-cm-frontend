@@ -67,18 +67,10 @@ export const DoctorsCreate = ({ onNewDoctor }: Props) => {
               <Form.Control onChange={handleChange} type="text" placeholder="Ingrese el teléfono" />
             </Form.Group>
           </Col>
-        </Row>
-        <Row>
           <Col>
             <Form.Group className="mb-3" controlId="especialidad">
               <Form.Label>Especialidad</Form.Label>
               <Form.Control onChange={handleChange} type="text" placeholder="Ingrese la especialidad" />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group className="mb-3" controlId="consultorio">
-              <Form.Label>Consultorio</Form.Label>
-              <Form.Control onChange={handleChange} type="text" placeholder="Ingrese el consultorio" />
             </Form.Group>
           </Col>
         </Row>
