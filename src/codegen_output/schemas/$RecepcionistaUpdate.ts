@@ -3,21 +3,21 @@
 /* eslint-disable */
 export const $RecepcionistaUpdate = {
     properties: {
-        id: {
-            type: 'number',
-            isRequired: true,
-        },
         nombre: {
             type: 'string',
+            isRequired: true,
         },
         apellido: {
             type: 'string',
+            isRequired: true,
         },
         email: {
             type: 'string',
+            isRequired: true,
         },
         telefono: {
             type: 'string',
+            isRequired: true,
         },
     },
 } as const;

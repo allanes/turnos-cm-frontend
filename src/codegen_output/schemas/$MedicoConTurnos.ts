@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $Paciente = {
+export const $MedicoConTurnos = {
     properties: {
         id: {
             type: 'number',
@@ -22,6 +22,19 @@ export const $Paciente = {
         telefono: {
             type: 'string',
             isRequired: true,
+        },
+        especialidad: {
+            type: 'string',
+            isRequired: true,
+        },
+        consultorio: {
+            type: 'string',
+        },
+        turnos: {
+            type: 'array',
+            contains: {
+                type: 'Turno',
+            },
         },
     },
 } as const;

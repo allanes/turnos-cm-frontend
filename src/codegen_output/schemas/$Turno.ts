@@ -3,10 +3,10 @@
 /* eslint-disable */
 export const $Turno = {
     properties: {
-        id_consultorio: {
+        id_medico: {
             type: 'number',
         },
-        id_medico: {
+        id_paciente: {
             type: 'number',
         },
         motivo_consulta: {

@@ -27,16 +27,6 @@ export const $Medico = {
             type: 'string',
             isRequired: true,
         },
-        activo: {
-            type: 'boolean',
-            isRequired: true,
-        },
-        turnos: {
-            type: 'array',
-            contains: {
-                type: 'Turno',
-            },
-        },
         consultorio: {
             type: 'string',
         },

@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Medico } from '../models/Medico';
+import type { MedicoConTurnos } from '../models/MedicoConTurnos';
 import type { MedicoCreate } from '../models/MedicoCreate';
 import type { MedicoUpdate } from '../models/MedicoUpdate';
 
@@ -61,12 +62,12 @@ export class MedicosService {
      * Read Medico
      * Get medico by ID.
      * @param id
-     * @returns Medico Successful Response
+     * @returns MedicoConTurnos Successful Response
      * @throws ApiError
      */
     public static readMedicoApiV1DoctorsIdGet(
         id: number,
-    ): CancelablePromise<Medico> {
+    ): CancelablePromise<MedicoConTurnos> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/doctors/{id}',

@@ -3,11 +3,10 @@
 /* eslint-disable */
 
 export type MedicoUpdate = {
-    id: number;
-    nombre?: string;
-    apellido?: string;
-    email?: string;
-    telefono?: string;
-    especialidad?: string;
+    nombre: string;
+    apellido: string;
+    email: string;
+    telefono: string;
+    especialidad: string;
 };
 

@@ -3,11 +3,11 @@
 /* eslint-disable */
 export const $TurnoCreate = {
     properties: {
-        id_consultorio: {
+        id_medico: {
             type: 'number',
             isRequired: true,
         },
-        id_medico: {
+        id_paciente: {
             type: 'number',
             isRequired: true,
         },

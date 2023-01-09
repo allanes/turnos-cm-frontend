@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export const $Paciente = {
+export const $PacienteInDB = {
     properties: {
         id: {
             type: 'number',
@@ -22,6 +22,12 @@ export const $Paciente = {
         telefono: {
             type: 'string',
             isRequired: true,
+        },
+        turnos: {
+            type: 'array',
+            contains: {
+                type: 'Turno',
+            },
         },
     },
 } as const;

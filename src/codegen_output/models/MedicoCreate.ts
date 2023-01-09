@@ -9,6 +9,5 @@ export type MedicoCreate = {
     email?: string;
     telefono?: string;
     especialidad?: string;
-    activo?: boolean;
 };
 

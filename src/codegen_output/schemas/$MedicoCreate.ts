@@ -24,8 +24,5 @@ export const $MedicoCreate = {
         especialidad: {
             type: 'string',
         },
-        activo: {
-            type: 'boolean',
-        },
     },
 } as const;
