@@ -15,7 +15,7 @@ const keysTabPatients = [
   "Turnos"
 ]
 
-export const PatientsList = ({patientsList, onDeletePatient}: Props) => {
+export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
   return (
     (
       <>
@@ -37,8 +37,12 @@ export const PatientsList = ({patientsList, onDeletePatient}: Props) => {
                   <td>{patient.nombre}, {patient.apellido}</td>
                   <td>{patient.email}</td>
                   <td>{patient.telefono}</td>
-                  <td>{patient.turnos?.length}</td>
-                  <td><button className='icons-border icon--size icon--delete' type='button' onClick={() => { onDeletePatient(patient.id) }} ><img className='icon-img--size' src={deleteIcon} alt="" /></button></td>
+                  <td><button className='icons-border icon--size icon--delete'
+                        type='button'
+                        onClick={() => { onDeletePatient(patient.id) }} >
+                        <img className='icon-img--size' src={deleteIcon} alt="" />
+                      </button>
+                  </td>
                 </tr>
               )
             })}

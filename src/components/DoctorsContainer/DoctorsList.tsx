@@ -41,8 +41,6 @@ export const DoctorsList = ({ doctorsList }: Props) => {
                 <td>{doctor.telefono}</td>
                 <td>{doctor.especialidad}</td>
                 <td>{doctor.consultorio}</td>
-                <td>{doctor.activo}</td>
-                <td>{doctor.turnos?.length}</td>
               </tr>
             )
           })}
