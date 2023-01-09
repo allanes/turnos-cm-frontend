@@ -1,26 +1,26 @@
 import React from 'react'
-import { Paciente } from '../../codegen_output'
+import { Consultorio } from '../../codegen_output'
 import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 
 interface Props {
-  patientsList: Array<Paciente>
-  onDeletePatient: (id: number) => void
+  officesList: Array<Consultorio>
+  onDeleteOffice: (id: number) => void
 }
 
-const keysTabPatients = [
+const keysTabOffices = [
   "Id",
-  "Nombre, Apellido",
-  "Email",
-  "Telefono"
+  "Sala",
+  "Descripción"
 ]
 
-export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
+export const OfficesList = ({officesList, onDeleteOffice}: Props) => {
+
   return (
     <>
-      <table className='table table-striped table-hover table-xxl table-container-xl'>
+      <table className='table table-striped table-hover table-xxl table-container-l'>
         <thead>
           <tr>
-            {keysTabPatients.map((item, index) => {
+            {keysTabOffices.map((item, index) => {
               return (
                 <th key={index}>{item}</th>
               )
@@ -28,16 +28,15 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
           </tr>
         </thead>
         <tbody className='table-group-divider' >
-          {patientsList.map((patient, index) => {
+          {officesList.map((office, index) => {
             return (
               <tr key={index} >
-                <th scope='row'>{patient.id}</th>
-                <td>{patient.nombre}, {patient.apellido}</td>
-                <td>{patient.email}</td>
-                <td>{patient.telefono}</td>
+                <th scope='row'>{office.id}</th>
+                <td>{office.sala}</td>
+                <td>{office.descripcion}</td>
                 <td><button className='icons-border icon--size icon--delete'
                   type='button'
-                  onClick={() => { onDeletePatient(patient.id) }} >
+                  onClick={() => { onDeleteOffice(office.id) }} >
                   <img className='icon-img--size' src={deleteIcon} alt="" />
                 </button>
                 </td>
