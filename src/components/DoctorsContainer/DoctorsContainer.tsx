@@ -19,9 +19,14 @@ export const DoctorsContainer = () => {
     })
   }, [])
 
+  const handleDelete = (id: number): void => {
+    MedicosService.deleteMedicoApiV1DoctorsIdDelete(id)
+    setDoctorsList(doctorsList.filter((doctor) => doctor.id !== id));
+  }
+
   return (
     <>
-      <DoctorsList doctorsList={doctorsList} />
+      <DoctorsList doctorsList={doctorsList} onDeleteDoctor={handleDelete} />
     </>
   )
 }
