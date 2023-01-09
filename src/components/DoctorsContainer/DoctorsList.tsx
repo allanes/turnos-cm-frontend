@@ -21,7 +21,7 @@ export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
 
   return (
     <>
-      <table className='table table-striped table-hover table-xxl table-container'>
+      <table className='table table-striped table-hover table-xxl table-container-xl'>
         <thead>
           <tr>
             {keysTableDoctors.map((item, index) => {

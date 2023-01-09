@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import { OfficesDescription } from './OfficesDescription'
-
-import { ConsultorioDetallado, ConsultoriosService } from '../../codegen_output'
+import { useEffect, useState } from "react"
+import { OfficesList } from "./OfficesList"
+import { Consultorio, ConsultoriosService } from "../../codegen_output"
+import { OfficesCreate } from "./OfficesCreate"
 
 interface OfficesState {
-  offices: Array<ConsultorioDetallado>
+  offices: Array<Consultorio>
 }
 
 export const OfficesContainer = () => {
@@ -12,16 +12,29 @@ export const OfficesContainer = () => {
   const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
 
   useEffect(() => {
-    ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet()
+    ConsultoriosService.readConsultoriosApiV1OfficesGet()
     .then(offices => {
-      console.log(offices);
+      console.log(offices)
       setOfficesList(offices)
     })
   }, [])
+
+  const handleNewOffice = (newOffice: Consultorio): void => {
+    ConsultoriosService.createConsultorioApiV1OfficesPost(newOffice)
+    console.log(newOffice);
+    setOfficesList( office => [...officesList, newOffice])
+    
+  }
+
+  const handleDelete = (id: number): void => {
+    ConsultoriosService.deleteConsultorioApiV1OfficesIdDelete(id)
+    setOfficesList(officesList.filter((offices) => offices.id !== id));
+  }
   
   return (
     <>
-      <OfficesDescription officesList={officesList} />
+      <OfficesCreate onNewOffice={handleNewOffice} />
+      <OfficesList officesList={officesList} onDeleteOffice={handleDelete} />
     </>
   )
 }

@@ -32,7 +32,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
   }
 
   return (
-    <div className='table-container'>
+    <div className='table-container-xl'>
       <Form ref={formRef} onSubmit={handleSubmit} >
         <Row>
           <Col>
