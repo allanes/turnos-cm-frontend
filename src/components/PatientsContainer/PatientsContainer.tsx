@@ -24,7 +24,6 @@ export const PatientsContainer = () => {
     PacientesService.createPacienteApiV1PatientsPost(newPatient)
     console.log(newPatient);
     setPatientsList( patient => [...patientsList, newPatient])
-    
   }
 
   const handleDelete = (id: number): void => {
