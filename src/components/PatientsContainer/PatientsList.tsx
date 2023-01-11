@@ -33,6 +33,7 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
       } 
     })
   }
+  
   return (
     <>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
