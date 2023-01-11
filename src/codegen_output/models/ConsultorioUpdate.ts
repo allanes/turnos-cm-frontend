@@ -5,6 +5,5 @@
 export type ConsultorioUpdate = {
     numero?: number;
     sala?: number;
-    descripcion?: string;
 };
 

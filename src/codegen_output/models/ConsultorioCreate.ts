@@ -3,8 +3,7 @@
 /* eslint-disable */
 
 export type ConsultorioCreate = {
-    numero: number;
+    numero?: number;
     sala: number;
-    descripcion?: string;
 };
 

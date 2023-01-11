@@ -1,18 +1,14 @@
 import { useReducer } from "react"
-import { Medico } from "../codegen_output"
+import { TurnoCreate } from "../codegen_output"
 
 interface FormState {
-    inputValues: Medico
+    inputValues: TurnoCreate
 }
 
 const INITIAL_STATE = {
-    id: 12345678,
-    nombre: "Nombre",
-    apellido: "Apellido",
-    email: "email@gmail.com",
-    telefono: "03814567899",
-    especialidad: "Clínico",
-    consultorio: ""
+    id_medico: 1,
+    id_paciente: 1,
+    motivo_consulta: "Dolor de cabeza"
 }
 
 type FormReducerAction = {
@@ -25,7 +21,7 @@ type FormReducerAction = {
     type: "clear"
 }
 
-const newDoctorReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
+const newTurnReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
     switch (action.type) {
         case "change_value":
             const { inputName, inputValue } = action.payload
@@ -42,8 +38,8 @@ const newDoctorReducer = (state: FormState["inputValues"], action: FormReducerAc
     }
 }
 
-const useNewDoctorForm = () => {
-    return useReducer(newDoctorReducer, INITIAL_STATE)
+const useNewTurnForm = () => {
+    return useReducer(newTurnReducer, INITIAL_STATE)
 }
 
-export default useNewDoctorForm 
+export default useNewTurnForm 
