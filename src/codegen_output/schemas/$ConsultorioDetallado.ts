@@ -11,10 +11,6 @@ export const $ConsultorioDetallado = {
             type: 'number',
             isRequired: true,
         },
-        descripcion: {
-            type: 'string',
-            isRequired: true,
-        },
         id: {
             type: 'number',
             isRequired: true,

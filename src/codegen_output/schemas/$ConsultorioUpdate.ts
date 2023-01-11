@@ -9,8 +9,5 @@ export const $ConsultorioUpdate = {
         sala: {
             type: 'number',
         },
-        descripcion: {
-            type: 'string',
-        },
     },
 } as const;

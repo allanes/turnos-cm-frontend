@@ -13,25 +13,13 @@ export class RegistroDeConsultoriosConMDicosService {
     /**
      * Read Consultorios
      * Retrieve registros consultorios.
-     * @param skip
-     * @param limit
      * @returns RegistroConsultorios Successful Response
      * @throws ApiError
      */
-    public static readConsultoriosApiV1OfficesToDoctorsGet(
-        skip?: number,
-        limit: number = 100,
-    ): CancelablePromise<Array<RegistroConsultorios>> {
+    public static readConsultoriosApiV1OfficesToDoctorsGet(): CancelablePromise<Array<RegistroConsultorios>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/offices-to-doctors/',
-            query: {
-                'skip': skip,
-                'limit': limit,
-            },
-            errors: {
-                422: `Validation Error`,
-            },
         });
     }
 

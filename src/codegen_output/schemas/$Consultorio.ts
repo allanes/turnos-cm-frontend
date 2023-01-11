@@ -11,13 +11,12 @@ export const $Consultorio = {
             type: 'number',
             isRequired: true,
         },
-        descripcion: {
-            type: 'string',
-            isRequired: true,
-        },
         id: {
             type: 'number',
             isRequired: true,
+        },
+        descripcion: {
+            type: 'string',
         },
     },
 } as const;
