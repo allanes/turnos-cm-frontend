@@ -9,8 +9,8 @@ interface Props {
 
 const keysTabOffices = [
   "Id",
-  "Sala",
-  "Descripción"
+  "Descripción",
+  "Sala"
 ]
 
 export const OfficesList = ({officesList, onDeleteOffice}: Props) => {
@@ -32,8 +32,8 @@ export const OfficesList = ({officesList, onDeleteOffice}: Props) => {
             return (
               <tr key={index} >
                 <th scope='row'>{office.id}</th>
-                <td>{office.sala}</td>
                 <td>{office.descripcion}</td>
+                <td>{office.sala}</td>
                 <td><button className='icons-border icon--size icon--delete'
                   type='button'
                   onClick={() => { onDeleteOffice(office.id) }} >

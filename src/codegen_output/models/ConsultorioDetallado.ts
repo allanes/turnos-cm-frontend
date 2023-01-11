@@ -5,7 +5,6 @@
 export type ConsultorioDetallado = {
     numero: number;
     sala: number;
-    descripcion: string;
     id: number;
     medico?: string;
     pacientes?: Array<string>;
