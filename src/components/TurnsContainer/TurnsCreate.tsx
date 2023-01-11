@@ -3,7 +3,7 @@ import { PacienteInDB, PacientesService, TurnoCreate } from '../../codegen_outpu
 import useNewTurnForm from '../../hooks/useNewTurnsForm'
 import { Medico } from '../../codegen_output'
 import editIcon from '../../assets/icons/outline_edit_white_24dp.png'
-
+import Swal from 'sweetalert2'
 import { Row, Col, Button, Form } from 'react-bootstrap'
 
 interface Props {
@@ -91,6 +91,11 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
     onNewTurn(inputValues)
     formRef.current?.reset()
     handleClear()
+    Swal.fire(
+      '',
+      'El turno ha sido guardado con éxito',
+      'success'
+    )
   }
 
   const handleClear = () => {
