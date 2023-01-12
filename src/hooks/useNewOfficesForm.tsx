@@ -1,15 +1,12 @@
 import { useReducer } from "react"
-import { Consultorio } from "../codegen_output"
+import { ConsultorioCreate } from "../codegen_output"
 
 interface FormState {
-    inputValues: Consultorio
+    inputValues: ConsultorioCreate
 }
 
 const INITIAL_STATE = {
-    id: 20,
-    sala: 1,
-    numero: 1,
-    descripcion: "Consultorio"
+    sala: 20,
 }
 
 type FormReducerAction = {

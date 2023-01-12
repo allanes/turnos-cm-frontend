@@ -2,7 +2,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Header } from './components/Header/Header';
 import { OfficesContainer } from './components/OfficesContainer/OfficesContainer';
-import { PatientContainer } from './components/PatientContainer/PatientContainer';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SideBar } from './components/SideBar/SideBar';
 import { DoctorsContainer } from './components/DoctorsContainer/DoctorsContainer';

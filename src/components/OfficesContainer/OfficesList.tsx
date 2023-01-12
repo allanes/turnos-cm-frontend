@@ -1,19 +1,24 @@
-import React from 'react'
-import { Consultorio } from '../../codegen_output'
+import { Medico } from '../../codegen_output'
 import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
+import { OfficesWithDoctor } from "../../types/types"
+
+
 
 interface Props {
-  officesList: Array<Consultorio>
+  offices: Array<OfficesWithDoctor>
   onDeleteOffice: (id: number) => void
+  doctorsList: Array<Medico>
 }
+
 
 const keysTabOffices = [
   "Id",
   "Descripción",
-  "Sala"
+  "Sala",
+  "Médico asignado"
 ]
 
-export const OfficesList = ({officesList, onDeleteOffice}: Props) => {
+export const OfficesList = ({ offices, onDeleteOffice}: Props) => {
 
   return (
     <>
@@ -28,12 +33,13 @@ export const OfficesList = ({officesList, onDeleteOffice}: Props) => {
           </tr>
         </thead>
         <tbody className='table-group-divider' >
-          {officesList.map((office, index) => {
+          {offices.map((office, index) => {
             return (
               <tr key={index} >
                 <th scope='row'>{office.id}</th>
                 <td>{office.descripcion}</td>
                 <td>{office.sala}</td>
+                <td>{office.medico?.nombre}, {office.medico?.apellido}</td>
                 <td><button className='icons-border icon--size icon--delete'
                   type='button'
                   onClick={() => { onDeleteOffice(office.id) }} >
