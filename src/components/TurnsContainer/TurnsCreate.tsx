@@ -116,7 +116,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
                 </Form.Group>
               </Col>
               <Col>
-                <Button variant='outline-warning' type="reset" className="m-2 mt-4">Limpiar</Button>
+                <Button variant='outline-warning' type="reset" className="m-2 mt-4">Borrar</Button>
                 <Button variant='warning' type="submit" className="m-2 mt-4">Buscar</Button>
               </Col>
             </Row>
@@ -174,7 +174,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
               <Col>
                 <Form.Group className="mb-3" controlId="id_paciente">
                   <Form.Label>Nombre del Paciente</Form.Label>
-                  <Form.Control type="text" placeholder={`${patientSelected?.nombre}, ${patientSelected?.apellido}`} />
+                  <Form.Control type="text" placeholder={`${patientSelected?.nombre}, ${patientSelected?.apellido}`} disabled/>
                 </Form.Group>
               </Col>
               <Col>
@@ -186,7 +186,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
             </Row>
 
             <Button variant='outline-warning' type="reset" className="m-2">
-              Limpiar
+              Borrar
             </Button>
 
             <Button type="submit" className="m-2">

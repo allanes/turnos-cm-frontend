@@ -7,7 +7,6 @@ import { OfficesWithDoctor } from "../../types/types"
 interface Props {
   offices: Array<OfficesWithDoctor>
   onDeleteOffice: (id: number) => void
-  doctorsList: Array<Medico>
 }
 
 

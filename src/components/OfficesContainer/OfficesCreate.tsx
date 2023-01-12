@@ -43,7 +43,7 @@ export const OfficesCreate = ({ onNewOffice }: Props) => {
           </Col>
         </Row>
         <Button variant='outline-warning' type="reset" className="m-2">
-          Limpiar
+          Borrar
         </Button>
 
         <Button type="submit" className="m-2">

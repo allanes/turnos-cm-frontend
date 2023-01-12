@@ -4,7 +4,10 @@ import { Consultorio, ConsultorioCreate, ConsultoriosService, MedicosService } f
 import { OfficesCreate } from "./OfficesCreate"
 import { Medico } from "../../codegen_output"
 import { OfficesWithDoctor } from "../../types/types"
-
+import { AssignDoctorToOffice } from "./AssignDoctorToOffice"
+import { RegistroConsultoriosCreate } from "../../codegen_output"
+import { RegistroDeConsultoriosConMDicosService } from "../../codegen_output"
+import { useNavigate} from "react-router-dom"
 
 interface OfficesState {
   offices: Array<Consultorio>
@@ -19,6 +22,7 @@ export const OfficesContainer = () => {
   const [officesListCreate, setOfficesListCreate] = useState<OfficesState["officesCreate"]>([])
   const [doctorsList, setDoctorsList] = useState<OfficesState["doctorsList"]>([])
   const [offices, setOffices] = useState<OfficesState["officesListWithDoctor"]>([])
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -58,11 +62,17 @@ export const OfficesContainer = () => {
     ConsultoriosService.deleteConsultorioApiV1OfficesIdDelete(id)
     setOfficesList(officesList.filter((offices) => offices.id !== id));
   }
+
+  const handleNewAssign = (newAssign: RegistroConsultoriosCreate): void => {
+    RegistroDeConsultoriosConMDicosService.createConsultorioApiV1OfficesToDoctorsPost(newAssign)
+    navigate("/waitingRoom")
+  }
   
   return (
     <>
       <OfficesCreate onNewOffice={handleNewOffice} />
-      <OfficesList offices={offices} onDeleteOffice={handleDelete} doctorsList={doctorsList} />
+      <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
+      <OfficesList offices={offices}  onDeleteOffice={handleDelete} />
     </>
   )
 }

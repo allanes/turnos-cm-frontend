@@ -77,7 +77,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
         </Row>
 
         <Button variant='outline-warning' type="reset" className="m-2">
-          Limpiar
+          Borrar
         </Button>
 
         <Button type="submit" className="m-2">
