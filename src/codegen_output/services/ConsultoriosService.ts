@@ -22,7 +22,7 @@ export class ConsultoriosService {
      * @throws ApiError
      */
     public static readConsultoriosConDetallesApiV1OfficesWithDetailsGet(
-        sala?: number,
+        sala: string = '0',
         skip?: number,
         limit: number = 100,
     ): CancelablePromise<Array<ConsultorioDetallado>> {

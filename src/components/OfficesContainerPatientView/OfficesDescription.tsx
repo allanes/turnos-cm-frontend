@@ -9,7 +9,7 @@ export const OfficesDescription = ({ officesList }: Props) => {
 
 	return (
 		<div className='container-md text-center my-4'>
-			<div className='container'>
+			<div className='container-fluid'>
 				<div className="row g-5">
 					{officesList.map((office, index) => {
 						return (
