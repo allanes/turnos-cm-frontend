@@ -1,12 +1,13 @@
 import { useReducer } from "react"
-import { ConsultorioCreate } from "../codegen_output"
+import { RegistroConsultoriosCreate } from "../codegen_output"
 
 interface FormState {
-    inputValues: ConsultorioCreate
+    inputValues: RegistroConsultoriosCreate
 }
 
 const INITIAL_STATE = {
-    sala: 20,
+    id_consultorio: 0,
+    id_medico: 0
 }
 
 type FormReducerAction = {
@@ -19,7 +20,7 @@ type FormReducerAction = {
     type: "clear"
 }
 
-const newOfficeReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
+const newAssignReducer = (state: FormState["inputValues"], action: FormReducerAction) => {
     switch (action.type) {
         case "change_value":
             const { inputName, inputValue } = action.payload
@@ -36,8 +37,8 @@ const newOfficeReducer = (state: FormState["inputValues"], action: FormReducerAc
     }
 }
 
-const useNewOfficeForm = () => {
-    return useReducer(newOfficeReducer, INITIAL_STATE)
+const useNewAssignDoctorToOffice = () => {
+    return useReducer(newAssignReducer, INITIAL_STATE)
 }
 
-export default useNewOfficeForm 
+export default useNewAssignDoctorToOffice 
