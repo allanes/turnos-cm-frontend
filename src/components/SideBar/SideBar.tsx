@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { categoriesList_sidebar } from '../../services/categoriesList_sidebar'
+import { categoriesList_sidebar } from '../../types/categoriesList_sidebar'
 
 interface NavLink {
   title: string;
