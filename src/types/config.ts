@@ -1,0 +1,1 @@
+export const PORT_SERVER = 'http://192.168.100.117:4000'

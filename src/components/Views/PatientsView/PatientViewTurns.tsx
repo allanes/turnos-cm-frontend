@@ -6,7 +6,7 @@ interface Props {
 
 export const PatientViewTurns = ({ turnsList }: Props) => {
   return (
-    <div>
+    <>
       <ol className='h1'>
         {turnsList?.map((patient, index) => {
           return (
@@ -16,7 +16,7 @@ export const PatientViewTurns = ({ turnsList }: Props) => {
           )
         })}
       </ol>
-    </div>
+    </>
   )
 }
 
