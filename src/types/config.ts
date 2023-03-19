@@ -1,1 +1,1 @@
-export const PORT_SERVER = 'http://192.168.100.117:4000'
+export const PORT_SERVER = 'http://192.168.1.27:4000'

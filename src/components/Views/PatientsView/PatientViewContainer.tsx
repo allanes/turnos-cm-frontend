@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { useParams } from 'react-router-dom'
 import { PatientViewList } from './PatientViewList'
-
-import io from 'socket.io-client'
 import { PORT_SERVER } from '../../../types/config'
-const socket = io('http://192.168.100.117:4000')
+import io from 'socket.io-client'
+
+const socket = io(PORT_SERVER)
 
 interface OfficesState {
   offices: Array<ConsultorioDetallado>
