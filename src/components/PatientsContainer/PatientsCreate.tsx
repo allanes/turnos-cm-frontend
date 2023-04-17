@@ -4,6 +4,8 @@ import useNewPatientForm from '../../hooks/useNewPatientsForm'
 
 import { Row, Col, Button, Form } from 'react-bootstrap'
 
+import Swal from 'sweetalert2'
+
 interface Props {
   onNewPatient: (newPatient: Paciente) => void
 }
@@ -29,10 +31,15 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
     evt.preventDefault()
     onNewPatient(inputValues)
     formRef.current?.reset()
+    Swal.fire(
+      `${inputValues.nombre}, ${inputValues.apellido}`,
+      'ha sido guardado con éxito',
+      'success'
+    )
   }
 
   return (
-    <div className='table-container'>
+    <div className='table-container-xl'>
       <Form ref={formRef} onSubmit={handleSubmit} >
         <Row>
           <Col>
@@ -70,7 +77,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
         </Row>
 
         <Button variant='outline-warning' type="reset" className="m-2">
-          Limpiar
+          Borrar
         </Button>
 
         <Button type="submit" className="m-2">

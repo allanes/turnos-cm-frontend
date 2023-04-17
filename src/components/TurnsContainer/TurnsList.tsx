@@ -1,26 +1,27 @@
 import React from 'react'
-import { Paciente } from '../../codegen_output'
+import { Turno } from '../../codegen_output'
 import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 import Swal from 'sweetalert2'
 
 interface Props {
-  patientsList: Array<Paciente>
-  onDeletePatient: (id: number) => void
+  turnsList: Array<Turno>
+  onDeleteTurn: (id: number) => void
 }
 
-const keysTabPatients = [
+const keysTabTurns = [
   "Id",
-  "Nombre, Apellido",
-  "Email",
-  "Telefono"
+  "Id médico",
+  "Id paciente",
+  "Motivo de consulta",
+  "Pendiente",
+  "Fecha"
 ]
 
-export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
+export const TurnsList = ({turnsList, onDeleteTurn}: Props) => {
 
-  const handleDelete = ( patient: Paciente ) => {
+  const handleDelete = ( turn: Turno ) => {
     Swal.fire({
-      title:'¿Estás seguro que deseas eliminar el paciente?',
-      html:`${patient.nombre}, ${patient.apellido}`,
+      title:'¿Estás seguro que deseas eliminar el turno?',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       icon: 'warning',
@@ -29,17 +30,17 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire('Eliminado!', '', 'error')
-        onDeletePatient(patient.id)
+        onDeleteTurn(turn.id)
       } 
     })
   }
-  
+
   return (
     <>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
         <thead>
           <tr>
-            {keysTabPatients.map((item, index) => {
+            {keysTabTurns.map((item, index) => {
               return (
                 <th key={index}>{item}</th>
               )
@@ -47,16 +48,18 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
           </tr>
         </thead>
         <tbody className='table-group-divider' >
-          {patientsList.map((patient, index) => {
+          {turnsList.map((turn, index) => {
             return (
               <tr key={index} >
-                <th scope='row'>{patient.id}</th>
-                <td>{patient.nombre}, {patient.apellido}</td>
-                <td>{patient.email}</td>
-                <td>{patient.telefono}</td>
+                <th scope='row'>{turn.id}</th>
+                <td>{turn.id_medico}</td>
+                <td>{turn.id_paciente}</td>
+                <td>{turn.motivo_consulta}</td>
+                <td>{turn.pendiente}</td>
+                <td>{turn.fecha}</td>
                 <td><button className='icons-border icon--size icon--delete'
                   type='button'
-                  onClick={() => { handleDelete(patient) }} >
+                  onClick={() => { handleDelete(turn) }} >
                   <img className='icon-img--size' src={deleteIcon} alt="" />
                 </button>
                 </td>

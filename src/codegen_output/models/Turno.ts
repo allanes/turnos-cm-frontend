@@ -9,5 +9,7 @@ export type Turno = {
     id: number;
     pendiente: boolean;
     fecha: string;
+    nombre_medico?: string;
+    nombre_paciente?: string;
 };
 

@@ -25,5 +25,11 @@ export const $Turno = {
             isRequired: true,
             format: 'date-time',
         },
+        nombre_medico: {
+            type: 'string',
+        },
+        nombre_paciente: {
+            type: 'string',
+        },
     },
 } as const;

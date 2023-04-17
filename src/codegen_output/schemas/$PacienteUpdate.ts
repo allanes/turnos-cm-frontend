@@ -11,6 +11,11 @@ export const $PacienteUpdate = {
             type: 'string',
             isRequired: true,
         },
+        fecha_nacimiento: {
+            type: 'string',
+            isRequired: true,
+            format: 'date',
+        },
         email: {
             type: 'string',
             isRequired: true,

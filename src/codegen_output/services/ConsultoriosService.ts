@@ -15,12 +15,14 @@ export class ConsultoriosService {
     /**
      * Read Consultorios Con Detalles
      * Retrieve consultorios.
+     * @param sala
      * @param skip
      * @param limit
      * @returns ConsultorioDetallado Successful Response
      * @throws ApiError
      */
     public static readConsultoriosConDetallesApiV1OfficesWithDetailsGet(
+        sala: string = '0',
         skip?: number,
         limit: number = 100,
     ): CancelablePromise<Array<ConsultorioDetallado>> {
@@ -28,6 +30,7 @@ export class ConsultoriosService {
             method: 'GET',
             url: '/api/v1/offices/with-details',
             query: {
+                'sala': sala,
                 'skip': skip,
                 'limit': limit,
             },

@@ -8,6 +8,7 @@ export type PacienteInDB = {
     id: number;
     nombre: string;
     apellido: string;
+    fecha_nacimiento: string;
     email: string;
     telefono: string;
     turnos?: Array<Turno>;
