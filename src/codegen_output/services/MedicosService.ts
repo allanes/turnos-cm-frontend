@@ -5,7 +5,6 @@ import type { Medico } from '../models/Medico';
 import type { MedicoConTurnos } from '../models/MedicoConTurnos';
 import type { MedicoCreate } from '../models/MedicoCreate';
 import type { MedicoUpdate } from '../models/MedicoUpdate';
-import type { Turno } from '../models/Turno';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -120,28 +119,6 @@ export class MedicosService {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/v1/doctors/{id}',
-            path: {
-                'id': id,
-            },
-            errors: {
-                422: `Validation Error`,
-            },
-        });
-    }
-
-    /**
-     * Next Turn
-     * Delete an medico.
-     * @param id
-     * @returns Turno Successful Response
-     * @throws ApiError
-     */
-    public static nextTurnApiV1DoctorsIdNextGet(
-        id: number,
-    ): CancelablePromise<Turno> {
-        return __request(OpenAPI, {
-            method: 'GET',
-            url: '/api/v1/doctors/{id}/next',
             path: {
                 'id': id,
             },

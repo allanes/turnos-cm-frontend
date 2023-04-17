@@ -2,7 +2,6 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Turno } from '../models/Turno';
-import type { TurnoCreate } from '../models/TurnoCreate';
 import type { TurnoUpdate } from '../models/TurnoUpdate';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -30,27 +29,6 @@ export class TurnosService {
                 'skip': skip,
                 'limit': limit,
             },
-            errors: {
-                422: `Validation Error`,
-            },
-        });
-    }
-
-    /**
-     * Create Turno
-     * Create new turno.
-     * @param requestBody
-     * @returns Turno Successful Response
-     * @throws ApiError
-     */
-    public static createTurnoApiV1TurnsPost(
-        requestBody: TurnoCreate,
-    ): CancelablePromise<Turno> {
-        return __request(OpenAPI, {
-            method: 'POST',
-            url: '/api/v1/turns/',
-            body: requestBody,
-            mediaType: 'application/json',
             errors: {
                 422: `Validation Error`,
             },
