@@ -5,6 +5,7 @@ import type { Paciente } from '../models/Paciente';
 import type { PacienteCreate } from '../models/PacienteCreate';
 import type { PacienteInDB } from '../models/PacienteInDB';
 import type { PacienteUpdate } from '../models/PacienteUpdate';
+import type { Turno } from '../models/Turno';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -119,6 +120,27 @@ export class PacientesService {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/v1/patients/{id}',
+            path: {
+                'id': id,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Handle Next Turn
+     * @param id
+     * @returns Turno Successful Response
+     * @throws ApiError
+     */
+    public static handleNextTurnApiV1DoctorsIdNextPatientGet(
+        id: number,
+    ): CancelablePromise<Turno> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/{id}/nextPatient',
             path: {
                 'id': id,
             },
