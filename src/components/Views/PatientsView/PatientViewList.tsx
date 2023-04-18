@@ -21,7 +21,7 @@ export const PatientViewList = ({ officesList }: Props) => {
                       <h1 className='text-white'>Consultorio {office.numero}</h1>
                       <h4><small>Dr. {office.medico} </small></h4>
                     </div>
-                    <div>
+                    <div className='cardRoom-Body'>
                       <PatientViewTurns turnsList={office.pacientes} /> 
                     </div>
                     <div>
