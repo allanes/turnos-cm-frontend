@@ -9,6 +9,7 @@ const INITIAL_STATE = {
     id: 12345678,
     nombre: "Nombre",
     apellido: "Apellido",
+    fecha_nacimiento: "1990-01-01",
     email: "email@gmail.com",
     telefono: "03814567899",
 }
