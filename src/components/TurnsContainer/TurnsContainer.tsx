@@ -39,7 +39,7 @@ export const TurnsContainer = () => {
   }, [])
 
   const handleNewTurn = (newTurn: TurnoCreate): void => {
-    TurnosService.createTurnoApiV1TurnsPost(newTurn)
+    TurnosService.handleCreateTurnoApiV1TurnsPost(newTurn)
     console.log(newTurn);
     setTurnsCreateList(turn => [...turnsCreateList, newTurn])
     socket.emit('newTurn', 'newTurn')
