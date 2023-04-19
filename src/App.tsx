@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { AdminView } from './components/Views/AdminView';
 import { PatientView } from './components/Views/PatientsView/PatientViewContainer';
-import { DoctorsView } from './components/Views/DoctorsView';
+import { DoctorsView } from './components/Views/DoctorsView/DoctorsView';
 import Error404 from './components/Views/Error404';
 
 const renderSwitch = (props: string) => {
