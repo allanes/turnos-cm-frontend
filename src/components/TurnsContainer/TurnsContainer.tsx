@@ -6,9 +6,9 @@ import { TurnsCreate } from './TurnsCreate'
 import { TurnsList } from './TurnsList'
 import { Button } from 'react-bootstrap'
 
-import io from 'socket.io-client'
-import { PORT_SERVER } from '../../types/config'
-const socket = io(PORT_SERVER)
+// import io from 'socket.io-client'
+// import { PORT_SERVER } from '../../types/config'
+// const socket = io(PORT_SERVER)
 
 interface TurnsState {
   turns: Array<Turno>
@@ -42,13 +42,13 @@ export const TurnsContainer = () => {
     TurnosService.handleCreateTurnoApiV1TurnsPost(newTurn)
     console.log(newTurn);
     setTurnsCreateList(turn => [...turnsCreateList, newTurn])
-    socket.emit('newTurn', 'newTurn')
+    // socket.emit('newTurn', 'newTurn')
   }
   
   const handleDelete = (id: number): void => {
     TurnosService.deleteTurnoApiV1TurnsIdDelete(id)
     setTurnsList(turnsList.filter((turn) => turn.id !== id));
-    socket.emit('newTurn', 'newTurn')
+    // socket.emit('newTurn', 'newTurn')
   }
 
   return (

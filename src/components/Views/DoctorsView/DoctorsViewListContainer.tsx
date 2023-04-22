@@ -25,7 +25,7 @@ export const DoctorsViewListContainer = () => {
 		<div className='table-container-xxl text-center'>
 			<p className='h5'>Seleccione su identidad para controlar la lista de turnos</p>
 		</div>
-			< DoctorsViewList doctorsList={doctorsList} />
+			<DoctorsViewList doctorsList={doctorsList} />
 		</>
 	)
 }

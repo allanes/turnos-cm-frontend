@@ -13,7 +13,7 @@ export const DoctorsView = () => {
           <div className='pages-container'>
             <Routes>
               <Route path="/doctorsView" element={<DoctorsViewListContainer />} />
-              <Route path="/doctorsView/doctor/:IdDoctor" element={<DoctorsViewDoctorDetail />} />
+              <Route path="/doctorsView/:doctorId" element={<DoctorsViewDoctorDetail />} />
             </Routes>
           </div>
         </Router>
