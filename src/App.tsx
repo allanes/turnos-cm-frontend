@@ -7,9 +7,9 @@ import Error404 from './components/Views/Error404';
 
 const renderSwitch = (props: string) => {
   switch (props) {
-    case '/patientsView':
+    case 'patientsView':
       return <PatientView />;
-    case '/doctorsView':
+    case 'doctorsView':
       return <DoctorsView />;
     default:
       return <AdminView />;
@@ -17,22 +17,25 @@ const renderSwitch = (props: string) => {
 };
 
 interface appState {
-  route: string
+  route: Array<string>
 }
 
 function App() {
 
-  const [currentRoute, setCurrentRoute] = useState<appState["route"]>('');
+  const [currentRoute, setCurrentRoute] = useState<appState["route"]>([]);
 
   useEffect(() => {
     console.log(window.location);
-    
-    setCurrentRoute(window.location.pathname);
+    setCurrentRoute((window.location.pathname).split("/"));
   }, [])
+  
+  useEffect(() => {
+    console.log(currentRoute);
+  }, [currentRoute])
 
   return (
     <>
-      {renderSwitch(currentRoute)}
+      {renderSwitch(currentRoute[1])}
     </>
   );
 }
