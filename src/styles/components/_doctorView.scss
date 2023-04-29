@@ -1,9 +1,16 @@
-.card-container{
+.text-container{
     background-color: $mi-white;
-    width: 95vw;
+    width: auto;
     border-radius: 10px;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
     padding: 10px;
-    margin: 10px;
-    list-style: none;
+    margin: 20px 10px 40px 10px;
 }
+
+.container-button{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+}
+

@@ -36,38 +36,50 @@ export const DoctorsViewDoctorDetail = () => {
   }
 
   return (
-    <div>
-      <div className='card-container'>
-        <p>Dr./Dra. {doctor?.nombre}, {doctor?.apellido}</p>
+    <div className='container-sm'>
+      <div className='text-container'>
+        <p className='color-mi-grey-blue'>Dr./Dra. </p>
+        <blockquote className="blockquote text-center">
+          <p className='h2 '>{doctor?.nombre}, {doctor?.apellido}</p>
+        </blockquote>
       </div>
-      <button type='button' className="btn btn-warning" onClick={() => { handlePreviousTurn(Number(doctor?.id)) }} >
-        Retroceder turno
-      </button>
-      <button type='button' className="btn btn-success" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
-        Avanzar turno
-      </button>
-      <table className='table table-striped table-hover table-xxl table-container-xl'>
-        <thead>
-          <tr>
-            {keysTablePatiens.map((item, index) => {
-              return (
-                <th key={index}>{item}</th>
-              )
-            })}
-          </tr>
-        </thead>
-        <tbody className='table-group-divider' >
-          {doctor?.turnos?.map((turn, index) => {
-            const isFirstPatient = index === 0;
-            return (
-              <tr key={index} className={isFirstPatient ? 'table-success' : ''}>
-                <th scope='row'>{turn.id}</th>
-                <td>{turn.nombre_paciente}</td>
+      <div className='container-button my-4 '>
+        <button type='button' className="btn btn-outline-warning" onClick={() => { handlePreviousTurn(Number(doctor?.id)) }} >
+          <p className='my-2'>Retroceder turno</p>
+        </button>
+        <button type='button' className="btn btn-success px-4" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
+          <p className='my-2'>Avanzar turno</p>
+        </button>
+      </div>
+      {doctor?.turnos?.length === 0
+        ? <div>
+            <blockquote className="blockquote text-center">
+              <p className='text-container'>¡ No tenes turnos asignados !</p>
+            </blockquote>
+          </div>
+        : <table className='table table-striped table-hover table-xxl table-container-sm'>
+            <thead>
+              <tr>
+                {keysTablePatiens.map((item, index) => {
+                  return (
+                    <th key={index}>{item}</th>
+                  )
+                })}
               </tr>
-            )
-          })}
-        </tbody>
-      </table>
+            </thead>
+            <tbody className='table-group-divider' >
+              {doctor?.turnos?.map((turn, index) => {
+                const isFirstPatient = index === 0;
+                return (
+                  <tr key={index} className={isFirstPatient ? 'table-success' : ''}>
+                    <th scope='row'>{turn.id}</th>
+                    <td>{turn.nombre_paciente}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+      }
     </div>
   )
 }

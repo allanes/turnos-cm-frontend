@@ -9,11 +9,12 @@ interface Props {
 export const DoctorsViewList = ({ doctorsList }: Props) => {
 	return (
 		<div>
-			<ul className='p-1'>
+			<ul className='p-1 wihtout-style'>
 				{doctorsList.map((doctor) => {
 					return (
-						<Link key={doctor.id} to={`/doctorsView/${doctor.id}`}>
-							<li className='card-container'>{doctor.nombre}, {doctor.apellido} - {doctor.especialidad}</li>
+						<Link className='wihtout-style' key={doctor.id} to={`/doctorsView/${doctor.id}`}>
+							<li className='text-container wihtout-style color-mi-black h2 px-4'>
+								{doctor.nombre}, {doctor.apellido}</li>
 						</Link>
 					)
 				})}
