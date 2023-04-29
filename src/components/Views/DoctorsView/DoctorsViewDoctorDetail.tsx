@@ -4,6 +4,11 @@ import { Medico } from '../../../codegen_output'
 import { MedicoConTurnos } from '../../../codegen_output'
 import { MedicosService } from '../../../codegen_output'
 
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 interface DoctorDetailState {
   doctor: MedicoConTurnos
 }
@@ -23,16 +28,29 @@ export const DoctorsViewDoctorDetail = () => {
       .then(doctor => {
         setDoctor(doctor)
       })
-  }, [doctorId])
+  }, [doctorId, doctor])
 
+  const notifyNextTurn = ( message: String) => {
+    toast.success(message, {
+      position: toast.POSITION.TOP_CENTER,
+      
+    });
+  };
+  
+  const notifyPreviousTurn = ( message: String) => {
+    toast.warn(message, {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+  
   const handlePreviousTurn = (doctorId: Number): void => {
     MedicosService.handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(Number(doctorId))
-    window.location.reload()
+    notifyPreviousTurn("Retrocedio un turno")
   }
-
+  
   const handleNextTurn = (doctorId: Number): void => {
     MedicosService.handleNextTurnApiV1DoctorsIdNextPatientGet(Number(doctorId))
-    window.location.reload()
+    notifyNextTurn("Avanzó un turno")
   }
 
   return (
@@ -54,10 +72,10 @@ export const DoctorsViewDoctorDetail = () => {
       {doctor?.turnos?.length === 0
         ? <div>
             <blockquote className="blockquote text-center">
-              <p className='text-container'>¡ No tenes turnos asignados !</p>
+              <p className='text-container'>¡ No tenés turnos asignados !</p>
             </blockquote>
           </div>
-        : <table className='table table-striped table-hover table-xxl table-container-sm'>
+        : <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
             <thead>
               <tr>
                 {keysTablePatiens.map((item, index) => {
@@ -80,6 +98,7 @@ export const DoctorsViewDoctorDetail = () => {
             </tbody>
           </table>
       }
+      <ToastContainer autoClose={1500} />
     </div>
   )
 }

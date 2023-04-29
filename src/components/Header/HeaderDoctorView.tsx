@@ -9,7 +9,7 @@ export const HeaderDoctorView = () => {
 				<div className="col-2">
 					<img src={logocm} className="float-start mx-4 logocm" alt="Logo del centro médico esperanza" />
 				</div>
-				<div className="col-10 ">
+				<div className="col-10">
 					<h2 className='my-0'>Plantel Médico</h2>
 				</div>
 			</div>
