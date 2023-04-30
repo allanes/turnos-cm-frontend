@@ -151,12 +151,12 @@ export class MedicosService {
     }
 
     /**
-     * Handle Next Turn
+     * Handle Previous Turn
      * @param id
      * @returns Turno Successful Response
      * @throws ApiError
      */
-    public static handleNextTurnApiV1DoctorsIdPreviousPatientGet(
+    public static handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(
         id: number,
     ): CancelablePromise<Turno> {
         return __request(OpenAPI, {
