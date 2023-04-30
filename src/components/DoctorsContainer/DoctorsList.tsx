@@ -14,15 +14,16 @@ const keysTableDoctors = [
   "Email",
   "Teléfono",
   "Especialidad",
-  "Consultorio"
+  "Consultorio",
+  ""
 ]
 
 export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
 
   return (
     <>
-      <table className='table table-striped table-hover table-xxl table-container-xl table-borderless'>
-        <thead>
+      <table className='table table-striped table-hover table-xxl table-container-xl'>
+        <thead className='table-success'>
           <tr>
             {keysTableDoctors.map((item, index) => {
               return (

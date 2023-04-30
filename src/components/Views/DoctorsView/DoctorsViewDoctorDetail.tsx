@@ -76,7 +76,7 @@ export const DoctorsViewDoctorDetail = () => {
             </blockquote>
           </div>
         : <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
-            <thead>
+            <thead className='table-success'>
               <tr>
                 {keysTablePatiens.map((item, index) => {
                   return (
@@ -89,7 +89,7 @@ export const DoctorsViewDoctorDetail = () => {
               {doctor?.turnos?.map((turn, index) => {
                 const isFirstPatient = index === 0;
                 return (
-                  <tr key={index} className={isFirstPatient ? 'table-success' : ''}>
+                  <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
                     <th scope='row'>{turn.id}</th>
                     <td>{turn.nombre_paciente}</td>
                   </tr>
