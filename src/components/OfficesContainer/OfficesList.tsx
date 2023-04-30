@@ -21,7 +21,7 @@ export const OfficesList = ({ offices, onDeleteOffice}: Props) => {
 
   return (
     <>
-      <table className='table table-striped table-hover table-xxl table-container-l'>
+      <table className='table table-striped table-hover table-xxl table-container-l table-borderless'>
         <thead>
           <tr>
             {keysTabOffices.map((item, index) => {
