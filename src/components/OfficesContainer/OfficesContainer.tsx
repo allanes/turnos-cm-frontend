@@ -7,7 +7,8 @@ import { OfficesWithDoctor } from "../../types/types"
 import { AssignDoctorToOffice } from "./AssignDoctorToOffice"
 import { RegistroConsultoriosCreate } from "../../codegen_output"
 import { RegistroDeConsultoriosConMDicosService } from "../../codegen_output"
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
+import Swal from "sweetalert2"
 
 interface OfficesState {
   offices: Array<Consultorio>
@@ -27,18 +28,18 @@ export const OfficesContainer = () => {
 
   useEffect(() => {
     ConsultoriosService.readConsultoriosApiV1OfficesGet()
-    .then(offices => {
-      console.log(offices)
-      setOfficesList(offices)
-    })
+      .then(offices => {
+        console.log(offices)
+        setOfficesList(offices)
+      })
   }, [])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
-    .then(doctors => {
-      console.log(doctors)
-      setDoctorsList(doctors)
-    })
+      .then(doctors => {
+        console.log(doctors)
+        setDoctorsList(doctors)
+      })
   }, [])
 
   useEffect(() => {
@@ -54,25 +55,37 @@ export const OfficesContainer = () => {
   const handleNewOffice = (newOffice: ConsultorioCreate): void => {
     ConsultoriosService.createConsultorioApiV1OfficesPost(newOffice)
     console.log(newOffice);
-    setOfficesListCreate( office => [...officesList, newOffice])
-    
+    setOfficesListCreate(office => [...officesList, newOffice])
+
   }
 
   const handleDelete = (id: number): void => {
-    ConsultoriosService.deleteConsultorioApiV1OfficesIdDelete(id)
-    setOfficesList(officesList.filter((offices) => offices.id !== id));
+    Swal.fire({
+      title: '¿Estás seguro que deseas eliminar el consultorio?',
+      html: ``,
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      icon: 'warning',
+      confirmButtonColor: '#ff2d55'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Eliminado!', '', 'error')
+        ConsultoriosService.deleteConsultorioApiV1OfficesIdDelete(id)
+        setOfficesList(officesList.filter((offices) => offices.id !== id));
+      }
+    })
   }
 
   const handleNewAssign = (newAssign: RegistroConsultoriosCreate): void => {
     RegistroDeConsultoriosConMDicosService.createConsultorioApiV1OfficesToDoctorsPost(newAssign)
     navigate("/waitingRoom/0")
   }
-  
+
   return (
     <>
       <OfficesCreate onNewOffice={handleNewOffice} />
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
-      <OfficesList offices={offices}  onDeleteOffice={handleDelete} />
+      <OfficesList offices={offices} onDeleteOffice={handleDelete} />
     </>
   )
 }
