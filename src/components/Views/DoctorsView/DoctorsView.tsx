@@ -6,18 +6,16 @@ import { DoctorsViewDoctorDetail } from './DoctorsViewDoctorDetail'
 
 export const DoctorsView = () => {
   return (
-    <>
-      <div>
-        <HeaderDoctorView />
-        <Router>
-          <div className='pages-container'>
-            <Routes>
-              <Route path="/doctorsView" element={<DoctorsViewListContainer />} />
-              <Route path="/doctorsView/:doctorId" element={<DoctorsViewDoctorDetail />} />
-            </Routes>
-          </div>
-        </Router>
-      </div>
-    </>
+    <div className='back-grey'>
+      <HeaderDoctorView />
+      <Router>
+        <div className='pages-container'>
+          <Routes>
+            <Route path="/doctorsView" element={<DoctorsViewListContainer />} />
+            <Route path="/doctorsView/:doctorId" element={<DoctorsViewDoctorDetail />} />
+          </Routes>
+        </div>
+      </Router>
+    </div>
   )
 }

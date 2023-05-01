@@ -1,5 +1,11 @@
+.cardRoom-container{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+}
 .cardRoom {
-    height: 500px;
+    height: 21rem;
+    width: 28rem;
     border: 2px solid ;
     border-color: $mi-grey-smoke;
     border-radius: 2rem;
@@ -11,9 +17,4 @@
     background: $mi-orange;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
-}
-
-.cardRoom-Body{
-    width: 400px;
-    margin: 10px auto;
 }

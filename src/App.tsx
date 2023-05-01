@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { AdminView } from './components/Views/AdminView';
-import { PatientView } from './components/Views/PatientsView/PatientViewContainer';
+import { PatientView } from './components/Views/PatientsView/PatientView';
 import { DoctorsView } from './components/Views/DoctorsView/DoctorsView';
 import Error404 from './components/Views/Error404';
 
