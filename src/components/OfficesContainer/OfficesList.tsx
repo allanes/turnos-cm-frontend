@@ -14,7 +14,8 @@ const keysTabOffices = [
   "Id",
   "Descripción",
   "Sala",
-  "Médico asignado"
+  "Médico asignado",
+  ""
 ]
 
 export const OfficesList = ({ offices, onDeleteOffice}: Props) => {
@@ -22,7 +23,7 @@ export const OfficesList = ({ offices, onDeleteOffice}: Props) => {
   return (
     <>
       <table className='table table-striped table-hover table-xxl table-container-l'>
-        <thead>
+        <thead className='table-success'>
           <tr>
             {keysTabOffices.map((item, index) => {
               return (

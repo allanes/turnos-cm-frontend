@@ -63,6 +63,12 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
         </Row>
         <Row>
           <Col>
+            <Form.Group className="mb-3" controlId="fecha_nacimiento">
+              <Form.Label>Fecha de nacimiento</Form.Label>
+              <Form.Control onChange={handleChange} type="date" placeholder="Ingrese la fecha nacimiento" />
+            </Form.Group>
+          </Col>
+          <Col>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control onChange={handleChange} type="text" placeholder="Ingrese el email" />

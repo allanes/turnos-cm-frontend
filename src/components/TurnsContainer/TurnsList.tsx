@@ -2,22 +2,27 @@ import React from 'react'
 import { Turno } from '../../codegen_output'
 import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 import Swal from 'sweetalert2'
+import { Medico } from '../../codegen_output'
+import { Paciente } from '../../codegen_output'
 
 interface Props {
+  doctorsList: Array<Medico>
+  patientsList: Array<Paciente>
   turnsList: Array<Turno>
   onDeleteTurn: (id: number) => void
 }
 
 const keysTabTurns = [
   "Id",
-  "Id médico",
-  "Id paciente",
+  "Médico",
+  "Paciente",
   "Motivo de consulta",
-  "Pendiente",
-  "Fecha"
+  "Estado",
+  "Fecha",
+  ""
 ]
 
-export const TurnsList = ({turnsList, onDeleteTurn}: Props) => {
+export const TurnsList = ({doctorsList, patientsList, turnsList, onDeleteTurn}: Props) => {
 
   const handleDelete = ( turn: Turno ) => {
     Swal.fire({
@@ -35,10 +40,18 @@ export const TurnsList = ({turnsList, onDeleteTurn}: Props) => {
     })
   }
 
+  const searchDoctor = ( doctorId: number | undefined ) => {
+    return doctorsList.find(doctor => doctor.id === doctorId);
+  }
+
+  const searchPatient = ( patientId: number | undefined ) => {
+    return patientsList.find(patient => patient.id === patientId);
+  }
+
   return (
     <>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
-        <thead>
+        <thead className='table-success'>
           <tr>
             {keysTabTurns.map((item, index) => {
               return (
@@ -52,10 +65,10 @@ export const TurnsList = ({turnsList, onDeleteTurn}: Props) => {
             return (
               <tr key={index} >
                 <th scope='row'>{turn.id}</th>
-                <td>{turn.id_medico}</td>
-                <td>{turn.id_paciente}</td>
+                <td>{searchDoctor(turn.id_medico)?.nombre}, {searchDoctor(turn.id_medico)?.apellido}</td>
+                <td>{searchPatient(turn.id_paciente)?.nombre}, {searchPatient(turn.id_paciente)?.apellido}</td>
                 <td>{turn.motivo_consulta}</td>
-                <td>{turn.pendiente}</td>
+                <td>{turn.pendiente === true ? "Pendiente" : "Atendido"}</td>
                 <td>{turn.fecha}</td>
                 <td><button className='icons-border icon--size icon--delete'
                   type='button'

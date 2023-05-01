@@ -4,7 +4,8 @@ import { Turno } from '../../codegen_output'
 import { TurnosService } from '../../codegen_output'
 import { TurnsCreate } from './TurnsCreate'
 import { TurnsList } from './TurnsList'
-import { Button } from 'react-bootstrap'
+import { Paciente } from '../../codegen_output'
+import { PacientesService } from '../../codegen_output'
 
 // import io from 'socket.io-client'
 // import { PORT_SERVER } from '../../types/config'
@@ -14,6 +15,7 @@ interface TurnsState {
   turns: Array<Turno>
   turnsCreate: Array<TurnoCreate>
   doctorsList: Array<Medico>
+  patients: Array<Paciente>
 }
 
 export const TurnsContainer = () => {
@@ -21,6 +23,7 @@ export const TurnsContainer = () => {
   const [turnsList, setTurnsList] = useState<TurnsState["turns"]>([])
   const [turnsCreateList, setTurnsCreateList] = useState<TurnsState["turnsCreate"]>([])
   const [doctorsList, setDoctorList] = useState<TurnsState["doctorsList"]>([])
+  const [patientsList, setPatientsList] = useState<TurnsState["patients"]>([])
 
   useEffect(() => {
     TurnosService.readTurnosApiV1TurnsGet()
@@ -36,6 +39,14 @@ export const TurnsContainer = () => {
         console.log(doctors);
         setDoctorList(doctors)
       })
+  }, [])
+
+  useEffect(() => {
+    PacientesService.readPacientesApiV1PatientsGet()
+    .then(patients => {
+      console.log(patients);
+      setPatientsList(patients)
+    })
   }, [])
 
   const handleNewTurn = (newTurn: TurnoCreate): void => {
@@ -54,7 +65,7 @@ export const TurnsContainer = () => {
   return (
     <div>
       <TurnsCreate onNewTurn={handleNewTurn} doctorsList={doctorsList} />
-      <TurnsList turnsList={turnsList} onDeleteTurn={handleDelete} />
+      <TurnsList doctorsList={doctorsList} patientsList={patientsList} turnsList={turnsList} onDeleteTurn={handleDelete} />
     </div>
   )
 }
