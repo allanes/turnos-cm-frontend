@@ -130,18 +130,38 @@ export class MedicosService {
     }
 
     /**
-     * Next Turn
-     * Delete an medico.
+     * Handle Next Turn
      * @param id
      * @returns Turno Successful Response
      * @throws ApiError
      */
-    public static nextTurnApiV1DoctorsIdNextGet(
+    public static handleNextTurnApiV1DoctorsIdNextPatientGet(
         id: number,
     ): CancelablePromise<Turno> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/api/v1/doctors/{id}/next',
+            url: '/api/v1/doctors/{id}/nextPatient',
+            path: {
+                'id': id,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Handle Previous Turn
+     * @param id
+     * @returns Turno Successful Response
+     * @throws ApiError
+     */
+    public static handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(
+        id: number,
+    ): CancelablePromise<Turno> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/{id}/previousPatient',
             path: {
                 'id': id,
             },

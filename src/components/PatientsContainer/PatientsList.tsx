@@ -9,18 +9,21 @@ interface Props {
 }
 
 const keysTabPatients = [
-  "Id",
+  "Dni",
   "Nombre, Apellido",
+  "Fecha de nacimiento",
+  "Obra social",
   "Email",
-  "Telefono"
+  "Teléfono",
+  ""
 ]
 
 export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
 
-  const handleDelete = ( patient: Paciente ) => {
+  const handleDelete = (patient: Paciente) => {
     Swal.fire({
-      title:'¿Estás seguro que deseas eliminar el paciente?',
-      html:`${patient.nombre}, ${patient.apellido}`,
+      title: '¿Estás seguro que deseas eliminar el paciente?',
+      html: `${patient.nombre}, ${patient.apellido}`,
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       icon: 'warning',
@@ -30,14 +33,14 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
       if (result.isConfirmed) {
         Swal.fire('Eliminado!', '', 'error')
         onDeletePatient(patient.id)
-      } 
+      }
     })
   }
-  
+
   return (
     <>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
-        <thead>
+        <thead className='table-success'>
           <tr>
             {keysTabPatients.map((item, index) => {
               return (
@@ -52,13 +55,16 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
               <tr key={index} >
                 <th scope='row'>{patient.id}</th>
                 <td>{patient.nombre}, {patient.apellido}</td>
+                <td>{patient.fecha_nacimiento}</td>
+                <td>Obra social</td>
                 <td>{patient.email}</td>
                 <td>{patient.telefono}</td>
-                <td><button className='icons-border icon--size icon--delete'
-                  type='button'
-                  onClick={() => { handleDelete(patient) }} >
-                  <img className='icon-img--size' src={deleteIcon} alt="" />
-                </button>
+                <td>
+                  <button className='icons-border icon--size icon--delete'
+                    type='button'
+                    onClick={() => { handleDelete(patient) }} >
+                    <img className='icon-img--size' src={deleteIcon} alt="" />
+                  </button>
                 </td>
               </tr>
             )

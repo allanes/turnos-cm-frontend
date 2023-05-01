@@ -37,13 +37,12 @@ export class TurnosService {
     }
 
     /**
-     * Create Turno
-     * Create new turno.
+     * Handle Create Turno
      * @param requestBody
      * @returns Turno Successful Response
      * @throws ApiError
      */
-    public static createTurnoApiV1TurnsPost(
+    public static handleCreateTurnoApiV1TurnsPost(
         requestBody: TurnoCreate,
     ): CancelablePromise<Turno> {
         return __request(OpenAPI, {
