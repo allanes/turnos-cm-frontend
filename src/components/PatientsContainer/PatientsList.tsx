@@ -11,8 +11,10 @@ interface Props {
 const keysTabPatients = [
   "Dni",
   "Nombre, Apellido",
+  "Fecha de nacimiento",
+  "Obra social",
   "Email",
-  "Telefono",
+  "Teléfono",
   ""
 ]
 
@@ -53,6 +55,8 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
               <tr key={index} >
                 <th scope='row'>{patient.id}</th>
                 <td>{patient.nombre}, {patient.apellido}</td>
+                <td>{patient.fecha_nacimiento}</td>
+                <td>Obra social</td>
                 <td>{patient.email}</td>
                 <td>{patient.telefono}</td>
                 <td>
