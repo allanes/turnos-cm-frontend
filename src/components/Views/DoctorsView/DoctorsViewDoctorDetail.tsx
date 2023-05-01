@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 interface DoctorDetailState {
   doctor: MedicoConTurnos
+  flag: Boolean
 }
 
 const keysTablePatiens = [
@@ -22,13 +23,14 @@ export const DoctorsViewDoctorDetail = () => {
 
   const { doctorId } = useParams()
   const [doctor, setDoctor] = useState<DoctorDetailState["doctor"]>()
+  const [refreshFlag, setRefreshFlag] = useState<DoctorDetailState["flag"]>(true)
 
   useEffect(() => {
     MedicosService.readMedicoApiV1DoctorsIdGet(Number(doctorId))
       .then(doctor => {
         setDoctor(doctor)
       })
-  }, [doctorId, doctor])
+  }, [doctorId, refreshFlag])
 
   const notifyNextTurn = ( message: String) => {
     toast.success(message, {
@@ -45,11 +47,13 @@ export const DoctorsViewDoctorDetail = () => {
   
   const handlePreviousTurn = (doctorId: Number): void => {
     MedicosService.handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(Number(doctorId))
+    setRefreshFlag(!refreshFlag)
     notifyPreviousTurn("Retrocedio un turno")
   }
   
   const handleNextTurn = (doctorId: Number): void => {
     MedicosService.handleNextTurnApiV1DoctorsIdNextPatientGet(Number(doctorId))
+    setRefreshFlag(!refreshFlag)
     notifyNextTurn("Avanzó un turno")
   }
 
