@@ -25,12 +25,10 @@ function App() {
   const [currentRoute, setCurrentRoute] = useState<appState["route"]>([]);
 
   useEffect(() => {
-    console.log(window.location);
     setCurrentRoute((window.location.pathname).split("/"));
   }, [])
   
   useEffect(() => {
-    console.log(currentRoute);
   }, [currentRoute])
 
   return (

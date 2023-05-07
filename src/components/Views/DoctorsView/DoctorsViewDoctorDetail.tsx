@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Medico } from '../../../codegen_output'
 import { MedicoConTurnos } from '../../../codegen_output'
 import { MedicosService } from '../../../codegen_output'
-
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,7 +33,6 @@ export const DoctorsViewDoctorDetail = () => {
   const notifyNextTurn = ( message: String) => {
     toast.success(message, {
       position: toast.POSITION.TOP_CENTER,
-      
     });
   };
   

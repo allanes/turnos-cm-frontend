@@ -9,11 +9,6 @@ interface OfficesState {
 
 export const PatientViewOfficeDetail = ({ officesList }: OfficesState) => {
 
-  useEffect(() => {
-    console.log(officesList)
-  }, [])
-
-
   return (
     <div>
       <div className="container-fluid text-center">

@@ -16,11 +16,16 @@ export const PatientViewOfficeList = () => {
 
   const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
   const { roomId } = useParams()
+  const audio = new Audio();
+  audio.src = 'http://localhost:8000/notifications'
 
   useEffect(() => {
     socket.on('refresh', (msg) => {
-      console.log(msg)
-      window.location.reload()
+      ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
+        .then(offices => {
+          setOfficesList(offices)
+          handleNewMessage()
+        })
     })
     return () => {
       socket.off('refresh')
@@ -30,17 +35,21 @@ export const PatientViewOfficeList = () => {
   useEffect(() => {
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
       .then(offices => {
-        console.log(offices)
         setOfficesList(offices)
       })
   }, [roomId])
+
+  const handleNewMessage = () => {
+    audio.play()
+  };
+
 
   return (
     <div>
       <div className="container-fluid text-center">
         <div className="row align-items-center">
           <div className="col-6">
-            <h2 className='my-0'>Aqui se inserta la publicidad</h2>
+            <h2 className='my-0'>Publicidad</h2>
           </div>
           <div className="col-6">
             <PatientViewOfficeDetail officesList={officesList} />
