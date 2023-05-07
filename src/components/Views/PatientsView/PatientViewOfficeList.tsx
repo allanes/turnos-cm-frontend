@@ -17,7 +17,7 @@ export const PatientViewOfficeList = () => {
   const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
   const { roomId } = useParams()
   const audio = new Audio();
-  audio.src = 'http://localhost:8000/notifications'
+  audio.src = 'http://localhost:8000/notification'
 
   useEffect(() => {
     socket.on('refresh', (msg) => {
@@ -41,16 +41,18 @@ export const PatientViewOfficeList = () => {
 
   const handleNewMessage = () => {
     audio.play()
-  };
+    console.log(audio.duration);
+    
+   };
 
 
   return (
     <div>
       <div className="container-fluid text-center">
         <div className="row align-items-center">
-          <div className="col-6">
+          {/* <div className="col-6">
             <h2 className='my-0'>Publicidad</h2>
-          </div>
+          </div> */}
           <div className="col-6">
             <PatientViewOfficeDetail officesList={officesList} />
           </div>

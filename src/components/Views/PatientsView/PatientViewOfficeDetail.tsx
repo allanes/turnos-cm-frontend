@@ -24,7 +24,7 @@ export const PatientViewOfficeDetail = ({ officesList }: OfficesState) => {
                   <div>
                     <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
                       <tbody>
-                        {office.pacientes?.map((turn, index) => {
+                        {office.pacientes?.slice(0,3).map((turn, index) => {
                           const isFirstPatient = index === 0;
                           return (
                             <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
