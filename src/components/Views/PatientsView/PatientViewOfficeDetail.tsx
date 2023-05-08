@@ -7,7 +7,7 @@ interface OfficesState {
   officesList: Array<ConsultorioDetallado>
 }
 
-export const PatientViewOfficeDetail = ({ officesList }: OfficesState) => {
+export const PatientViewOfficeDetail = ({ officesList  }: OfficesState) => {
 
   return (
     <div>
@@ -15,10 +15,11 @@ export const PatientViewOfficeDetail = ({ officesList }: OfficesState) => {
         <div className="row align-items-center">
           <div className="cardRoom-container">
             {officesList.map((office) => {
+              const numPatientsLeft = (office.pacientes?.length ?? 0) - 3;
               return (
-                <div key={office.id} className='cardRoom'>
+                <div key={office.id} className={'cardRoom'}> 
                   <div className='cardRoom-Top'>
-                    <p className='h1'>{office.medico}</p>
+                    <p className='h1'>Dr. {office.medico}</p>
                     <p>Consultorio: {office.id}</p>
                   </div>
                   <div>
@@ -32,7 +33,14 @@ export const PatientViewOfficeDetail = ({ officesList }: OfficesState) => {
                               <td className='h2 text-start'>{turn}</td>
                             </tr>
                           )
-                        })}
+                      })}
+                        {office.pacientes?.length && office.pacientes.length > 3 &&
+                          <tr>
+                            <td colSpan={3} style={{textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold', color: '#808080'}}>
+                              + {(office.pacientes?.length ?? 0) - 3} pacientes
+                            </td>
+                          </tr>
+                        }
                       </tbody>
                     </table>
                   </div>
