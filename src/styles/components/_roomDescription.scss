@@ -18,3 +18,19 @@
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 }
+
+.cardRoom.animation-active table > tbody  > tr:first-child{
+    // background: $mi-orange;
+    border-width: 6px; 
+    border-style: solid;
+    font-style: oblique;
+    animation-name: border-color-animation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+  
+@keyframes border-color-animation {
+    100% { 
+        border-color: rgb(20, 119, 25);         
+    }
+}

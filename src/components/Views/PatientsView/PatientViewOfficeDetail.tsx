@@ -5,9 +5,27 @@ import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_outp
 
 interface OfficesState {
   officesList: Array<ConsultorioDetallado>
+  consultorioId: number;
+  animationActive: boolean;
 }
 
-export const PatientViewOfficeDetail = ({ officesList  }: OfficesState) => {
+// export const [animationActive, setAnimationActive] = useState(false);
+
+export const handleRefresh = (
+  officesList: Array<ConsultorioDetallado>, 
+  consultorioId: number,
+  setAnimationActive: Function) => {
+  // Check if the refresh event is targeting this consultorio
+  if (officesList.some((office) => office.id === consultorioId)) {
+    console.log('setAnimationActive called')
+    setAnimationActive(true);
+    // Stop the animation after 5 seconds
+    setTimeout(() => setAnimationActive(false), 5000);
+  }
+};
+
+export const PatientViewOfficeDetail = ({ officesList, consultorioId, animationActive }: OfficesState) => {
+  
 
   return (
     <div>
@@ -17,7 +35,7 @@ export const PatientViewOfficeDetail = ({ officesList  }: OfficesState) => {
             {officesList.map((office) => {
               const numPatientsLeft = (office.pacientes?.length ?? 0) - 3;
               return (
-                <div key={office.id} className={'cardRoom'}> 
+                <div key={office.id} className={`cardRoom${animationActive && office.id === consultorioId ? " animation-active" : ""}`}>
                   <div className='cardRoom-Top'>
                     <p className='h1'>Dr. {office.medico}</p>
                     <p>Consultorio: {office.id}</p>
