@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
+    // width: 100%;
 }
 .cardRoom {
     height: 21rem;
@@ -11,6 +12,8 @@
     border-radius: 2rem;
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
     background-color: $mi-white;
+    flex: 1;
+    margin-bottom: 20px;
 }
 
 .cardRoom-Top{
@@ -34,3 +37,17 @@
         border-color: rgb(20, 119, 25);         
     }
 }
+
+.carousel-item {
+    display: none;
+}
+  
+.carousel-item.active {
+    display: block;
+}
+
+.carousel-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
