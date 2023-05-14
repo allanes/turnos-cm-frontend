@@ -7,7 +7,6 @@ interface OfficesState {
   officesList: Array<ConsultorioDetallado>
   consultorioId: number;
   animationActive: boolean;
-  carouselRef: React.RefObject<HTMLDivElement>; // add this line
 }
 
 // export const [animationActive, setAnimationActive] = useState(false);
@@ -15,23 +14,15 @@ interface OfficesState {
 export const handleRefresh = (
   officesList: Array<ConsultorioDetallado>, 
   consultorioId: number,
-  setAnimationActive: Function,
-  carouselRef: React.RefObject<HTMLDivElement>) => {
-    const targetIndex = Math.floor(officesList.findIndex((office) => office.id === consultorioId) / 3) * 3;
-    if (carouselRef.current) {
-      carouselRef.current.scrollTop = targetIndex * (window.innerHeight / 3);
-    }
-    setAnimationActive(true);
-    setTimeout(() => setAnimationActive(false), 5000);
-  }
+  setAnimationActive: Function) => {
     // // Check if the refresh event is targeting this consultorio
-    // if (officesList.some((office) => office.id === consultorioId)) {
-    //   console.log('setAnimationActive called')
-    //   setAnimationActive(true);
-    //   // Stop the animation after 5 seconds
-    //   setTimeout(() => setAnimationActive(false), 5000);
-    // }
-// };
+    if (officesList.some((office) => office.id === consultorioId)) {
+      console.log('setAnimationActive called')
+      setAnimationActive(true);
+      // Stop the animation after 5 seconds
+      setTimeout(() => setAnimationActive(false), 5000);
+    }
+};
 
 export const PatientViewOfficeDetail = ({ officesList, consultorioId, animationActive }: OfficesState) => {
   const itemsToShow = 3;
@@ -41,7 +32,8 @@ export const PatientViewOfficeDetail = ({ officesList, consultorioId, animationA
     <div>
       <div className="container-fluid text-center">
         <div className="row align-items-center">
-          <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+          {/* <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000"> */}
+          <div id="react-responsive-carousel" className="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
             <div className="carousel-inner">
               {[...Array(totalSlides)].map((_, slideIndex) => {
                 const isActive = slideIndex === 0; // Make the first slide active

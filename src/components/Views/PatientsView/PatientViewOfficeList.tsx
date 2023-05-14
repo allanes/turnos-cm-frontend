@@ -21,7 +21,6 @@ export const PatientViewOfficeList = () => {
   const [animationActive, setAnimationActive] = useState<OfficesState["animationActive"]>(false);
   const { roomId } = useParams()
   const audio = new Audio();
-  const carouselRef = useRef<HTMLDivElement>(null);
   audio.src = 'http://localhost:8000/notification'
 
   useEffect(() => {
@@ -31,7 +30,7 @@ export const PatientViewOfficeList = () => {
           setOfficesList(offices)
           setConsultorioId(parseInt(consultorioIdStr, 10));
           handleNewMessage()
-          handleRefresh(offices, parseInt(consultorioIdStr,10), setAnimationActive, carouselRef)
+          handleRefresh(offices, parseInt(consultorioIdStr,10), setAnimationActive)
           console.log('handleRefresh called with ' + consultorioIdStr)
         })
     })
@@ -62,7 +61,7 @@ export const PatientViewOfficeList = () => {
             <h2 className='my-0'>Publicidad</h2>
           </div> */}
           <div className="col-6">
-            <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive} carouselRef={carouselRef} />
+            <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive} />
           </div>
         </div>
       </div>
