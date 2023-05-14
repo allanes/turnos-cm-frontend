@@ -7,6 +7,7 @@ interface OfficesState {
   officesList: Array<ConsultorioDetallado>
   consultorioId: number;
   animationActive: boolean;
+  carouselRef: React.RefObject<HTMLDivElement>; // add this line
 }
 
 // export const [animationActive, setAnimationActive] = useState(false);
@@ -14,15 +15,23 @@ interface OfficesState {
 export const handleRefresh = (
   officesList: Array<ConsultorioDetallado>, 
   consultorioId: number,
-  setAnimationActive: Function) => {
-  // Check if the refresh event is targeting this consultorio
-  if (officesList.some((office) => office.id === consultorioId)) {
-    console.log('setAnimationActive called')
+  setAnimationActive: Function,
+  carouselRef: React.RefObject<HTMLDivElement>) => {
+    const targetIndex = Math.floor(officesList.findIndex((office) => office.id === consultorioId) / 3) * 3;
+    if (carouselRef.current) {
+      carouselRef.current.scrollTop = targetIndex * (window.innerHeight / 3);
+    }
     setAnimationActive(true);
-    // Stop the animation after 5 seconds
     setTimeout(() => setAnimationActive(false), 5000);
   }
-};
+    // // Check if the refresh event is targeting this consultorio
+    // if (officesList.some((office) => office.id === consultorioId)) {
+    //   console.log('setAnimationActive called')
+    //   setAnimationActive(true);
+    //   // Stop the animation after 5 seconds
+    //   setTimeout(() => setAnimationActive(false), 5000);
+    // }
+// };
 
 export const PatientViewOfficeDetail = ({ officesList, consultorioId, animationActive }: OfficesState) => {
   const itemsToShow = 3;

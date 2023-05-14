@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { useParams } from 'react-router-dom'
 import { PatientViewOfficeDetail, handleRefresh } from './PatientViewOfficeDetail'
@@ -21,6 +21,7 @@ export const PatientViewOfficeList = () => {
   const [animationActive, setAnimationActive] = useState<OfficesState["animationActive"]>(false);
   const { roomId } = useParams()
   const audio = new Audio();
+  const carouselRef = useRef<HTMLDivElement>(null);
   audio.src = 'http://localhost:8000/notification'
 
   useEffect(() => {
@@ -30,7 +31,7 @@ export const PatientViewOfficeList = () => {
           setOfficesList(offices)
           setConsultorioId(parseInt(consultorioIdStr, 10));
           handleNewMessage()
-          handleRefresh(offices, parseInt(consultorioIdStr,10), setAnimationActive)
+          handleRefresh(offices, parseInt(consultorioIdStr,10), setAnimationActive, carouselRef)
           console.log('handleRefresh called with ' + consultorioIdStr)
         })
     })
@@ -61,7 +62,7 @@ export const PatientViewOfficeList = () => {
             <h2 className='my-0'>Publicidad</h2>
           </div> */}
           <div className="col-6">
-            <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive} />
+            <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive} carouselRef={carouselRef} />
           </div>
         </div>
       </div>
