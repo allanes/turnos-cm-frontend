@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { PatientViewOfficeDetail, handleRefresh } from './PatientViewOfficeDetail'
 import { PORT_SERVER } from '../../../types/config'
 import io from 'socket.io-client'
+import { CarouselItem } from './CarouselItem'
 
 const socket = io(PORT_SERVER)
 
@@ -60,8 +61,11 @@ export const PatientViewOfficeList = () => {
           {/* <div className="col-6">
             <h2 className='my-0'>Publicidad</h2>
           </div> */}
-          <div className="col-6">
+          {/* <div className="col-6">
             <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive} />
+          </div> */}
+          <div className="">
+            <CarouselItem officesList={officesList} consultorioId={consultorioId} animationActive={animationActive}/>
           </div>
         </div>
       </div>
