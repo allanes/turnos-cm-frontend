@@ -16,7 +16,7 @@ export const OfficesDescription = ({ officesList }: Props) => {
 							<div className='col-12 col-md-6 col-xxl-4' key={index}>
 								<div className='cardRoom'>
 									<div className='cardRoom-Top'>
-										<p className='h2'>Dr. {office.medico}</p>
+										<p className='h2'>Dr/a. {office.medico}</p>
 										<p className='h5'>Consultorio {office.numero}</p>
 										<p className='h5'>Sala {office.sala}</p>
 									</div>
