@@ -1,8 +1,8 @@
 .sidebar-container{
     padding: 10px;
     margin: 10px;
-    border: 1px solid $mi-cyan;
-    border-radius: 20px;
+    border-radius: 10px;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, 0.1);
     background: $mi-white;
     position: sticky;
     top: 0;
@@ -19,6 +19,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 2px;
+    padding: 2px 8px;
+    border-radius: 15px;
 }
 
 .link-text{
@@ -37,12 +40,25 @@
     margin-right: 10px;
 }
 
-.active {
-    background-color: #2ad6ba;
-    padding: 4px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-    margin: 5px 0;
-    box-sizing: border-box;
+.link-underline{
+    
+    text-decoration: none;
+    background-image: linear-gradient($mi-cyan, $mi-cyan);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s;
+
+    &:hover {
+        background-size: 100% 2px;
+    }
+}
+
+.link-container-isActive{
+    background-color: $mi-cyan;
+    color: $mi-white;
+}
+
+.link-text-isActive{
+    color: $mi-white;
 }

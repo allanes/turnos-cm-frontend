@@ -30,13 +30,13 @@ export const SideBar = () => {
         
         return (
           <Link 
-            className={`link-text m-0 ${isActive ? 'active' : ''}`} 
+            className={`link-underline ${isActive && 'link-isActive' }`} 
             key={index} 
             to={navItems.link}
           >
-            <div className='link-container'>
+            <div className={`link-container ${isActive && 'link-container-isActive' }`}>
               <img className='icon-link--size' src={navItems.icon} alt="" />
-              <p className='link-p'>{navItems.title}</p>
+              <p className={`link-p ${isActive && 'link-text-isActive' }`}>{navItems.title}</p>
             </div>
           </Link>
         )
