@@ -14,7 +14,7 @@ interface DoctorDetailState {
 }
 
 const keysTablePatiens = [
-  "Nº turno",
+  "Nro. de orden",
   "Apellido, nombre",
 ]
 
@@ -90,7 +90,7 @@ export const DoctorsViewDoctorDetail = () => {
                 const isFirstPatient = index === 0;
                 return (
                   <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
-                    <th scope='row'>{turn.id}</th>
+                    <th scope='row'>{turn.nro_orden}</th>
                     <td>{turn.nombre_paciente}</td>
                   </tr>
                 )
