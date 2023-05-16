@@ -51,15 +51,12 @@ export const TurnsContainer = () => {
 
   const handleNewTurn = (newTurn: TurnoCreate): void => {
     TurnosService.handleCreateTurnoApiV1TurnsPost(newTurn)
-    console.log(newTurn);
     setTurnsCreateList(turn => [...turnsCreateList, newTurn])
-    // socket.emit('newTurn', 'newTurn')
   }
   
   const handleDelete = (id: number): void => {
     TurnosService.deleteTurnoApiV1TurnsIdDelete(id)
     setTurnsList(turnsList.filter((turn) => turn.id !== id));
-    // socket.emit('newTurn', 'newTurn')
   }
 
   return (

@@ -14,6 +14,7 @@ interface Props {
 
 const keysTabTurns = [
   "Id",
+  "Nro. de orden",
   "Médico",
   "Paciente",
   "Motivo de consulta",
@@ -55,7 +56,7 @@ export const TurnsList = ({doctorsList, patientsList, turnsList, onDeleteTurn}: 
           <tr>
             {keysTabTurns.map((item, index) => {
               return (
-                <th key={index}>{item}</th>
+                <th className='text-center' key={index}>{item}</th>
               )
             })}
           </tr>
@@ -63,11 +64,12 @@ export const TurnsList = ({doctorsList, patientsList, turnsList, onDeleteTurn}: 
         <tbody className='table-group-divider' >
           {turnsList.map((turn, index) => {
             return (
-              <tr key={index} >
+              <tr className='text-center' key={index} >
                 <th scope='row'>{turn.id}</th>
+                <td>{turn.nro_orden}</td>
                 <td>{searchDoctor(turn.id_medico)?.nombre}, {searchDoctor(turn.id_medico)?.apellido}</td>
-                <td>{searchPatient(turn.id_paciente)?.nombre}, {searchPatient(turn.id_paciente)?.apellido}</td>
-                <td>{turn.motivo_consulta}</td>
+                <td className='text-start'>{searchPatient(turn.id_paciente)?.nombre}, {searchPatient(turn.id_paciente)?.apellido}</td>
+                <td className='text-start'>{turn.motivo_consulta}</td>
                 <td>{turn.pendiente === true ? "Pendiente" : "Atendido"}</td>
                 <td>{turn.fecha}</td>
                 <td><button className='icons-border icon--size icon--delete'
