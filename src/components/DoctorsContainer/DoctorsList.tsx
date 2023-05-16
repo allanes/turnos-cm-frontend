@@ -5,7 +5,7 @@ import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 
 interface Props {
   doctorsList: Array<Medico>
-  onDeleteDoctor: (doctor: Medico) => void 
+  onDeleteDoctor: (doctor: Medico) => void
 }
 
 const keysTableDoctors = [
@@ -22,6 +22,9 @@ export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
 
   return (
     <>
+      <div className='table-container-xl text-center mb-1'>
+        <p className='h3'>Tabla de Médicos</p>
+      </div>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
         <thead className='table-success'>
           <tr>
@@ -33,7 +36,7 @@ export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
           </tr>
         </thead>
         <tbody className='table-group-divider' >
-          {doctorsList.map((doctor,index) => {
+          {doctorsList.map((doctor, index) => {
             return (
               <tr key={index} >
                 <th scope='row'>{doctor.id}</th>
@@ -44,10 +47,10 @@ export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
                 <td>{doctor.consultorio}</td>
                 <td>
                   <button className='icons-border icon--size icon--delete'
-                  type='button'
-                  onClick={() => { onDeleteDoctor(doctor) }} >
-                  <img className='icon-img--size' src={deleteIcon} alt="" />
-                </button>
+                    type='button'
+                    onClick={() => { onDeleteDoctor(doctor) }} >
+                    <img className='icon-img--size' src={deleteIcon} alt="" />
+                  </button>
                 </td>
               </tr>
             )
