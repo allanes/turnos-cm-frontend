@@ -32,10 +32,13 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
     evt.preventDefault()
     onNewAssign(inputValues)
     formRef.current?.reset()
-  } 
+  }
 
   return (
-    <div className='table-container-l'>
+    <div className='table-container-xl'>
+      <div className='table-container-l text-center mb-5'>
+        <p className='h3'>Asignar un consultorio a una sala de espera</p>
+      </div>
       <Form ref={formRef} onSubmit={handleSubmit} >
         <Row className='align-items-center'>
           <Col>

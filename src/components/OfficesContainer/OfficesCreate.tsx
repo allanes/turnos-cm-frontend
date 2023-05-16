@@ -5,7 +5,7 @@ import useNewOfficeForm from '../../hooks/useNewOfficesForm'
 import { Row, Col, Button, Form } from 'react-bootstrap'
 
 interface Props {
-    onNewOffice: (newOffice: ConsultorioCreate) => void
+  onNewOffice: (newOffice: ConsultorioCreate) => void
 }
 
 export const OfficesCreate = ({ onNewOffice }: Props) => {
@@ -15,7 +15,7 @@ export const OfficesCreate = ({ onNewOffice }: Props) => {
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = evt.target
-    
+
     dispatch({
       type: "change_value",
       payload: {
@@ -32,7 +32,10 @@ export const OfficesCreate = ({ onNewOffice }: Props) => {
   }
 
   return (
-    <div className='table-container-l'>
+    <div className='table-container-xl'>
+      <div className='table-container-l text-center mb-5'>
+        <p className='h3'>Crear una nueva sala de espera</p>
+      </div>
       <Form ref={formRef} onSubmit={handleSubmit} >
         <Row>
           <Col>
