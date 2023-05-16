@@ -1,9 +1,38 @@
 .sidebar-container{
-    width: 15rem;
-    min-height: 800px;
     padding: 10px;
     margin: 10px;
-    border-right: 1px solid $mi-cyan;
-    border-radius: 2px;
+    border: 1px solid $mi-cyan;
+    border-radius: 20px;
     background: $mi-white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.sideBar-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.link-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.link-text{
+    text-decoration: none;
+}
+
+.link-p{
+    margin: 0px;
+    color: $mi-black;
+}
+
+.icon-link--size{
+    width: 32px;
+    height: 32px;
+    margin-bottom: 2px;
+    margin-right: 10px;
 }

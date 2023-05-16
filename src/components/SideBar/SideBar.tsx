@@ -21,11 +21,14 @@ export const SideBar = () => {
   }, [])
 
   return (
-    <div>
+    <div className='sideBar-content'>
       {navList.map((navItems, index) => {
         return (
-          <Link className="" key={index} to={navItems.link} >
-            <p>{navItems.title}</p>
+          <Link className="link-text m-0" key={index} to={navItems.link}>
+            <div className='link-container'>
+              <img className='icon-link--size' src={navItems.icon} alt="" />
+              <p className='link-p'>{navItems.title}</p>
+            </div>
           </Link>
         )
       })}
