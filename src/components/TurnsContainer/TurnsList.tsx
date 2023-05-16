@@ -23,11 +23,11 @@ const keysTabTurns = [
   ""
 ]
 
-export const TurnsList = ({doctorsList, patientsList, turnsList, onDeleteTurn}: Props) => {
+export const TurnsList = ({ doctorsList, patientsList, turnsList, onDeleteTurn }: Props) => {
 
-  const handleDelete = ( turn: Turno ) => {
+  const handleDelete = (turn: Turno) => {
     Swal.fire({
-      title:'¿Estás seguro que deseas eliminar el turno?',
+      title: '¿Estás seguro que deseas eliminar el turno?',
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       icon: 'warning',
@@ -37,20 +37,23 @@ export const TurnsList = ({doctorsList, patientsList, turnsList, onDeleteTurn}: 
       if (result.isConfirmed) {
         Swal.fire('Eliminado!', '', 'error')
         onDeleteTurn(turn.id)
-      } 
+      }
     })
   }
 
-  const searchDoctor = ( doctorId: number | undefined ) => {
+  const searchDoctor = (doctorId: number | undefined) => {
     return doctorsList.find(doctor => doctor.id === doctorId);
   }
 
-  const searchPatient = ( patientId: number | undefined ) => {
+  const searchPatient = (patientId: number | undefined) => {
     return patientsList.find(patient => patient.id === patientId);
   }
 
   return (
     <>
+      <div className='table-container-xl text-center mb-1'>
+        <p className='h3'>Tabla de turnos</p>
+      </div>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
         <thead className='table-success'>
           <tr>
