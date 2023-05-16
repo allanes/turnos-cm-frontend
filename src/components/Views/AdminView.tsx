@@ -22,10 +22,10 @@ export const AdminView = () => {
           </div>
           <div className='pages-container'>
             <Routes>
-              <Route path='/' element={<OfficesContainer />} />
+              <Route path='/' element={<TurnsContainer />} />
               <Route path={categoriesList_sidebar[1].link} element={<DoctorsContainer />} />
               <Route path={categoriesList_sidebar[2].link} element={<PatientsContainer />} />
-              <Route path={categoriesList_sidebar[3].link} element={<TurnsContainer />} />
+              <Route path={categoriesList_sidebar[3].link} element={<OfficesContainer />} />
               <Route path={`${url_waitingRoom}/:query`} element={<OfficesContainerPatientView />} />
               <Route path='*' element={<Error404 />} />
             </Routes>

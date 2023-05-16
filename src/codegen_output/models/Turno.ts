@@ -7,6 +7,7 @@ export type Turno = {
     id_paciente?: number;
     motivo_consulta?: string;
     id: number;
+    nro_orden: number;
     pendiente: boolean;
     fecha: string;
     nombre_medico?: string;

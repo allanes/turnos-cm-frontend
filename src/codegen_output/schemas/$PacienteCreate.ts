@@ -17,7 +17,6 @@ export const $PacienteCreate = {
         },
         fecha_nacimiento: {
             type: 'string',
-            format: 'date',
         },
         email: {
             type: 'string',

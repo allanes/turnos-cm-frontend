@@ -8,6 +8,18 @@ import { request as __request } from '../core/request';
 export class DefaultService {
 
     /**
+     * Main
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static mainNotificationGet(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/notification',
+        });
+    }
+
+    /**
      * Inicializar Db
      * @returns any Successful Response
      * @throws ApiError

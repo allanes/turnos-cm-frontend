@@ -16,6 +16,10 @@ export const $Turno = {
             type: 'number',
             isRequired: true,
         },
+        nro_orden: {
+            type: 'number',
+            isRequired: true,
+        },
         pendiente: {
             type: 'boolean',
             isRequired: true,

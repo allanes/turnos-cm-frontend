@@ -60,6 +60,36 @@ export class MedicosService {
     }
 
     /**
+     * Read Medicos Por Sala
+     * Retrieve medicos.
+     * @param sala
+     * @param skip
+     * @param limit
+     * @returns MedicoConTurnos Successful Response
+     * @throws ApiError
+     */
+    public static readMedicosPorSalaApiV1DoctorsPorSalaSalaGet(
+        sala: string,
+        skip?: number,
+        limit: number = 100,
+    ): CancelablePromise<Array<MedicoConTurnos>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/por-sala/{sala}',
+            path: {
+                'sala': sala,
+            },
+            query: {
+                'skip': skip,
+                'limit': limit,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
      * Read Medico
      * Get medico by ID.
      * @param id
