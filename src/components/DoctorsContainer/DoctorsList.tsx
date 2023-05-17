@@ -23,7 +23,7 @@ export const DoctorsList = ({ doctorsList, onDeleteDoctor }: Props) => {
   return (
     <>
       <div className='table-container-xl text-center mb-1'>
-        <p className='h3'>Tabla de Médicos</p>
+        <p className='h3'>Lista de Médicos</p>
       </div>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
         <thead className='table-success'>

@@ -40,7 +40,7 @@ export const PatientsList = ({ patientsList, onDeletePatient }: Props) => {
   return (
     <>
       <div className='table-container-xl text-center mb-1'>
-        <p className='h3'>Tabla de pacientes</p>
+        <p className='h3'>Lista de pacientes</p>
       </div>
       <table className='table table-striped table-hover table-xxl table-container-xl'>
         <thead className='table-success'>

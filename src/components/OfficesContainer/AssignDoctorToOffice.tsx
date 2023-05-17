@@ -37,7 +37,7 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
   return (
     <div className='table-container-xl'>
       <div className='table-container-l text-center mb-5'>
-        <p className='h3'>Asignar un consultorio a una sala de espera</p>
+        <p className='h3'>Asociar consultorio con médico</p>
       </div>
       <Form ref={formRef} onSubmit={handleSubmit} >
         <Row className='align-items-center'>
