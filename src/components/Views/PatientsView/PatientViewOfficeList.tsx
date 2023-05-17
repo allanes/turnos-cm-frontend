@@ -58,18 +58,9 @@ export const PatientViewOfficeList = () => {
     <div>
       <div className="container-fluid text-center">
         <div className="row align-items-center">
-          {/* <div className="col-6">
-            <h2 className='my-0'>Publicidad</h2>
-          </div> */}
-          {/* <div className="col-6">
-            <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive} />
-          </div> */}
-          <div className="">
-            <CarouselItem officesList={officesList} consultorioId={consultorioId} animationActive={animationActive}/>
+          <PatientViewOfficeDetail officesList={officesList} consultorioId={consultorioId} animationActive={animationActive}/>
           </div>
         </div>
       </div>
-    </div>
   )
 }
-
