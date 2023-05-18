@@ -6,6 +6,8 @@ import { PatientViewOfficeDetail, handleRefresh, cardsToShow } from './PatientVi
 import { PORT_SERVER } from '../../../types/config'
 import io from 'socket.io-client'
 import { CarouselItem } from './CarouselItem'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const socket = io(PORT_SERVER)
 
@@ -14,6 +16,12 @@ interface OfficesState {
   consultorioId: number;
   animationActive: boolean;
 }
+
+const notifyNextTurn = ( message: String, consul_id: String) => {
+  toast.success(message, {
+    position: toast.POSITION.TOP_CENTER,
+  });
+};
 
 export const PatientViewOfficeList = () => {
 
@@ -67,23 +75,27 @@ export const PatientViewOfficeList = () => {
 
 }, [officesList.length, restartTimer]);
 
-  const refreshOffices = (consultorioIdStr: string) => {
+  const refreshOffices = (mensajeRecibido: string) => {
     setRestartTimer((prev) => !prev);
 
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
     .then(offices => {
-      const consul_recibido = parseInt(consultorioIdStr, 10)
+      const consulRecibidoStr = mensajeRecibido.split(";")[0]
+      const nombrePacienteStr = mensajeRecibido.split(";")[1]
+      console.log(`Nombre del paciente nuevo ${nombrePacienteStr}`)
+      const consul_recibido = parseInt(consulRecibidoStr, 10)
       setConsultorioId(consul_recibido);
-      handleNewMessage()
+      handleNewMessageSound()
+      notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
       handleRefresh(offices, consul_recibido, setAnimationActive)
       setOfficesList(offices)
       const newActiveSlide = findSlideForOffice(offices, consul_recibido);
       console.log('nueva slide activa: ' + newActiveSlide)
-      console.log('handleRefresh called with ' + consultorioIdStr)
+      console.log('handleRefresh called with ' + mensajeRecibido)
       setActiveSlide(newActiveSlide);
       
     })}
-
+    
   useEffect(() => {
     socket.on('refresh', refreshOffices)
     return () => {
@@ -98,7 +110,7 @@ export const PatientViewOfficeList = () => {
       })
   }, [roomId])
 
-  const handleNewMessage = () => {
+  const handleNewMessageSound = () => {
     audio.play()
     console.log(audio.duration);
     
