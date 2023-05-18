@@ -40,7 +40,6 @@ export const OfficesCreate = ({ onNewOffice }: Props) => {
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="sala">
-              <Form.Label>Sala</Form.Label>
               <Form.Control onChange={handleChange} type="number" placeholder="Ingrese la sala a la cual pertenece el consultorio" />
             </Form.Group>
           </Col>

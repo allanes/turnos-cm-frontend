@@ -22,10 +22,11 @@ export const OfficesList = ({ offices, onDeleteOffice }: Props) => {
 
   return (
     <>
-      <div className='table-container-xl text-center mb-1'>
+    <div className='table-container-xl'>
+      <div className='table-container-l text-center mb-1'>
         <p className='h3'>Lista de Consultorios</p>
       </div>
-      <table className='table table-striped table-hover table-xxl table-container-xl'>
+      <table className='table table-striped table-hover table-container-l'>
         <thead className='table-success'>
           <tr>
             {keysTabOffices.map((item, index) => {
@@ -54,6 +55,7 @@ export const OfficesList = ({ offices, onDeleteOffice }: Props) => {
           })}
         </tbody>
       </table>
+      </div>
     </>
   )
 }
