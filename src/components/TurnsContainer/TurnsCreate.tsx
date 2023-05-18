@@ -106,7 +106,10 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
 
   return (
     <>
-      <div className='table-container-xl'>
+      <div className='table-container-xl mb-4'>
+        <div className='table-container-l text-center mb-5'>
+          <p className='h3'>Nuevo Turno</p>
+        </div>
         <div>
           <Form ref={formSearchRef} onSubmit={handlePatientSearchSubmit} >
             <Row className='align-items-center'>

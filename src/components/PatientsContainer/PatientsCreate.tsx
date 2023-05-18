@@ -17,7 +17,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
 
   const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = evt.target
-    
+
     dispatch({
       type: "change_value",
       payload: {
@@ -39,7 +39,10 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
   }
 
   return (
-    <div className='table-container-xl'>
+    <div className='table-container-xl mb-4'>
+      <div className='table-container-l text-center mb-5'>
+        <p className='h3'>Nuevo Paciente</p>
+      </div>
       <Form ref={formRef} onSubmit={handleSubmit} >
         <Row>
           <Col>
