@@ -39,7 +39,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
   }
 
   return (
-    <div className='table-container-xl'>
+    <div className='table-container-xl mb-4'>
       <div className='table-container-l text-center mb-5'>
         <p className='h3'>Nuevo Paciente</p>
       </div>
