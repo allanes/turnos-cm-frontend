@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState, useRef } from 'react'
 import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { useParams } from 'react-router-dom'
-import { PatientViewOfficeDetail, handleRefresh, itemsToShow } from './PatientViewOfficeDetail'
+import { PatientViewOfficeDetail, handleRefresh, cardsToShow } from './PatientViewOfficeDetail'
 import { PORT_SERVER } from '../../../types/config'
 import io from 'socket.io-client'
 import { CarouselItem } from './CarouselItem'
@@ -37,7 +37,7 @@ export const PatientViewOfficeList = () => {
       return 0;  // Default to the first slide if office not found
     }
 
-    return Math.floor(officeIndex / itemsToShow);
+    return Math.floor(officeIndex / cardsToShow);
   };
 
   useEffect(() => {
@@ -51,7 +51,7 @@ export const PatientViewOfficeList = () => {
       timerRef.current = null;
     }
 
-    const totalSlides = Math.ceil(officesList.length / itemsToShow);
+    const totalSlides = Math.ceil(officesList.length / cardsToShow);
 
     timerRef.current = window.setInterval(() => {
       setActiveSlide((prevSlide) => (prevSlide + 1) % totalSlides);
