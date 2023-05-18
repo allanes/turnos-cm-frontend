@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import { ConsultorioDetallado } from '../../../codegen_output'
 
+export const itemsToShow = 3;
+
 interface OfficesState {
   officesList: Array<ConsultorioDetallado>
   consultorioId: number;
   animationActive: boolean;
+  activeSlide: number;
 }
 
 export const handleRefresh = (
@@ -18,24 +21,21 @@ export const handleRefresh = (
     }
 };
 
-export const PatientViewOfficeDetail = ({ officesList, consultorioId, animationActive }: OfficesState) => {
-  const itemsToShow = 3;
+export const PatientViewOfficeDetail = ({ 
+  officesList, 
+  consultorioId, 
+  animationActive, 
+  activeSlide
+}: OfficesState) => {
+  console.log('Rendering PatientViewOfficeDetail with activeSlide:', activeSlide);
+
   const totalSlides = Math.ceil(officesList.length / itemsToShow);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % totalSlides);
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [totalSlides]);
 
   return (
     <div>
       <div className="container-fluid text-center">
         <div className="row align-items-center">
-          <Carousel activeIndex={activeIndex}>
+          <Carousel activeIndex={activeSlide }>
             {[...Array(totalSlides)].map((_, slideIndex) => {
               return (
                 <Carousel.Item key={slideIndex}>
