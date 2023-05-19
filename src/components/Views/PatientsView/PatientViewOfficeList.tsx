@@ -8,6 +8,7 @@ import io from 'socket.io-client'
 import { toast } from 'react-toastify';
 import { Toast } from './ToastContainer';
 import 'react-toastify/dist/ReactToastify.css';
+import { useOffices } from '../../../hooks/useOffices'
 
 const socket = io(PORT_SERVER)
 
@@ -19,10 +20,11 @@ interface OfficesState {
 
 export const PatientViewOfficeList = () => {
 
-  const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
+  const [_, setOfficesList] = useState<OfficesState["offices"]>([])
   const [consultorioId, setConsultorioId] = useState<OfficesState["consultorioId"]>(0);
   const [animationActive, setAnimationActive] = useState<OfficesState["animationActive"]>(false);
-  const { roomId } = useParams()
+  const { roomId = "" } = useParams<{ roomId: string }>()
+  const officesList = useOffices(roomId) // Use the hook
   const audio = new Audio();
   audio.src = 'http://localhost:8000/notification'
   const [activeSlide, setActiveSlide] = useState(0);

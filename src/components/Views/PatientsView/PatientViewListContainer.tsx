@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from 'react'
 import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { PatientViewWaitingRoomList } from './PatientViewWaitingRoomList'
 import { Consultorio } from '../../../codegen_output'
+import { useOffices } from '../../../hooks/useOffices'
 
 interface OfficesState {
 	offices: Array<ConsultorioDetallado>
@@ -10,8 +11,10 @@ interface OfficesState {
 
 
 export const PatientViewListContainer = () => {
-
+  // const officesList = useOffices('') // Pass the roomId
   const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
+
+  // const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
   const [waitingRoomList, setWaitingRoomList] = useState<OfficesState["offices"]>([])
 
   const officesFilter = officesList.filter((office, indice, offices) => {
