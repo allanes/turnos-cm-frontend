@@ -9,7 +9,6 @@ export const $RegistroConsultorios = {
         },
         id_medico: {
             type: 'number',
-            isRequired: true,
         },
         id: {
             type: 'number',
