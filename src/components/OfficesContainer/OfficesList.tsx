@@ -1,12 +1,11 @@
-import { Medico } from '../../codegen_output'
+import { RegistroConsultoriosCreate  } from '../../codegen_output'
 import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 import { OfficesWithDoctor } from "../../types/types"
-
-
 
 interface Props {
   offices: Array<OfficesWithDoctor>
   onDeleteOffice: (id: number) => void
+  onRelease: (registro: RegistroConsultoriosCreate) => void
 }
 
 
@@ -15,10 +14,11 @@ const keysTabOffices = [
   "Descripción",
   "Sala",
   "Médico asignado",
+  "",
   ""
 ]
 
-export const OfficesList = ({ offices, onDeleteOffice }: Props) => {
+export const OfficesList = ({ offices, onDeleteOffice, onRelease}: Props) => {
 
   return (
     <>
@@ -44,6 +44,12 @@ export const OfficesList = ({ offices, onDeleteOffice }: Props) => {
                 <td>{office.descripcion}</td>
                 <td>{office.sala}</td>
                 <td>{office.medico?.nombre}, {office.medico?.apellido}</td>
+                <td><button className='btn btn-primary'
+                  type='button'
+                  onClick={() => { onRelease({id_consultorio: office.id}) }} >
+                  <p className='m-0'>Liberar</p> 
+                </button>
+                </td>
                 <td><button className='icons-border icon--size icon--delete'
                   type='button'
                   onClick={() => { onDeleteOffice(office.id) }} >

@@ -78,14 +78,30 @@ export const OfficesContainer = () => {
 
   const handleNewAssign = (newAssign: RegistroConsultoriosCreate): void => {
     RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(newAssign)
-    navigate("/waitingRoom/0")
+  }
+
+  const handleReleaseOffice = (registro: RegistroConsultoriosCreate): void => {
+    Swal.fire({
+      title: '¿Estás seguro que deseas liberar el consultorio?',
+      html: ``,
+      showCancelButton: true,
+      confirmButtonText: 'Liberar',
+      icon: 'warning',
+      confirmButtonColor: '#ff2d55'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Consultorio liberado','', 'success')
+        RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(registro)
+      }
+    })
+    
   }
 
   return (
     <>
       <OfficesCreate onNewOffice={handleNewOffice} />
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
-      <OfficesList offices={offices} onDeleteOffice={handleDelete} />
+      <OfficesList offices={offices} onDeleteOffice={handleDelete} onRelease={handleReleaseOffice} />
     </>
   )
 }
