@@ -1,22 +1,32 @@
 import React from 'react'
 import { useEffect, useState, useRef, useCallback } from 'react'
-import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { useParams } from 'react-router-dom'
+import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { PatientViewOfficeDetail, handleRefresh, cardsToShow } from './PatientViewOfficeDetail'
-import { PORT_SERVER } from '../../../types/config'
-import io from 'socket.io-client'
 import { toast } from 'react-toastify';
 import { Toast } from './ToastContainer';
-import 'react-toastify/dist/ReactToastify.css';
 import { useOffices } from '../../../hooks/useOffices'
+import { useSocket } from '../../../hooks/useSocket'
+import { useAudio } from '../../../hooks/useAudio'
+import 'react-toastify/dist/ReactToastify.css';
 
-const socket = io(PORT_SERVER)
 
 interface OfficesState {
   offices: Array<ConsultorioDetallado>;
   consultorioId: number;
   animationActive: boolean;
 }
+
+const findSlideForOffice = (offices: Array<ConsultorioDetallado>, consultorioId: number) => {
+  const officeIndex = offices.findIndex((office) => office.id === consultorioId);
+
+  if (officeIndex === -1) {
+    console.log(`Office with id ${consultorioId} not found`);
+    return 0;  // Default to the first slide if office not found
+  }
+
+  return Math.floor(officeIndex / cardsToShow);
+};
 
 export const PatientViewOfficeList = () => {
 
@@ -25,24 +35,12 @@ export const PatientViewOfficeList = () => {
   const [animationActive, setAnimationActive] = useState<OfficesState["animationActive"]>(false);
   const { roomId = "" } = useParams<{ roomId: string }>()
   const officesList = useOffices(roomId) // Use the hook
-  const audio = new Audio();
-  audio.src = 'http://localhost:8000/notification'
   const [activeSlide, setActiveSlide] = useState(0);
   const setActiveSlideRef = useRef<React.Dispatch<React.SetStateAction<number>> | null>(null);
   const timerRef = useRef<number | null>(null);
   const [restartTimer, setRestartTimer] = useState(false);
+  const { play } = useAudio('http://localhost:8000/notification');
 
-
-  const findSlideForOffice = (offices: Array<ConsultorioDetallado>, consultorioId: number) => {
-    const officeIndex = offices.findIndex((office) => office.id === consultorioId);
-
-    if (officeIndex === -1) {
-      console.log(`Office with id ${consultorioId} not found`);
-      return 0;  // Default to the first slide if office not found
-    }
-
-    return Math.floor(officeIndex / cardsToShow);
-  };
 
   const notifyNextTurn = useCallback((message: String, consul_id: String) => {
     toast.success(
@@ -79,7 +77,7 @@ export const PatientViewOfficeList = () => {
 
 }, [officesList.length, restartTimer]);
 
-  const refreshOffices = (mensajeRecibido: string) => {
+  const refreshOffices = useCallback((mensajeRecibido: string) => {
     setRestartTimer((prev) => !prev);
 
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
@@ -90,7 +88,7 @@ export const PatientViewOfficeList = () => {
       const consul_recibido = parseInt(consulRecibidoStr, 10)
       
       setConsultorioId(consul_recibido);
-      handleNewMessageSound()
+      play()
       notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
       handleRefresh(offices, consul_recibido, setAnimationActive)
       setOfficesList(offices)
@@ -98,14 +96,10 @@ export const PatientViewOfficeList = () => {
       const newActiveSlide = findSlideForOffice(offices, consul_recibido);
       setActiveSlide(newActiveSlide);
       
-    })}
-    
-  useEffect(() => {
-    socket.on('refresh', refreshOffices)
-    return () => {
-      socket.off('refresh')
-    }
+    })
   }, [])
+    
+  useSocket('refresh', refreshOffices)
 
   useEffect(() => {
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
@@ -114,13 +108,7 @@ export const PatientViewOfficeList = () => {
       })
   }, [roomId])
 
-  const handleNewMessageSound = () => {
-    audio.play()
-    console.log(audio.duration);
-    
-   };
 
-   console.log('Rendering PatientViewOfficeList with activeSlide:', activeSlide);
   return (
     <div>
       <div className="container-fluid text-center">
