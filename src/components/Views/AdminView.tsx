@@ -15,7 +15,7 @@ export const AdminView = () => {
   return (
     <>
       <Header />
-      <div className='mi-app'>
+      <div className='mi-app back-grey'>
         <Router>
           <div className='sidebar-container'>
             <SideBar />
