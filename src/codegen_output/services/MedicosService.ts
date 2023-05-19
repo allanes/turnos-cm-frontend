@@ -23,7 +23,7 @@ export class MedicosService {
      */
     public static readMedicosApiV1DoctorsGet(
         skip?: number,
-        limit: number = 100,
+        limit: number = 200,
     ): CancelablePromise<Array<Medico>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -71,7 +71,7 @@ export class MedicosService {
     public static readMedicosPorSalaApiV1DoctorsPorSalaSalaGet(
         sala: string,
         skip?: number,
-        limit: number = 100,
+        limit: number = 200,
     ): CancelablePromise<Array<MedicoConTurnos>> {
         return __request(OpenAPI, {
             method: 'GET',

@@ -77,7 +77,7 @@ export const OfficesContainer = () => {
   }
 
   const handleNewAssign = (newAssign: RegistroConsultoriosCreate): void => {
-    RegistroDeConsultoriosConMDicosService.createConsultorioApiV1OfficesToDoctorsPost(newAssign)
+    RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(newAssign)
     navigate("/waitingRoom/0")
   }
 
