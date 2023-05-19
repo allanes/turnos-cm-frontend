@@ -3,8 +3,7 @@ import { useEffect, useState, useRef, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import { ConsultorioDetallado, ConsultoriosService } from '../../../codegen_output'
 import { PatientViewOfficeDetail, handleRefresh, cardsToShow } from './PatientViewOfficeDetail'
-import { toast } from 'react-toastify';
-import { Toast } from './ToastContainer';
+import { Toast, notifyNextTurn } from './ToastContainer';
 import { useOffices } from '../../../hooks/useOffices'
 import { useSocket } from '../../../hooks/useSocket'
 import { useAudio } from '../../../hooks/useAudio'
@@ -30,25 +29,17 @@ const findSlideForOffice = (offices: Array<ConsultorioDetallado>, consultorioId:
 
 export const PatientViewOfficeList = () => {
 
-  const [_, setOfficesList] = useState<OfficesState["offices"]>([])
+  // const [_, setOfficesList] = useState<OfficesState["offices"]>([])
   const [consultorioId, setConsultorioId] = useState<OfficesState["consultorioId"]>(0);
   const [animationActive, setAnimationActive] = useState<OfficesState["animationActive"]>(false);
   const { roomId = "" } = useParams<{ roomId: string }>()
-  const officesList = useOffices(roomId) // Use the hook
+  const {officesList, refreshOffices} = useOffices(roomId) // Use the hook
   const [activeSlide, setActiveSlide] = useState(0);
   const setActiveSlideRef = useRef<React.Dispatch<React.SetStateAction<number>> | null>(null);
   const timerRef = useRef<number | null>(null);
   const [restartTimer, setRestartTimer] = useState(false);
   const { play } = useAudio('http://localhost:8000/notification');
 
-
-  const notifyNextTurn = useCallback((message: String, consul_id: String) => {
-    toast.success(
-      message, {
-        position: toast.POSITION.TOP_RIGHT,
-      });
-    
-  }, []);
 
   useEffect(() => {
     console.log('activeSlide actualizada desde officelist:', activeSlide);
@@ -73,11 +64,10 @@ export const PatientViewOfficeList = () => {
         timerRef.current = null;
       }
     };
-  // }, [officesList.length, setActiveSlide]);
+  }, [officesList.length, restartTimer]);
 
-}, [officesList.length, restartTimer]);
-
-  const refreshOffices = useCallback((mensajeRecibido: string) => {
+  const refreshOfficesCallback = useCallback((mensajeRecibido: string) => {
+    refreshOffices()
     setRestartTimer((prev) => !prev);
 
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
@@ -91,7 +81,7 @@ export const PatientViewOfficeList = () => {
       play()
       notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
       handleRefresh(offices, consul_recibido, setAnimationActive)
-      setOfficesList(offices)
+      // setOfficesList(offices)
       
       const newActiveSlide = findSlideForOffice(offices, consul_recibido);
       setActiveSlide(newActiveSlide);
@@ -99,14 +89,14 @@ export const PatientViewOfficeList = () => {
     })
   }, [])
     
-  useSocket('refresh', refreshOffices)
+  useSocket('refresh', refreshOfficesCallback)
 
-  useEffect(() => {
-    ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-      .then(offices => {
-        setOfficesList(offices)
-      })
-  }, [roomId])
+  // useEffect(() => {
+  //   ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
+  //     .then(offices => {
+  //       refreshOffices();
+  //     })
+  // }, [roomId])
 
 
   return (

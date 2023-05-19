@@ -1,0 +1,31 @@
+.toast-class {
+    background-color: #dbdfdb;
+    color: #000000;
+    font-size: 1.5em;
+    padding: 10px;
+    border-radius: 10px;
+    /* Add more styling as needed */
+  }
+
+@keyframes arrow-animation {
+0% { transform: translateX(0); }
+50% { transform: translateX(10px); }
+100% { transform: translateX(0); }
+}
+
+.arrow {
+    display: inline-block;
+    animation: arrow-animation 1s infinite;
+}
+
+.mezclar-con-fondo{
+    mix-blend-mode: multiply;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
