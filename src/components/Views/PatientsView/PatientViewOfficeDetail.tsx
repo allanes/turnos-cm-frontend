@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import { ConsultorioDetallado } from '../../../codegen_output'
 
-export const cardsToShow = 3;
-export const patientsPerCard = 2
+export const cardsToShow = 2;
+export const patientsPerCard = 3
 
 interface OfficesState {
   officesList: Array<ConsultorioDetallado>
