@@ -7,18 +7,18 @@ import upArrowIcon from '../../../assets/icons/icons8-double-up.gif'
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export const notifyNextTurn = (message: String, consul_id: String) => {
+export const notifyNextTurn = (patientName: String, consul_id: String) => {
   toast(
     <div>
-      {/* <h2>
-        Aviso
-      </h2> */}
-      <div className='centered-content'>
-        <img src={gifNotificacion} className='mezclar-con-fondo centered-content'/>
-        <p>Consultorio {consul_id}</p>
-        <img src={upArrowIcon} className='mezclar-con-fondo'/>
-        <p>{message}</p>        
-      </div>
+      <h2>
+        {/* Aviso */}
+        <div className='centered-content'>
+          <img src={gifNotificacion} className='mezclar-con-fondo centered-content'/>
+          <span className='toast-text'>{'  '}{patientName}</span>
+          <img src={rightArrowIcon} className='mezclar-con-fondo'/>
+          <span className='toast-text mx-1'>{'   Consultorio '} {consul_id}</span>
+        </div>
+      </h2> 
     </div>,
     {
       // type: "success",
@@ -40,6 +40,7 @@ export const Toast = () => {
       // pauseOnHover
       // theme='light'
       toastClassName="toast-class" // Use this class to style your toast, replace with your class
+      // style={{ width: "500px" }}
     />
   );
 };
