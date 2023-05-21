@@ -22,7 +22,8 @@
     border-top-right-radius: 2rem;
 }
 
-.cardRoom.animation-active table > tbody  > tr:first-child{
+// .cardRoom.animation-active table > tbody  > tr:first-child{
+.cardRoom.animation-active table > tbody  {
     // background: $mi-orange;
     border-width: 6px; 
     border-style: solid;
@@ -34,7 +35,7 @@
   
 @keyframes border-color-animation {
     100% { 
-        border-color: rgb(20, 119, 25);         
+        border-color: rgb(201, 120, 0);         
     }
 }
 
