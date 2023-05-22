@@ -71,28 +71,18 @@ export const PatientViewOfficeList = () => {
     const nombrePacienteStr = mensajeRecibido.split(";")[1]
     const consultorioId = parseInt(consulRecibidoStr, 10)
     
-    // const consultorioExists = officesList.some((office) => office.id === consultorioId);
-
-    // if (!consultorioExists) {
-    //   return; // Do nothing if the consultorio ID doesn't exist
-    // }
-    
     refreshOffices()
     setRestartTimer((prev) => !prev);
 
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-    .then(offices => {
-
-      
+    .then(offices => {      
       setConsultorioId(consultorioId);
       play()
       notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
       handleRefresh(offices, consultorioId, setAnimationActive)
-      // setOfficesList(offices)
       
       const newActiveSlide = findSlideForOffice(offices, consultorioId);
-      setActiveSlide(newActiveSlide);
-      
+      setActiveSlide(newActiveSlide);      
     })
   }, [])
 
@@ -100,32 +90,15 @@ export const PatientViewOfficeList = () => {
     const consultorioId = parseInt(mensajeRecibido, 10)
     
     refreshOffices()
-    // setRestartTimer((prev) => !prev);
-
+    
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-    .then(offices => {
-      
+    .then(offices => {      
       setConsultorioId(consultorioId);
-      // play()
-      // notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
-      // handleRefresh(offices, consultorioId, setAnimationActive)
-      
-      // const newActiveSlide = findSlideForOffice(offices, consultorioId);
-      // setActiveSlide(newActiveSlide);
-      
     })
   }, [])
     
   useSocket('patient-turn', handlePatientTurnEvent)
   useSocket('created-turn', handleCreatedTurnEvent)
-
-  // useEffect(() => {
-  //   ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-  //     .then(offices => {
-  //       refreshOffices();
-  //     })
-  // }, [roomId])
-
 
   return (
     <div>
