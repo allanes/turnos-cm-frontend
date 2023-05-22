@@ -48,7 +48,7 @@ export const PatientViewOfficeDetail = ({
                       <div key={office.id} className={`cardRoom${animationActive && office.id === consultorioId ? " animation-active" : ""}`}>
                         <div className='cardRoom-Top'>
                           <p className='h1'>Dr. {office.medico}</p>
-                          <p>Consultorio: {office.id}</p>
+                          <p className='h3'>Consultorio: {office.id}</p>                        
                         </div>
                         <div>
                           <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
