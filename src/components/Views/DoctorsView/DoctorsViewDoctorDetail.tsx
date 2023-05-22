@@ -4,7 +4,9 @@ import { MedicoConTurnos } from '../../../codegen_output'
 import { MedicosService } from '../../../codegen_output'
 
 import { ToastContainer, toast } from 'react-toastify';
+import Swal from 'sweetalert2'
 import 'react-toastify/dist/ReactToastify.css';
+import '../../../styles/base/_pallete.scss'
 
 
 interface DoctorDetailState {
@@ -54,6 +56,17 @@ export const DoctorsViewDoctorDetail = () => {
     notifyNextTurn("Avanzó un turno")
   }
 
+  const handleMotivo = (motivo: String): void => {
+    Swal.fire({
+      title: 'Motivo de consulta',
+      html: `${motivo}`,
+      showCancelButton: false,
+      confirmButtonText: 'Volver',
+      icon: 'info',
+      confirmButtonColor: '#0090b2'
+    })
+  }
+
   return (
     <div className='container-sm'>
       <div className='text-container'>
@@ -93,6 +106,14 @@ export const DoctorsViewDoctorDetail = () => {
                   <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
                     <th scope='row'>{turn.nro_orden}</th>
                     <td>{turn.nombre_paciente}</td>
+                    <td>
+                      <button 
+                        type='button' 
+                        className={isFirstPatient ? 'btn btn-sm px-4 btn-success' : 'btn btn-sm px-4 btn-outline-success'} 
+                        onClick={() => { handleMotivo(turn.motivo_consulta?turn.motivo_consulta:" ") }}>
+                      <p className='my-2'>Motivo</p>
+                      </button>
+                    </td>
                   </tr>
                 )
               })}
