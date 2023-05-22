@@ -66,38 +66,39 @@ export const PatientViewOfficeList = () => {
     };
   }, [officesList.length, restartTimer]);
 
-  const refreshOfficesCallback = useCallback((mensajeRecibido: string) => {
+  const handlePatientTurnEvent = useCallback((mensajeRecibido: string) => {
+    const consulRecibidoStr = mensajeRecibido.split(";")[0]
+    const nombrePacienteStr = mensajeRecibido.split(";")[1]
+    const consultorioId = parseInt(consulRecibidoStr, 10)
+    
     refreshOffices()
     setRestartTimer((prev) => !prev);
 
     ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-    .then(offices => {
-
-      const consulRecibidoStr = mensajeRecibido.split(";")[0]
-      const nombrePacienteStr = mensajeRecibido.split(";")[1]
-      const consul_recibido = parseInt(consulRecibidoStr, 10)
-      
-      setConsultorioId(consul_recibido);
+    .then(offices => {      
+      setConsultorioId(consultorioId);
       play()
       notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
-      handleRefresh(offices, consul_recibido, setAnimationActive)
-      // setOfficesList(offices)
+      handleRefresh(offices, consultorioId, setAnimationActive)
       
-      const newActiveSlide = findSlideForOffice(offices, consul_recibido);
-      setActiveSlide(newActiveSlide);
-      
+      const newActiveSlide = findSlideForOffice(offices, consultorioId);
+      setActiveSlide(newActiveSlide);      
+    })
+  }, [])
+
+  const handleCreatedTurnEvent = useCallback((mensajeRecibido: string) => {
+    const consultorioId = parseInt(mensajeRecibido, 10)
+    
+    refreshOffices()
+    
+    ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
+    .then(offices => {      
+      setConsultorioId(consultorioId);
     })
   }, [])
     
-  useSocket('refresh', refreshOfficesCallback)
-
-  // useEffect(() => {
-  //   ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-  //     .then(offices => {
-  //       refreshOffices();
-  //     })
-  // }, [roomId])
-
+  useSocket('patient-turn', handlePatientTurnEvent)
+  useSocket('created-turn', handleCreatedTurnEvent)
 
   return (
     <div>
