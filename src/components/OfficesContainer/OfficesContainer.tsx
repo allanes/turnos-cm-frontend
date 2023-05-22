@@ -37,7 +37,6 @@ export const OfficesContainer = () => {
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
       .then(doctors => {
-        console.log(doctors)
         setDoctorsList(doctors)
       })
   }, [])
@@ -99,9 +98,9 @@ export const OfficesContainer = () => {
 
   return (
     <>
-      <OfficesCreate onNewOffice={handleNewOffice} />
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
       <OfficesList offices={offices} onDeleteOffice={handleDelete} onRelease={handleReleaseOffice} />
+      <OfficesCreate onNewOffice={handleNewOffice} />
     </>
   )
 }
