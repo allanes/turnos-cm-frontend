@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { OfficesList } from "./OfficesList"
-import { Consultorio, ConsultorioCreate, ConsultoriosService, MedicosService } from "../../codegen_output"
+import { ApiError, CancelablePromise, Consultorio, ConsultorioCreate, ConsultoriosService, MedicosService } from "../../codegen_output"
 import { OfficesCreate } from "./OfficesCreate"
 import { Medico } from "../../codegen_output"
 import { OfficesWithDoctor } from "../../types/types"
@@ -76,9 +76,20 @@ export const OfficesContainer = () => {
     })
   }
 
-  const handleNewAssign = (newAssign: RegistroConsultoriosCreate): void => {
-    RegistroDeConsultoriosConMDicosService.createConsultorioApiV1OfficesToDoctorsPost(newAssign)
-    navigate("/waitingRoom/0")
+  const handleNewAssign = async (newAssign: RegistroConsultoriosCreate): CancelablePromise<void> => {
+    try{
+      await RegistroDeConsultoriosConMDicosService.createConsultorioApiV1OfficesToDoctorsPost(newAssign)
+      navigate("/waitingRoom/0")
+    } catch(error) {
+      const err = error as ApiError; // or a custom error type if you know the structure
+      let errorMessage = 'An error occurred.'; // Start with the message property.
+      
+      if (err.body && err.body.detail) {
+        // If the body property has a message property, add it to the error message.
+        errorMessage = err.body.detail;
+      }
+      Swal.fire('Error', errorMessage, 'error');
+    }
   }
 
   return (
