@@ -5,6 +5,7 @@ import { PatientViewOfficeList } from './PatientViewOfficeList'
 // import YouTubePlayer from 'react-player/youtube'
 // import GoogleDrivePlayer from './GoogleDrivePlayer';
 import VideoPlayer from './VideoPlayer';
+import ReactVideoPlayer from './ReactPlayer';
 
 
 export const PatientView = () => {
@@ -17,7 +18,8 @@ export const PatientView = () => {
             <Route path="/patientsView/:roomId" element={
               <div style={{display: 'flex', width: '100%'}}>
                 <PatientViewOfficeList />
-                <VideoPlayer />
+                {/* <VideoPlayer /> */}
+                <ReactVideoPlayer/>
               </div>
             } />
           </Routes>

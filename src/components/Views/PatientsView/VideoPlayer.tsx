@@ -8,7 +8,7 @@ const VideoPlayer = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-    const response = await axios.get('http://localhost:8000/lista-videos-locales');
+    const response = await axios.get('http://localhost:8000/lista-videos-gdrive');
     setVideoUrls(response.data);
     };
 
@@ -27,6 +27,9 @@ const VideoPlayer = () => {
         playing={true}
         onEnded={handleVideoEnd}
         config={{
+          youtube: {
+            playerVars: { autoplay: 1 }
+          },
           file: {
             forceVideo: true,
             attributes: {
