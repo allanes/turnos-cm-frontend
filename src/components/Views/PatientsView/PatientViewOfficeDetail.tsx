@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import { ConsultorioDetallado } from '../../../codegen_output'
 
-export const cardsToShow = 3;
-export const patientsPerCard = 2
+export const cardsToShow = 2;
+export const patientsPerCard = 3
 
 interface OfficesState {
   officesList: Array<ConsultorioDetallado>
@@ -48,7 +48,7 @@ export const PatientViewOfficeDetail = ({
                       <div key={office.id} className={`cardRoom${animationActive && office.id === consultorioId ? " animation-active" : ""}`}>
                         <div className='cardRoom-Top'>
                           <p className='h1'>Dr. {office.medico}</p>
-                          <p>Consultorio: {office.id}</p>
+                          <p className='h3'>Consultorio: {office.id}</p>                        
                         </div>
                         <div>
                           <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
@@ -57,8 +57,8 @@ export const PatientViewOfficeDetail = ({
                                 const isFirstPatient = index === 0;
                                 return (
                                   <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
-                                    <th scope='row'><p className='mt-2'>{index + 1}</p></th>
-                                    <td className='h2 text-start'>{turn}</td>
+                                    <th scope='row'><p className='mt-2'>{turn.split(" ")[0]}</p></th>
+                                    <td className='h2 text-start'>{turn.split(" ").slice(1).join(" ")}</td>
                                   </tr>
                                 );
                               })}

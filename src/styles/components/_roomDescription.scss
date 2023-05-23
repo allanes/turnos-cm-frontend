@@ -17,11 +17,13 @@
 }
 
 .cardRoom-Top{
-    background: $mi-orange;
+    background: $mi-cyan;
+    color: $mi-grey-smoke;
     border-top-left-radius: 2rem;
     border-top-right-radius: 2rem;
 }
 
+// .cardRoom.animation-active table > tbody  {
 .cardRoom.animation-active table > tbody  > tr:first-child{
     // background: $mi-orange;
     border-width: 6px; 
@@ -34,7 +36,7 @@
   
 @keyframes border-color-animation {
     100% { 
-        border-color: rgb(20, 119, 25);         
+        border-color: $mi-cyan-1;
     }
 }
 
