@@ -24,7 +24,7 @@ export class ConsultoriosService {
     public static readConsultoriosConDetallesApiV1OfficesWithDetailsGet(
         sala: string = '0',
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<ConsultorioDetallado>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -50,7 +50,7 @@ export class ConsultoriosService {
      */
     public static readConsultoriosApiV1OfficesGet(
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<Consultorio>> {
         return __request(OpenAPI, {
             method: 'GET',

@@ -23,7 +23,7 @@ export class MedicosService {
      */
     public static readMedicosApiV1DoctorsGet(
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<Medico>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -71,7 +71,7 @@ export class MedicosService {
     public static readMedicosPorSalaApiV1DoctorsPorSalaSalaGet(
         sala: string,
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<MedicoConTurnos>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -161,6 +161,7 @@ export class MedicosService {
 
     /**
      * Handle Next Turn
+     * Delete an medico.
      * @param id
      * @returns Turno Successful Response
      * @throws ApiError
@@ -182,6 +183,7 @@ export class MedicosService {
 
     /**
      * Handle Previous Turn
+     * Delete an medico.
      * @param id
      * @returns Turno Successful Response
      * @throws ApiError

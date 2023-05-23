@@ -22,7 +22,7 @@ export class PacientesService {
      */
     public static readPacientesApiV1PatientsGet(
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<Paciente>> {
         return __request(OpenAPI, {
             method: 'GET',

@@ -21,7 +21,7 @@ export class RecepcionistasService {
      */
     public static readRecepcionistasApiV1ReceptionistsGet(
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<Recepcionista>> {
         return __request(OpenAPI, {
             method: 'GET',

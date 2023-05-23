@@ -21,7 +21,7 @@ export class TurnosService {
      */
     public static readTurnosApiV1TurnsGet(
         skip?: number,
-        limit: number = 200,
+        limit: number = 100,
     ): CancelablePromise<Array<Turno>> {
         return __request(OpenAPI, {
             method: 'GET',
@@ -37,12 +37,13 @@ export class TurnosService {
     }
 
     /**
-     * Handle Create Turno
+     * Create Turno
+     * Create new turno.
      * @param requestBody
      * @returns Turno Successful Response
      * @throws ApiError
      */
-    public static handleCreateTurnoApiV1TurnsPost(
+    public static createTurnoApiV1TurnsPost(
         requestBody: TurnoCreate,
     ): CancelablePromise<Turno> {
         return __request(OpenAPI, {
