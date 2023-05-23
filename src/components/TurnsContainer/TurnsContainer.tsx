@@ -50,7 +50,7 @@ export const TurnsContainer = () => {
   }, [])
 
   const handleNewTurn = (newTurn: TurnoCreate): void => {
-    TurnosService.handleCreateTurnoApiV1TurnsPost(newTurn)
+    TurnosService.createTurnoApiV1TurnsPost(newTurn)
     setTurnsCreateList(turn => [...turnsCreateList, newTurn])
   }
   

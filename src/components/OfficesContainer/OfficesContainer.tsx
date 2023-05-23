@@ -77,7 +77,7 @@ export const OfficesContainer = () => {
 
   const handleNewAssign = async (newAssign: RegistroConsultoriosCreate): CancelablePromise<void> => {
     try{
-      await RegistroDeConsultoriosConMDicosService.createConsultorioApiV1OfficesToDoctorsPost(newAssign)
+      await RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(newAssign)
       navigate("/waitingRoom/0")
     } catch(error) {
       const err = error as ApiError; // or a custom error type if you know the structure
@@ -89,6 +89,23 @@ export const OfficesContainer = () => {
       }
       Swal.fire('Error', errorMessage, 'error');
     }
+  }
+
+  const handleReleaseOffice = (registro: RegistroConsultoriosCreate): void => {
+    Swal.fire({
+      title: '¿Estás seguro que deseas liberar el consultorio?',
+      html: ``,
+      showCancelButton: true,
+      confirmButtonText: 'Liberar',
+      icon: 'warning',
+      confirmButtonColor: '#ff2d55'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Consultorio liberado','', 'success')
+        RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(registro)
+      }
+    })
+    
   }
 
   return (
