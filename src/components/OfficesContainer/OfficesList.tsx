@@ -15,7 +15,6 @@ const keysTabOffices = [
   "Descripción",
   "Sala",
   "Médico asignado",
-  "",
   ""
 ]
 
@@ -49,18 +48,18 @@ export const OfficesList = ({ offices, onDeleteOffice, onRelease }: Props) => {
                   <td>{office.descripcion}</td>
                   <td>{office.sala}</td>
                   <td>{office.medico?.nombre}, {office.medico?.apellido}</td>
-                  <td><button className='btn btn-primary'
+                  <td className='text-center'><button className='btn btn-primary'
                     type='button'
                     onClick={() => { onRelease({ id_consultorio: office.id }) }} >
-                    <p className='m-0'>Liberar</p>
+                    <p className='m-0'>Liberar consultorio</p>
                   </button>
                   </td>
-                  <td><button className='icons-border icon--size icon--delete'
+                  {/* <td><button className='icons-border icon--size icon--delete'
                     type='button'
                     onClick={() => { onDeleteOffice(office.id) }} >
                     <img className='icon-img--size' src={deleteIcon} alt="" />
                   </button>
-                  </td>
+                  </td> */}
                 </tr>
               )
             })}
