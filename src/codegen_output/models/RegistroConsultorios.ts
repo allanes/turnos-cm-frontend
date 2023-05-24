@@ -4,7 +4,7 @@
 
 export type RegistroConsultorios = {
     id_consultorio: number;
-    id_medico: number;
+    id_medico?: number;
     id: number;
     fecha: string;
 };

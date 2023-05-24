@@ -4,6 +4,6 @@
 
 export type RegistroConsultoriosCreate = {
     id_consultorio: number;
-    id_medico: number;
+    id_medico?: number;
 };
 
