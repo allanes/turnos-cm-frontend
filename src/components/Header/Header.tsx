@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react'
 import axios from 'axios';
 import logocm from '../../assets/icons/logoCM.png'
+import { PORT_SERVER } from '../../types/config'
 
 export const Header = () => {
 
 	const handleAbrirTeles = async () => {
-		await axios.get('http://localhost:8000/abrir-ventanas-teles');
+		await axios.get(`${PORT_SERVER}/abrir-ventanas-teles`);
 	}
 
 	return (
