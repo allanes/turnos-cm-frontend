@@ -79,7 +79,8 @@ export const PatientViewOfficeList = () => {
     .then(offices => {      
       setConsultorioId(consultorioId);
       play()
-      notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
+      
+      notifyNextTurn(nombrePacienteStr, consulRecibidoStr, offices)
       handleRefresh(offices, consultorioId, setAnimationActive)
       
       const newActiveSlide = findSlideForOffice(offices, consultorioId);
