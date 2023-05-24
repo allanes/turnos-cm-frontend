@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import io from 'socket.io-client';
-import ReactPlayer from 'react-player';
+import PlaylistTable from './PlaylistTable';
 
 const socket = io('http://localhost:8000');
 
@@ -21,65 +20,58 @@ function VideoPlaylist() {
     const [muted, setMuted] = useState(false);
     const [playing, setPlaying] = useState(true);
 
-    const fetchVideos = async () => {
-        const response = await axios.get<Video[]>('http://localhost:8000/lista-videos-gdrive');
+    const fetchVideos = async (sala:number) => {
+        const response = await axios.get<Video[]>(`http://localhost:8000/api/v1/video-control/lista-videos-youtube/${sala}`);
         setPlaylist(response.data);
         if (response.data.length > 0) {
             setCurrentVideo(response.data[0]);
         }
     };
 
-    const handleQuitarVideo = (e: string) => {
-        const nuevo_volumen = e
-        socket.emit('quitar_video', nuevo_volumen);
-        // setVolume();
-      };
+    const handleQuitarVideo = (e: string, sala: number) => {
+        socket.emit('quitar_video', { url: e, sala });
+    };
     
-    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>, sala: number) => {
         const nuevo_volumen = e.target.value
-        socket.emit('volume', nuevo_volumen);
-        // setVolume();
-      };
+        socket.emit('volume', { volume: nuevo_volumen, sala });
+    };
 
     useEffect(() => {
-        fetchVideos();
+        fetchVideos(1); // Fetch videos for sala 1 initially
     }, []);
 
-    const handlePlay = () => {
-        console.log('Manejando evento Play')
+    const handlePlay = (sala: number) => {
         if (currentVideo !== null) {
-            socket.emit('play', currentVideo);
-            // socket.emit('play');
+            socket.emit('play', { video: currentVideo, sala });
             setPlaying(true);
         }
     };
 
-    const handleMute = () => {
-        socket.emit('mute');
+    const handleMute = (sala: number) => {
+        socket.emit('mute', sala);
         setMuted(!muted);
-      };
+    };
 
-    const handleNext = () => {
-        console.log('Manejando evento Next')
+    const handleNext = (sala: number) => {
         if (currentVideo !== null) {
             const currentIndex = playlist.indexOf(currentVideo);
             const nextVideo = playlist[currentIndex + 1];
             if (nextVideo) {
                 setCurrentVideo(nextVideo);
-                socket.emit('next', nextVideo);
+                socket.emit('next', { video: nextVideo, sala });
             }
         }
     };
 
-    const handleAddVideo = () => {
-        console.log('Manejando evento Agregar video')
+    const handleAddVideo = (sala: number) => {
         if (newVideoUrl !== '') {
-            socket.emit('addVideo', newVideoUrl);
+            socket.emit('addVideo', { url: newVideoUrl, sala });
             setNewVideoUrl('');
-            fetchVideos();
+            fetchVideos(sala);
         }
     };
-    
+        
     const ids_sala = [1,2]
     
     return (
@@ -87,27 +79,29 @@ function VideoPlaylist() {
             {ids_sala.map((id_sala, index) => {
                 return(        
 
-                    // <div className='col-12 col-md-6 col-xxl-4' key={index}>
-                    //     <div className='cardRoom'>
-                    //         <div className='cardRoom-Top'>
+                    // <div className='cardRoom'>
+                    // <div className='cardRoom-Top'>
+                        // <div className='col-12 col-md-6 col-xxl-4' key={index}>
+                        <div>
+                                <h2>Sala {id_sala}</h2>
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <div style={{ flex: 1, marginRight: '2rem' }}>
                                         <h1>{currentVideo?.title}</h1>
                                         <button 
                                             type='button' 
                                             className={'btn btn-sm px-4 btn-success'} 
-                                            onClick={handlePlay}>
+                                            onClick={() => handlePlay(id_sala)}>
                                             {playing ? 'Pause' : 'Play'}                    
                                             {/* <p className='my-2'>Play</p> */}
                                         </button>
                                         <button 
                                             type='button' 
                                             className={'btn btn-sm px-4 btn-success'} 
-                                            onClick={handleMute}>
+                                            onClick={() => handleMute(id_sala)}>
                                             {muted ? 'Unmute' : 'Mute'}
                                             {/* <p className='my-2'>Mute</p> */}
                                         </button>
-                                        <input type="range" min={0} max={1} step="any" value={volume} onChange={handleVolumeChange} />
+                                        <input type="range" min={0} max={1} step="any" value={volume} onChange={e => handleVolumeChange(e, id_sala)} />
                                         <hr />
                                         <Form>
                                             <Form.Group>
@@ -116,48 +110,17 @@ function VideoPlaylist() {
                                                     value={newVideoUrl}
                                                     onChange={e => setNewVideoUrl(e.target.value)} 
                                                 />
-                                                <Button variant="primary" onClick={handleAddVideo}>Agregar video</Button>
+                                                <Button variant="primary" onClick={() => handleAddVideo(id_sala)}>Agregar video</Button>
                                             </Form.Group>
                                         </Form>
                                     </div>
                                     
                                     <div style={{ flex: 1 }}>
-                                        <div>
-
-                                            <div className='container-sm'>
-                                                <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
-                                                    <thead className='table-success'>
-                                                    <tr>
-                                                        {['Titulo', 'quitar'].map((item, index) => {
-                                                        return (
-                                                            <th key={index}>{item}</th>
-                                                        )
-                                                        })}
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody className='table-group-divider' >
-                                                    {playlist.map((vid, index) => {
-                                                        return (
-                                                        <tr key={index}>
-                                                            {/* <th scope='row'>{vid.title}</th> */}
-                                                            <td>{vid.title}</td>
-                                                            <td>
-                                                            <button 
-                                                                type='button' 
-                                                                className='btn btn-sm px-4 btn-success' 
-                                                                onClick={() => { handleQuitarVideo(vid.url) }}>
-                                                            <p className='my-2'>X</p>
-                                                            </button>
-                                                            </td>
-                                                        </tr>
-                                                        )
-                                                    })}
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-                                        </div>
-                                
+                                        <PlaylistTable 
+                                            playlist={playlist} 
+                                            handleQuitarVideo={(url) => handleQuitarVideo(url, id_sala)} 
+                                            handlePlayVideo={() => handlePlay(id_sala)}
+                                        />
                                     </div>
                                 </div>
                     //         </div>
