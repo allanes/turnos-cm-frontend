@@ -13,19 +13,19 @@ export const DoctorsViewListContainer = () => {
 	const [doctorsList, setDoctorsList] = useState<DoctorsListState["doctorsList"]>([])
 
 	useEffect(() => {
-    MedicosService.readMedicosApiV1DoctorsGet()
-    .then(doctors => {
-      console.log(doctors)
-      setDoctorsList(doctors)
-    })
-  }, [])
+		MedicosService.readMedicosApiV1DoctorsGet()
+			.then(doctors => {
+				console.log(doctors)
+				setDoctorsList(doctors)
+			})
+	}, [])
 
 	return (
 		<>
-		<div className='table-container-xxl text-center'>
-			<p className='h5'>Seleccione su identidad para controlar la lista de turnos</p>
-		</div>
-		<DoctorsViewList doctorsList={doctorsList} />
+			<div className='table-container-xxl text-center'>
+				<p className='h5'>Seleccione su identidad para controlar la lista de turnos</p>
+			</div>
+			<DoctorsViewList doctorsList={doctorsList} />
 		</>
 	)
 }
