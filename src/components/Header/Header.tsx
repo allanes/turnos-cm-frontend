@@ -1,8 +1,13 @@
-import React from 'react'
-
+import React, {useEffect} from 'react'
+import axios from 'axios';
 import logocm from '../../assets/icons/logoCM.png'
 
 export const Header = () => {
+
+	const handleAbrirTeles = async () => {
+		await axios.get('http://localhost:8000/abrir-ventanas-teles');
+	}
+
 	return (
 		<div className="container-fluid container-header text-white py-4">
 			<div className="row align-items-center">
@@ -12,8 +17,9 @@ export const Header = () => {
 				</div>
 				<div className="col text-center">
 					<h2>Panel de administración</h2>
-				</div>
-				<div className="col">
+				</div>				
+					<div className="col button btn  text-center">
+						<button type="button" onClick={handleAbrirTeles} className='btn btn-success btn-sm px-4'>Abrir Teles</button>										
 				</div>
 			</div>
 		</div>
