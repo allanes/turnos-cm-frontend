@@ -61,7 +61,7 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
                 <option>...</option>
                 {doctorsList.map((doctor, index) => {
                   return (
-                    <option key={index} value={doctor.id}>{doctor.apellido}, {doctor.nombre} - {doctor.especialidad}</option>
+                    <option key={index} value={doctor.id}>{doctor.nombre}, {doctor.apellido} - {doctor.especialidad}</option>
                   )
                 })}
               </Form.Select>

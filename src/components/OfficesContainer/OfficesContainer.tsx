@@ -7,32 +7,69 @@ import { OfficesWithDoctor } from "../../types/types"
 import { AssignDoctorToOffice } from "./AssignDoctorToOffice"
 import { RegistroConsultoriosCreate } from "../../codegen_output"
 import { RegistroDeConsultoriosConMDicosService } from "../../codegen_output"
-import { useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import Swal from "sweetalert2"
+import { ConsultorioDetallado } from "../../codegen_output"
+import { RegistroConsultorios } from "../../codegen_output"
 
 interface OfficesState {
-  offices: Array<Consultorio>
-  officesCreate: Array<ConsultorioCreate>
+  officesList: Array<Consultorio>
   doctorsList: Array<Medico>
+  recordWithDoctor: Array<RegistroConsultorios>
+  officesListWithDetails: Array<ConsultorioDetallado>
+  officesCreate: Array<ConsultorioCreate>
   officesListWithDoctor: Array<OfficesWithDoctor>
+  flag: Boolean
 }
 
 export const OfficesContainer = () => {
 
-  const [officesList, setOfficesList] = useState<OfficesState["offices"]>([])
-  const [officesListCreate, setOfficesListCreate] = useState<OfficesState["officesCreate"]>([])
+  const [officesList, setOfficesList] = useState<OfficesState["officesList"]>([])
   const [doctorsList, setDoctorsList] = useState<OfficesState["doctorsList"]>([])
+  const [officesListWithDetails, setOfficesListWithDetails] = useState<OfficesState["officesListWithDetails"]>([])
+  const [officesListWithDoctors, setOfficesListWithDoctors] = useState<OfficesState["officesListWithDetails"]>([])
+  const [officesListCreate, setOfficesListCreate] = useState<OfficesState["officesCreate"]>([])
   const [offices, setOffices] = useState<OfficesState["officesListWithDoctor"]>([])
-  const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const { queryParam } = useParams();
+  const [recordWithDoctor, setRecordWithDoctor] = useState<OfficesState["recordWithDoctor"]>([])
+  const [refreshFlag, setRefreshFlag] = useState<OfficesState["flag"]>(true)
+
 
 
   useEffect(() => {
     ConsultoriosService.readConsultoriosApiV1OfficesGet()
       .then(offices => {
-        console.log(offices)
         setOfficesList(offices)
       })
+      .catch(
+        (error => {
+          setError(error)
+          console.log("ERROR")
+        }
+        )
+      )
+      .finally(
+        () => console.log("Finish load Offices list")
+      )
   }, [])
+
+  useEffect(() => {
+    RegistroDeConsultoriosConMDicosService.readRegistrosConsultoriosApiV1OfficesToDoctorsGet()
+      .then(record => {
+        setRecordWithDoctor(record)
+      })
+      .catch(
+        (error => {
+          setError(error)
+          console.log("ERROR")
+        }
+        )
+      )
+      .finally(
+        () => console.log("Finish load Record Offices list")
+      )
+  }, [refreshFlag])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
@@ -41,21 +78,9 @@ export const OfficesContainer = () => {
       })
   }, [])
 
-  useEffect(() => {
-    setOffices(
-      officesList.map(office => ({
-        ...office,
-        medico: doctorsList.find((doctor) => doctor.consultorio === office.descripcion)
-      })
-      )
-    )
-  }, [officesList])
-
   const handleNewOffice = (newOffice: ConsultorioCreate): void => {
     ConsultoriosService.createConsultorioApiV1OfficesPost(newOffice)
-    console.log(newOffice);
     setOfficesListCreate(office => [...officesList, newOffice])
-
   }
 
   const handleDelete = (id: number): void => {
@@ -76,13 +101,15 @@ export const OfficesContainer = () => {
   }
 
   const handleNewAssign = async (newAssign: RegistroConsultoriosCreate): CancelablePromise<void> => {
-    try{
+    try {
       await RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(newAssign)
-      navigate("/waitingRoom/0")
-    } catch(error) {
+      Swal.fire('Médico asignado al consultorio', '', 'success');
+      setRefreshFlag(!refreshFlag)
+    }
+    catch (error) {
       const err = error as ApiError; // or a custom error type if you know the structure
       let errorMessage = 'An error occurred.'; // Start with the message property.
-      
+
       if (err.body && err.body.detail) {
         // If the body property has a message property, add it to the error message.
         errorMessage = err.body.detail;
@@ -91,7 +118,7 @@ export const OfficesContainer = () => {
     }
   }
 
-  const handleReleaseOffice = (registro: RegistroConsultoriosCreate): void => {
+  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate): void => {
     Swal.fire({
       title: '¿Estás seguro que deseas liberar el consultorio?',
       html: ``,
@@ -101,17 +128,18 @@ export const OfficesContainer = () => {
       confirmButtonColor: '#ff2d55'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire('Consultorio liberado','', 'success')
-        RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(registro)
+        Swal.fire('Consultorio liberado', '', 'success')
+        RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(officeIdToRelease)
+        setRecordWithDoctor(recordWithDoctor.filter((record) => record.id_consultorio !== officeIdToRelease.id_consultorio));
       }
     })
-    
+
   }
 
   return (
     <>
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
-      <OfficesList offices={offices} onDeleteOffice={handleDelete} onRelease={handleReleaseOffice} />
+      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor} onDeleteOffice={handleDelete} onRelease={handleReleaseOffice} />
       <OfficesCreate onNewOffice={handleNewOffice} />
     </>
   )

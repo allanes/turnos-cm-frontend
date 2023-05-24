@@ -1,28 +1,34 @@
-import { useEffect } from 'react'
-import { RegistroConsultoriosCreate } from '../../codegen_output'
+import { RegistroConsultoriosCreate, Consultorio } from '../../codegen_output'
 import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
+import { useEffect } from 'react'
 import { OfficesWithDoctor } from "../../types/types"
+import { Medico } from '../../codegen_output'
+import { RegistroConsultorios } from "../../codegen_output"
 
 interface Props {
-  offices: Array<OfficesWithDoctor>
+  officesList: Array<Consultorio>
+  doctorsList: Array<Medico>
+  recordWithDoctor: Array<RegistroConsultorios>
   onDeleteOffice: (id: number) => void
   onRelease: (registro: RegistroConsultoriosCreate) => void
 }
 
-
 const keysTabOffices = [
-  "Id",
-  "Descripción",
+  "Consultorio",
   "Sala",
   "Médico asignado",
   ""
 ]
 
-export const OfficesList = ({ offices, onDeleteOffice, onRelease }: Props) => {
+export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, onDeleteOffice, onRelease }: Props) => {
 
-  useEffect(() => {
-    console.log(offices)
-  }, [offices])
+  const searchDoctorID = (officeId: number | undefined) => {
+    return recordWithDoctor.find(record => record.id_consultorio === officeId);
+  }
+
+  const searchDoctor = (doctorId: number | undefined) => {
+    return doctorsList.find(doctor => doctor.id === doctorId);
+  }
 
   return (
     <>
@@ -41,13 +47,19 @@ export const OfficesList = ({ offices, onDeleteOffice, onRelease }: Props) => {
             </tr>
           </thead>
           <tbody className='table-group-divider' >
-            {offices.map((office, index) => {
+            {officesList.map((office, index) => {
               return (
                 <tr key={index} >
-                  <th scope='row'>{office.id}</th>
-                  <td>{office.descripcion}</td>
+                  <th scope='row'>{office.numero}</th>
                   <td>{office.sala}</td>
-                  <td>{office.medico?.nombre}, {office.medico?.apellido}</td>
+                  <td>
+                    {(searchDoctor(searchDoctorID(office.id)?.id_medico)?.nombre)
+                      ?
+                      `${searchDoctor(searchDoctorID(office.id)?.id_medico)?.nombre},
+                       ${searchDoctor(searchDoctorID(office.id)?.id_medico)?.apellido}`
+                      : "Consultorio sin médico"
+                    }
+                  </td>
                   <td className='text-center'><button className='btn btn-primary'
                     type='button'
                     onClick={() => { onRelease({ id_consultorio: office.id }) }} >
