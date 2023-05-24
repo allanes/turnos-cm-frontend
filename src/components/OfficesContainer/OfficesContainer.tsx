@@ -26,12 +26,8 @@ export const OfficesContainer = () => {
 
   const [officesList, setOfficesList] = useState<OfficesState["officesList"]>([])
   const [doctorsList, setDoctorsList] = useState<OfficesState["doctorsList"]>([])
-  const [officesListWithDetails, setOfficesListWithDetails] = useState<OfficesState["officesListWithDetails"]>([])
-  const [officesListWithDoctors, setOfficesListWithDoctors] = useState<OfficesState["officesListWithDetails"]>([])
   const [officesListCreate, setOfficesListCreate] = useState<OfficesState["officesCreate"]>([])
-  const [offices, setOffices] = useState<OfficesState["officesListWithDoctor"]>([])
   const [error, setError] = useState(false);
-  const { queryParam } = useParams();
   const [recordWithDoctor, setRecordWithDoctor] = useState<OfficesState["recordWithDoctor"]>([])
   const [refreshFlag, setRefreshFlag] = useState<OfficesState["flag"]>(true)
 
