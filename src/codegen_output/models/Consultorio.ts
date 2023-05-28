@@ -5,9 +5,7 @@
 export type Consultorio = {
     numero: number;
     sala: number;
-    descripcion: string;
     id: number;
-    medico?: string;
-    pacientes?: Array<string>;
+    descripcion?: string;
 };
 

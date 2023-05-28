@@ -3,16 +3,25 @@
 /* eslint-disable */
 export const $Turno = {
     properties: {
-        id_paciente: {
-            type: 'number',
-            isRequired: true,
-        },
         id_medico: {
             type: 'number',
-            isRequired: true,
+        },
+        id_paciente: {
+            type: 'number',
         },
         motivo_consulta: {
             type: 'string',
+        },
+        id: {
+            type: 'number',
+            isRequired: true,
+        },
+        nro_orden: {
+            type: 'number',
+            isRequired: true,
+        },
+        pendiente: {
+            type: 'boolean',
             isRequired: true,
         },
         fecha: {
@@ -20,9 +29,11 @@ export const $Turno = {
             isRequired: true,
             format: 'date-time',
         },
-        id: {
-            type: 'number',
-            isRequired: true,
+        nombre_medico: {
+            type: 'string',
+        },
+        nombre_paciente: {
+            type: 'string',
         },
     },
 } as const;

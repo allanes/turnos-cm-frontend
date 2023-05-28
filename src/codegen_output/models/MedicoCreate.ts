@@ -3,12 +3,11 @@
 /* eslint-disable */
 
 export type MedicoCreate = {
-    dni: number;
+    id: number;
     nombre: string;
     apellido: string;
     email?: string;
     telefono?: string;
     especialidad?: string;
-    activo?: boolean;
 };
 

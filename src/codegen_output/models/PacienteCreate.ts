@@ -3,9 +3,10 @@
 /* eslint-disable */
 
 export type PacienteCreate = {
-    dni: number;
+    id: number;
     nombre: string;
     apellido: string;
+    fecha_nacimiento?: string;
     email?: string;
     telefono?: string;
 };

@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { Consultorio } from '../models/Consultorio';
 import type { ConsultorioCreate } from '../models/ConsultorioCreate';
+import type { ConsultorioDetallado } from '../models/ConsultorioDetallado';
 import type { ConsultorioUpdate } from '../models/ConsultorioUpdate';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -10,6 +11,34 @@ import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 
 export class ConsultoriosService {
+
+    /**
+     * Read Consultorios Con Detalles
+     * Retrieve consultorios.
+     * @param sala
+     * @param skip
+     * @param limit
+     * @returns ConsultorioDetallado Successful Response
+     * @throws ApiError
+     */
+    public static readConsultoriosConDetallesApiV1OfficesWithDetailsGet(
+        sala: string = '0',
+        skip?: number,
+        limit: number = 100,
+    ): CancelablePromise<Array<ConsultorioDetallado>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/offices/with-details',
+            query: {
+                'sala': sala,
+                'skip': skip,
+                'limit': limit,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
 
     /**
      * Read Consultorios

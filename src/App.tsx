@@ -1,17 +1,40 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Header } from './components/Header/Header';
-import { RoomContainer } from './components/RoomContainer/RoomContainer';
-import { PatientContainer } from './components/PatientContainer/PatientContainer';
+import React, { useState, useEffect } from 'react';
+
+import { AdminView } from './components/Views/AdminView';
+import { PatientView } from './components/Views/PatientsView/PatientView';
+import { DoctorsView } from './components/Views/DoctorsView/DoctorsView';
+import Error404 from './components/Views/Error404';
+
+const renderSwitch = (props: string) => {
+  switch (props) {
+    case 'patientsView':
+      return <PatientView />;
+    case 'doctorsView':
+      return <DoctorsView />;
+    default:
+      return <AdminView />;
+  }
+};
+
+interface appState {
+  route: Array<string>
+}
 
 function App() {
 
+  const [currentRoute, setCurrentRoute] = useState<appState["route"]>([]);
+
+  useEffect(() => {
+    setCurrentRoute((window.location.pathname).split("/"));
+  }, [])
+  
+  useEffect(() => {
+  }, [currentRoute])
+
   return (
-    <div>
-      <Header />
-      <PatientContainer />
-      <RoomContainer />
-    </div>
+    <>
+      {renderSwitch(currentRoute[1])}
+    </>
   );
 }
 

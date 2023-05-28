@@ -3,6 +3,7 @@
 /* eslint-disable */
 import type { Paciente } from '../models/Paciente';
 import type { PacienteCreate } from '../models/PacienteCreate';
+import type { PacienteInDB } from '../models/PacienteInDB';
 import type { PacienteUpdate } from '../models/PacienteUpdate';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -61,12 +62,12 @@ export class PacientesService {
      * Read Paciente
      * Get paciente by ID.
      * @param id
-     * @returns Paciente Successful Response
+     * @returns PacienteInDB Successful Response
      * @throws ApiError
      */
     public static readPacienteApiV1PatientsIdGet(
         id: number,
-    ): CancelablePromise<Paciente> {
+    ): CancelablePromise<PacienteInDB> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/patients/{id}',

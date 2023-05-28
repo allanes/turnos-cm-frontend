@@ -3,7 +3,7 @@
 /* eslint-disable */
 export const $PacienteCreate = {
     properties: {
-        dni: {
+        id: {
             type: 'number',
             isRequired: true,
         },
@@ -14,6 +14,9 @@ export const $PacienteCreate = {
         apellido: {
             type: 'string',
             isRequired: true,
+        },
+        fecha_nacimiento: {
+            type: 'string',
         },
         email: {
             type: 'string',

@@ -1,15 +1,17 @@
 import { useReducer } from "react"
-import { Patient } from "../types/types"
+import { Paciente } from "../codegen_output"
 
 interface FormState {
-    inputValues: Patient
+    inputValues: Paciente
 }
 
 const INITIAL_STATE = {
-    dni: 0,
-    patientName: '',
-    patientSurName: '',
-    email: ''
+    id: 12345678,
+    nombre: "Nombre",
+    apellido: "Apellido",
+    fecha_nacimiento: "1990-01-01",
+    email: "email@gmail.com",
+    telefono: "03814567899",
 }
 
 type FormReducerAction = {

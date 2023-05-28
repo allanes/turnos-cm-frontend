@@ -2,11 +2,18 @@
 
 @import './base/settings';
 @import './base/pallete';
+@import './base/logocm';
+@import './base/icons';
+@import './base/typography';
 
 // text, forms, and other styles
 
 // Components styles
 
+@import './components/doctorView';
+@import './components/mainApp';
+@import './components/sidebar';
+@import './components/pagesContainer';
 @import './components/header';
-@import './components/logocm';
 @import './components/roomDescription';
+@import './components/toastConfig';

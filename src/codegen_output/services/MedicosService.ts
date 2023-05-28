@@ -2,8 +2,10 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { Medico } from '../models/Medico';
+import type { MedicoConTurnos } from '../models/MedicoConTurnos';
 import type { MedicoCreate } from '../models/MedicoCreate';
 import type { MedicoUpdate } from '../models/MedicoUpdate';
+import type { Turno } from '../models/Turno';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -58,15 +60,45 @@ export class MedicosService {
     }
 
     /**
+     * Read Medicos Por Sala
+     * Retrieve medicos.
+     * @param sala
+     * @param skip
+     * @param limit
+     * @returns MedicoConTurnos Successful Response
+     * @throws ApiError
+     */
+    public static readMedicosPorSalaApiV1DoctorsPorSalaSalaGet(
+        sala: string,
+        skip?: number,
+        limit: number = 100,
+    ): CancelablePromise<Array<MedicoConTurnos>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/por-sala/{sala}',
+            path: {
+                'sala': sala,
+            },
+            query: {
+                'skip': skip,
+                'limit': limit,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
      * Read Medico
      * Get medico by ID.
      * @param id
-     * @returns Medico Successful Response
+     * @returns MedicoConTurnos Successful Response
      * @throws ApiError
      */
     public static readMedicoApiV1DoctorsIdGet(
         id: number,
-    ): CancelablePromise<Medico> {
+    ): CancelablePromise<MedicoConTurnos> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/doctors/{id}',
@@ -118,6 +150,50 @@ export class MedicosService {
         return __request(OpenAPI, {
             method: 'DELETE',
             url: '/api/v1/doctors/{id}',
+            path: {
+                'id': id,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Handle Next Turn
+     * Delete an medico.
+     * @param id
+     * @returns Turno Successful Response
+     * @throws ApiError
+     */
+    public static handleNextTurnApiV1DoctorsIdNextPatientGet(
+        id: number,
+    ): CancelablePromise<Turno> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/{id}/nextPatient',
+            path: {
+                'id': id,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
+    /**
+     * Handle Previous Turn
+     * Delete an medico.
+     * @param id
+     * @returns Turno Successful Response
+     * @throws ApiError
+     */
+    public static handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(
+        id: number,
+    ): CancelablePromise<Turno> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/{id}/previousPatient',
             path: {
                 'id': id,
             },
