@@ -28,7 +28,6 @@ export const TurnsContainer = () => {
   useEffect(() => {
     TurnosService.readTurnosApiV1TurnsGet()
       .then(turns => {
-        console.log(turns)
         setTurnsList(turns)
       })
   }, [turnsCreateList])
@@ -36,7 +35,6 @@ export const TurnsContainer = () => {
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
       .then(doctors => {
-        console.log(doctors);
         setDoctorList(doctors)
       })
   }, [])
@@ -44,13 +42,12 @@ export const TurnsContainer = () => {
   useEffect(() => {
     PacientesService.readPacientesApiV1PatientsGet()
     .then(patients => {
-      console.log(patients);
       setPatientsList(patients)
     })
   }, [])
 
   const handleNewTurn = (newTurn: TurnoCreate): void => {
-    TurnosService.handleCreateTurnoApiV1TurnsPost(newTurn)
+    TurnosService.createTurnoApiV1TurnsPost(newTurn)
     setTurnsCreateList(turn => [...turnsCreateList, newTurn])
   }
   

@@ -161,6 +161,7 @@ export class MedicosService {
 
     /**
      * Handle Next Turn
+     * Delete an medico.
      * @param id
      * @returns Turno Successful Response
      * @throws ApiError
@@ -182,6 +183,7 @@ export class MedicosService {
 
     /**
      * Handle Previous Turn
+     * Delete an medico.
      * @param id
      * @returns Turno Successful Response
      * @throws ApiError

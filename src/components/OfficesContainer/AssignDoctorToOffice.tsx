@@ -45,7 +45,7 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
             <Form.Group className="mb-3" onChange={handleChange} controlId="id_consultorio">
               <Form.Label>Seleccione el consultorio</Form.Label>
               <Form.Select aria-label="Default select example">
-                <option>Abrir este selector</option>
+                <option>...</option>
                 {officesList.map((office, index) => {
                   return (
                     <option key={index} value={office.id}>{office.descripcion}</option>
@@ -58,10 +58,10 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
             <Form.Group className="mb-3" onChange={handleChange} controlId="id_medico">
               <Form.Label>Seleccione el médico</Form.Label>
               <Form.Select aria-label="Default select example">
-                <option>Abrir este selector</option>
+                <option>...</option>
                 {doctorsList.map((doctor, index) => {
                   return (
-                    <option key={index} value={doctor.id}>{doctor.apellido}, {doctor.nombre} - {doctor.especialidad}</option>
+                    <option key={index} value={doctor.id}>{doctor.nombre}, {doctor.apellido} - {doctor.especialidad}</option>
                   )
                 })}
               </Form.Select>

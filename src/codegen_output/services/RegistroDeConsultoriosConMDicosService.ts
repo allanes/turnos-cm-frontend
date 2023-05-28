@@ -11,12 +11,12 @@ import { request as __request } from '../core/request';
 export class RegistroDeConsultoriosConMDicosService {
 
     /**
-     * Read Consultorios
+     * Read Registros Consultorios
      * Retrieve registros consultorios.
      * @returns RegistroConsultorios Successful Response
      * @throws ApiError
      */
-    public static readConsultoriosApiV1OfficesToDoctorsGet(): CancelablePromise<Array<RegistroConsultorios>> {
+    public static readRegistrosConsultoriosApiV1OfficesToDoctorsGet(): CancelablePromise<Array<RegistroConsultorios>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/api/v1/offices-to-doctors/',
@@ -24,13 +24,13 @@ export class RegistroDeConsultoriosConMDicosService {
     }
 
     /**
-     * Create Consultorio
+     * Create Registro Consultorio
      * Create new registro consultorio.
      * @param requestBody
      * @returns RegistroConsultorios Successful Response
      * @throws ApiError
      */
-    public static createConsultorioApiV1OfficesToDoctorsPost(
+    public static createRegistroConsultorioApiV1OfficesToDoctorsPost(
         requestBody: RegistroConsultoriosCreate,
     ): CancelablePromise<RegistroConsultorios> {
         return __request(OpenAPI, {

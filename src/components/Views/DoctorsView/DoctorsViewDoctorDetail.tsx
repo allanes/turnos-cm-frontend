@@ -15,8 +15,9 @@ interface DoctorDetailState {
 }
 
 const keysTablePatiens = [
-  "Nro. de orden",
-  "Apellido, nombre",
+  "Nro.",
+  "Paciente",
+  "Motivo"
 ]
 
 export const DoctorsViewDoctorDetail = () => {
@@ -34,13 +35,13 @@ export const DoctorsViewDoctorDetail = () => {
 
   const notifyNextTurn = ( message: String) => {
     toast.success(message, {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.TOP_RIGHT,
     });
   };
   
   const notifyPreviousTurn = ( message: String) => {
     toast.warn(message, {
-      position: toast.POSITION.TOP_CENTER,
+      position: toast.POSITION.TOP_RIGHT,
     });
   };
   
