@@ -27,6 +27,7 @@ export const OfficesContainer = () => {
   const [officesList, setOfficesList] = useState<OfficesState["officesList"]>([])
   const [doctorsList, setDoctorsList] = useState<OfficesState["doctorsList"]>([])
   const [officesListCreate, setOfficesListCreate] = useState<OfficesState["officesCreate"]>([])
+  const [officesListWithDetails, setOfficesListWithDetails] = useState<OfficesState["officesListWithDetails"]>([])
   const [error, setError] = useState(false);
   const [recordWithDoctor, setRecordWithDoctor] = useState<OfficesState["recordWithDoctor"]>([])
   const [refreshFlag, setRefreshFlag] = useState<OfficesState["flag"]>(true)
@@ -66,6 +67,23 @@ export const OfficesContainer = () => {
         () => console.log("Finish load Record Offices list")
       )
   }, [refreshFlag])
+
+  useEffect(() => {
+    ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet()
+      .then(officeWithDetails => {
+        setOfficesListWithDetails(officeWithDetails)
+      })
+      .catch(
+        (error => {
+          setError(error)
+          console.log("ERROR")
+        }
+        )
+      )
+      .finally(
+        () => console.log("Finish load Offices list with details")
+      )
+  }, [])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
@@ -135,7 +153,9 @@ export const OfficesContainer = () => {
   return (
     <>
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
-      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor} onDeleteOffice={handleDelete} onRelease={handleReleaseOffice} />
+      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor} 
+                   officesListWithDetails={officesListWithDetails} onDeleteOffice={handleDelete} 
+                   onRelease={handleReleaseOffice} />
       <OfficesCreate onNewOffice={handleNewOffice} />
     </>
   )
