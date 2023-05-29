@@ -132,10 +132,10 @@ export const OfficesContainer = () => {
     }
   }
 
-  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate): void => {
+  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate, turnsRemaining: number | undefined): void => {
     Swal.fire({
       title: '¿Estás seguro que deseas liberar el consultorio?',
-      html: ``,
+      html: `Este consultorio ${turnsRemaining ? `tiene ${turnsRemaining}` : 'no tiene'} turnos asignados`,
       showCancelButton: true,
       confirmButtonText: 'Liberar',
       icon: 'warning',
