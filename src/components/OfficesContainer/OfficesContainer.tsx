@@ -45,7 +45,6 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-        () => console.log("Finish load Offices list")
       )
   }, [])
 
@@ -62,7 +61,6 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-        () => console.log("Finish load Record Offices list")
       )
   }, [refreshFlag])
 
@@ -79,7 +77,6 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-        () => console.log("Finish load Offices list with details")
       )
   }, [officesList])
 
