@@ -32,8 +32,6 @@ export const OfficesContainer = () => {
   const [recordWithDoctor, setRecordWithDoctor] = useState<OfficesState["recordWithDoctor"]>([])
   const [refreshFlag, setRefreshFlag] = useState<OfficesState["flag"]>(true)
 
-
-
   useEffect(() => {
     ConsultoriosService.readConsultoriosApiV1OfficesGet()
       .then(offices => {
@@ -83,7 +81,7 @@ export const OfficesContainer = () => {
       .finally(
         () => console.log("Finish load Offices list with details")
       )
-  }, [])
+  }, [officesList])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
@@ -147,6 +145,7 @@ export const OfficesContainer = () => {
           Swal.fire('Consultorio liberado', '', 'success')
           RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(officeIdToRelease)
           setRecordWithDoctor(recordWithDoctor.filter((record) => record.id_consultorio !== officeIdToRelease.id_consultorio));
+          setOfficesListWithDetails(officesListWithDetails.filter((office) => office.id !== officeIdToRelease.id_consultorio));
         }
       })
 
