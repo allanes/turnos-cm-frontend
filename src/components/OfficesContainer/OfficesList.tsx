@@ -74,8 +74,7 @@ export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, office
                   <td><button className='btn btn-primary'
                     type='button'
                     onClick={() => { 
-                      const turnsRemaining = searchPatientList(office.id)?.pacientes?.length
-                      onRelease({ id_consultorio: office.id }, turnsRemaining)}} >
+                      onRelease({ id_consultorio: office.id }, searchPatientList(office.id)?.pacientes?.length)}} >
                     <p className='m-0'>Liberar consultorio</p>
                   </button>
                   </td>

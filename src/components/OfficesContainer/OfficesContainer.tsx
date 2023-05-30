@@ -133,21 +133,25 @@ export const OfficesContainer = () => {
   }
 
   const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate, turnsRemaining: number | undefined): void => {
-    Swal.fire({
-      title: '¿Estás seguro que deseas liberar el consultorio?',
-      html: `Este consultorio ${turnsRemaining ? `tiene ${turnsRemaining}` : 'no tiene'} turnos asignados`,
-      showCancelButton: true,
-      confirmButtonText: 'Liberar',
-      icon: 'warning',
-      confirmButtonColor: '#ff2d55'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Consultorio liberado', '', 'success')
-        RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(officeIdToRelease)
-        setRecordWithDoctor(recordWithDoctor.filter((record) => record.id_consultorio !== officeIdToRelease.id_consultorio));
-      }
-    })
+    
+    { turnsRemaining
+      ? Swal.fire({
+        title: '¿Estás seguro que deseas liberar el consultorio?',
+        html: `Este consultorio ${turnsRemaining ? `tiene ${turnsRemaining}` : 'no tiene'} turnos asignados`,
+        showCancelButton: true,
+        confirmButtonText: 'Liberar',
+        icon: 'warning',
+        confirmButtonColor: '#ff2d55'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Consultorio liberado', '', 'success')
+          RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(officeIdToRelease)
+          setRecordWithDoctor(recordWithDoctor.filter((record) => record.id_consultorio !== officeIdToRelease.id_consultorio));
+        }
+      })
 
+      : Swal.fire('Error', 'El consultorio no tiene asignado un médico', 'error');
+    }
   }
 
   return (
