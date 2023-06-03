@@ -78,7 +78,7 @@ export const OfficesContainer = () => {
       )
       .finally(
       )
-  }, [officesList])
+  }, [officesList,refreshFlag])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
