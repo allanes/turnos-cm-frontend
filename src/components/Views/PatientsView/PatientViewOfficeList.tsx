@@ -99,15 +99,8 @@ export const PatientViewOfficeList = () => {
     })
   }, [])
 
-    const handleOfficeChangeEvent = useCallback((mensajeRecibido: string) => {
-    // const consultorioId = parseInt(mensajeRecibido, 10)
-    
-    refreshOffices()
-    /* 
-    ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet(roomId)
-    .then(offices => {      
-      setConsultorioId(consultorioId);
-    }) */
+  const handleOfficeChangeEvent = useCallback((consultorioId: string) => {
+    refreshOffices()    
   }, [])
     
   useSocket('patient-turn', handlePatientTurnEvent)
