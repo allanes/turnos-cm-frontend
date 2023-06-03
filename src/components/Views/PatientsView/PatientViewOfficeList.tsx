@@ -7,6 +7,7 @@ import { Toast, notifyNextTurn } from './ToastContainer';
 import { useOffices } from '../../../hooks/useOffices'
 import { useSocket } from '../../../hooks/useSocket'
 import { useAudio } from '../../../hooks/useAudio'
+import { PORT_SERVER } from '../../../types/config'
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -38,7 +39,7 @@ export const PatientViewOfficeList = () => {
   const setActiveSlideRef = useRef<React.Dispatch<React.SetStateAction<number>> | null>(null);
   const timerRef = useRef<number | null>(null);
   const [restartTimer, setRestartTimer] = useState(false);
-  const { play } = useAudio('http://localhost:8000/notification');
+  const { play } = useAudio(`${PORT_SERVER}/notification`);
 
 
   useEffect(() => {
@@ -78,7 +79,8 @@ export const PatientViewOfficeList = () => {
     .then(offices => {      
       setConsultorioId(consultorioId);
       play()
-      notifyNextTurn(nombrePacienteStr, consulRecibidoStr)
+      
+      notifyNextTurn(nombrePacienteStr, consulRecibidoStr, offices)
       handleRefresh(offices, consultorioId, setAnimationActive)
       
       const newActiveSlide = findSlideForOffice(offices, consultorioId);

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import axios from 'axios';
+import { PORT_SERVER } from '../../../types/config'
 
 const VideoPlayer = () => {
   const [videoUrls, setVideoUrls] = useState([]);
@@ -8,7 +9,7 @@ const VideoPlayer = () => {
 
   useEffect(() => {
     const fetchVideos = async () => {
-    const response = await axios.get('http://localhost:8000/lista-videos-locales');
+    const response = await axios.get(`${PORT_SERVER}/lista-videos-locales`);
     setVideoUrls(response.data);
     };
 
