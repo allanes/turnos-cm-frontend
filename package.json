@@ -32,7 +32,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "generate-client": "rm -r src/codegen_output && openapi --input http://localhost:8000/openapi.json --output src/codegen_output --client fetch --exportSchemas true"
+    "generate-client": "rm -r src/codegen_output && openapi --input http://localhost:8000/openapi.json --output src/codegen_output --client fetch --exportSchemas true",
+    "generate-client-win": "rmdir /s /q src\\codegen_output & openapi --input http://127.0.0.1:8000/openapi.json --output src\\codegen_output --client fetch --exportSchemas true"
   },
   "eslintConfig": {
     "extends": [

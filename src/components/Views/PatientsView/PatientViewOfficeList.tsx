@@ -98,9 +98,14 @@ export const PatientViewOfficeList = () => {
       setConsultorioId(consultorioId);
     })
   }, [])
+
+  const handleOfficeChangeEvent = useCallback((consultorioId: string) => {
+    refreshOffices()    
+  }, [])
     
   useSocket('patient-turn', handlePatientTurnEvent)
   useSocket('created-turn', handleCreatedTurnEvent)
+  useSocket('new-office', handleOfficeChangeEvent)
 
   return (
     <div>
