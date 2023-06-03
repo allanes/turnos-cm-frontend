@@ -1,1 +1,1 @@
-export const PORT_SERVER = 'http://localhost:8000'
+export const PORT_SERVER = 'http://127.0.0.1:8000'
