@@ -27,11 +27,10 @@ export const OfficesContainer = () => {
   const [officesList, setOfficesList] = useState<OfficesState["officesList"]>([])
   const [doctorsList, setDoctorsList] = useState<OfficesState["doctorsList"]>([])
   const [officesListCreate, setOfficesListCreate] = useState<OfficesState["officesCreate"]>([])
+  const [officesListWithDetails, setOfficesListWithDetails] = useState<OfficesState["officesListWithDetails"]>([])
   const [error, setError] = useState(false);
   const [recordWithDoctor, setRecordWithDoctor] = useState<OfficesState["recordWithDoctor"]>([])
   const [refreshFlag, setRefreshFlag] = useState<OfficesState["flag"]>(true)
-
-
 
   useEffect(() => {
     ConsultoriosService.readConsultoriosApiV1OfficesGet()
@@ -46,7 +45,6 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-        () => console.log("Finish load Offices list")
       )
   }, [])
 
@@ -63,9 +61,24 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-        () => console.log("Finish load Record Offices list")
       )
   }, [refreshFlag])
+
+  useEffect(() => {
+    ConsultoriosService.readConsultoriosConDetallesApiV1OfficesWithDetailsGet()
+      .then(officeWithDetails => {
+        setOfficesListWithDetails(officeWithDetails)
+      })
+      .catch(
+        (error => {
+          setError(error)
+          console.log("ERROR")
+        }
+        )
+      )
+      .finally(
+      )
+  }, [officesList,refreshFlag])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
@@ -114,28 +127,35 @@ export const OfficesContainer = () => {
     }
   }
 
-  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate): void => {
-    Swal.fire({
-      title: '¿Estás seguro que deseas liberar el consultorio?',
-      html: ``,
-      showCancelButton: true,
-      confirmButtonText: 'Liberar',
-      icon: 'warning',
-      confirmButtonColor: '#ff2d55'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire('Consultorio liberado', '', 'success')
-        RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(officeIdToRelease)
-        setRecordWithDoctor(recordWithDoctor.filter((record) => record.id_consultorio !== officeIdToRelease.id_consultorio));
-      }
-    })
+  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate, turnsRemaining: number | undefined): void => {
+    
+    { turnsRemaining
+      ? Swal.fire({
+        title: '¿Estás seguro que deseas liberar el consultorio?',
+        html: `Este consultorio ${turnsRemaining ? `tiene ${turnsRemaining}` : 'no tiene'} turnos asignados`,
+        showCancelButton: true,
+        confirmButtonText: 'Liberar',
+        icon: 'warning',
+        confirmButtonColor: '#ff2d55'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Consultorio liberado', '', 'success')
+          RegistroDeConsultoriosConMDicosService.createRegistroConsultorioApiV1OfficesToDoctorsPost(officeIdToRelease)
+          setRecordWithDoctor(recordWithDoctor.filter((record) => record.id_consultorio !== officeIdToRelease.id_consultorio));
+          setOfficesListWithDetails(officesListWithDetails.filter((office) => office.id !== officeIdToRelease.id_consultorio));
+        }
+      })
 
+      : Swal.fire('Error', 'El consultorio no tiene asignado un médico', 'error');
+    }
   }
 
   return (
     <>
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
-      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor} onDeleteOffice={handleDelete} onRelease={handleReleaseOffice} />
+      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor} 
+                   officesListWithDetails={officesListWithDetails} onDeleteOffice={handleDelete} 
+                   onRelease={handleReleaseOffice} />
       <OfficesCreate onNewOffice={handleNewOffice} />
     </>
   )

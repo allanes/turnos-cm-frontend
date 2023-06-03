@@ -1,26 +1,29 @@
-import { RegistroConsultoriosCreate, Consultorio } from '../../codegen_output'
-import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 import { useEffect } from 'react'
+import { RegistroConsultoriosCreate, Consultorio } from '../../codegen_output'
 import { OfficesWithDoctor } from "../../types/types"
 import { Medico } from '../../codegen_output'
 import { RegistroConsultorios } from "../../codegen_output"
+import { ConsultorioDetallado } from '../../codegen_output'
+import deleteIcon from '../../assets/icons/outline_delete_white_24dp.png'
 
 interface Props {
   officesList: Array<Consultorio>
   doctorsList: Array<Medico>
   recordWithDoctor: Array<RegistroConsultorios>
+  officesListWithDetails: Array<ConsultorioDetallado>
   onDeleteOffice: (id: number) => void
-  onRelease: (registro: RegistroConsultoriosCreate) => void
+  onRelease: (registro: RegistroConsultoriosCreate, turnsRemaining: number | undefined) => void
 }
 
 const keysTabOffices = [
   "Consultorio",
   "Sala",
   "Médico asignado",
+  "Nro. de turnos",
   ""
 ]
 
-export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, onDeleteOffice, onRelease }: Props) => {
+export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, officesListWithDetails, onDeleteOffice, onRelease }: Props) => {
 
   const searchDoctorID = (officeId: number | undefined) => {
     return recordWithDoctor.find(record => record.id_consultorio === officeId);
@@ -30,13 +33,17 @@ export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, onDele
     return doctorsList.find(doctor => doctor.id === doctorId);
   }
 
+  const searchPatientList = (officeId: number | undefined) => {
+    return officesListWithDetails.find(officeWithDetails => officeWithDetails.id === officeId);
+  }
+
   return (
     <>
       <div className='table-container-xl'>
         <div className='table-container-l text-center mb-1'>
           <p className='h3'>Lista de Consultorios</p>
         </div>
-        <table className='table table-striped table-hover table-container-l'>
+        <table className='table table-striped table-hover text-center table-container-l'>
           <thead className='table-success'>
             <tr>
               {keysTabOffices.map((item, index) => {
@@ -56,13 +63,18 @@ export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, onDele
                     {(searchDoctor(searchDoctorID(office.id)?.id_medico)?.nombre)
                       ?
                       `${searchDoctor(searchDoctorID(office.id)?.id_medico)?.nombre},
-                       ${searchDoctor(searchDoctorID(office.id)?.id_medico)?.apellido}`
-                      : "Consultorio sin médico"
+                      ${searchDoctor(searchDoctorID(office.id)?.id_medico)?.apellido}`
+                      : "-"
                     }
                   </td>
-                  <td className='text-center'><button className='btn btn-primary'
+                  <td>{searchPatientList(office.id)?.pacientes?.length
+                       ? searchPatientList(office.id)?.pacientes?.length
+                       : "-"
+                      }</td>
+                  <td><button className='btn btn-primary'
                     type='button'
-                    onClick={() => { onRelease({ id_consultorio: office.id }) }} >
+                    onClick={() => { 
+                      onRelease({ id_consultorio: office.id }, searchPatientList(office.id)?.pacientes?.length)}} >
                     <p className='m-0'>Liberar consultorio</p>
                   </button>
                   </td>
