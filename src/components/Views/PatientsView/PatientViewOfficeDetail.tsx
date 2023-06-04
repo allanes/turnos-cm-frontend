@@ -57,8 +57,8 @@ export const PatientViewOfficeDetail = ({
                       >
                         {isEmptyCard ? null : (
                           <>
-                            <div className="cardRoom-Top">
-                              <p className="h1">Dr. {office.medico}</p>
+                            <div className="patient-cardRoom-Top">
+                              <p className="h1">Dr/a. {office.medico}</p>
                               <p className="h3">Consultorio: {office.id}</p>
                             </div>
                             <div>

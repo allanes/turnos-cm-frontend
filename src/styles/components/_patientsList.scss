@@ -15,5 +15,12 @@
 .mi-contenedor-video-y-carousel{
     display: flex;
     width: 100%;
-    background-color: $mi-white
+    background-color: $mi-black
+}
+
+.patient-cardRoom-Top{
+    background: $mi-cyan;
+    color: $mi-black;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
 }
