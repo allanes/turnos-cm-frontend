@@ -22,56 +22,77 @@ export const handleRefresh = (
     }
 };
 
-export const PatientViewOfficeDetail = ({ 
-  officesList, 
-  consultorioId, 
-  animationActive, 
+export const PatientViewOfficeDetail = ({
+  officesList,
+  consultorioId,
+  animationActive,
   activeSlide
 }: OfficesState) => {
   console.log('Rendering PatientViewOfficeDetail with activeSlide:', activeSlide);
 
   const totalSlides = Math.ceil(officesList.length / cardsToShow);
 
+  const emptyCardCount = totalSlides * cardsToShow - officesList.length; // Number of empty cards needed on the last slide
+
   return (
     <div>
       <div className="container-fluid text-center">
         <div className="row align-items-center">
-          <Carousel activeIndex={activeSlide }>
+          <Carousel activeIndex={activeSlide}>
             {[...Array(totalSlides)].map((_, slideIndex) => {
               return (
                 <Carousel.Item key={slideIndex}>
                   {[...Array(cardsToShow)].map((_, cardIndex) => {
-                    const officeIndex = (slideIndex * cardsToShow + cardIndex) % officesList.length;
+                    const officeIndex = slideIndex * cardsToShow + cardIndex;
                     const office = officesList[officeIndex];
-                    
+                    const isLastSlide = slideIndex === totalSlides - 1;
+                    const isEmptyCard = isLastSlide && cardIndex >= cardsToShow - emptyCardCount;
+
                     return (
-                      <div key={office.id} className={`cardRoom${animationActive && office.id === consultorioId ? " animation-active" : ""}`}>
-                        <div className='cardRoom-Top'>
-                          <p className='h1'>Dr. {office.medico}</p>
-                          <p className='h3'>Consultorio: {office.id}</p>                        
-                        </div>
-                        <div>
-                          <table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
-                            <tbody>
-                              {office.pacientes?.slice(0, patientsPerCard).map((turn, index) => {
-                                const isFirstPatient = index === 0;
-                                return (
-                                  <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
-                                    <th scope='row'><p className='mt-2'>{turn.split(" ")[0]}</p></th>
-                                    <td className='h2 text-start'>{turn.split(" ").slice(1).join(" ")}</td>
-                                  </tr>
-                                );
-                              })}
-                              {office.pacientes?.length && office.pacientes.length > patientsPerCard &&
-                                <tr>
-                                  <td colSpan={3} style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold', color: '#808080' }}>
-                                    + {(office.pacientes?.length ?? 0) - patientsPerCard} pacientes
-                                  </td>
-                                </tr>
-                              }
-                            </tbody>
-                          </table>
-                        </div>
+                      <div
+                        key={officeIndex}
+                        className={`cardRoom${
+                          animationActive && office.id === consultorioId ? ' animation-active' : ''
+                        }`}
+                      >
+                        {isEmptyCard ? null : (
+                          <>
+                            <div className="cardRoom-Top">
+                              <p className="h1">Dr. {office.medico}</p>
+                              <p className="h3">Consultorio: {office.id}</p>
+                            </div>
+                            <div>
+                              <table className="table table-striped table-hover table-xxl table-container-sm table-turns-container">
+                                <tbody>
+                                  {office.pacientes?.slice(0, patientsPerCard).map((turn, index) => {
+                                    const isFirstPatient = index === 0;
+                                    const patientClassName = isFirstPatient ? 'table-warning' : '';
+                                    const patientTextStyle = isFirstPatient ? 'h2 font-weight-bold' : 'h3 text-muted';
+
+                                    return (
+                                      <tr key={index} className={patientClassName}>
+                                        <th scope="row">
+                                          <p className={`${patientTextStyle}`}>{turn.split(' ')[0]}</p>
+                                        </th>
+                                        <td className={`text-start ${patientTextStyle}`}>
+                                          {turn.split(' ').slice(1).join(' ')}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                                  {office.pacientes?.length &&
+                                    office.pacientes.length > patientsPerCard && (
+                                      <tr>
+                                        <td colSpan={3} style={{ textAlign: 'center', fontSize: '1.2rem', fontWeight: 'bold', color: '#808080' }}>
+                                          + {(office.pacientes?.length ?? 0) - patientsPerCard} pacientes
+                                        </td>
+                                      </tr>
+                                    )}
+                                </tbody>
+                              </table>
+                            </div>
+                          </>
+                        )}
                       </div>
                     );
                   })}
@@ -83,4 +104,4 @@ export const PatientViewOfficeDetail = ({
       </div>
     </div>
   );
-}
+};
