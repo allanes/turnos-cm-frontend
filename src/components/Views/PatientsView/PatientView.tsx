@@ -15,7 +15,7 @@ export const PatientView = () => {
           <Routes>
             <Route path="/patientsView" element={<PatientViewListContainer />} />
             <Route path="/patientsView/:roomId" element={
-              <div style={{display: 'flex', width: '100%'}}>
+              <div className='mi-contenedor-video-y-carousel'>
                 <PatientViewOfficeList />
                 <VideoPlayer />
               </div>
