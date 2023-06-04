@@ -29,7 +29,7 @@ export const CarouselItem = ({ officesList, consultorioId, animationActive }: Of
 						const isFirstOffice = index === 0;
 						return (
 							<div key={office.id} className={isFirstOffice ? 'carousel-item active cardRoom' : 'carousel-item cardRoom'}>
-								<div className='cardRoom-Top'>
+								<div className='patient-cardRoom-Top'>
 									<p className='h1'>{office.medico}</p>
 									<p>Consultorio: {office.id}</p>
 								</div>
@@ -65,31 +65,3 @@ export const CarouselItem = ({ officesList, consultorioId, animationActive }: Of
 	)
 }
 
-{/* <div className="cardRoom-container">
-{officesList.map((office, index) => {
-	const isFirstOffice = index === 0;
-	return (
-		<div key={office.id} className='cardRoom'{isFirstOffice ? 'carousel-item active cardRoom' : 'carousel-item cardRoom'}>
-			<div className='cardRoom-Top'>
-				<p className='h1'>{office.medico}</p>
-				<p>Consultorio: {office.id}</p>
-			</div>
-			<div>
-				<table className='table table-striped table-hover table-xxl table-container-sm table-turns-container'>
-					<tbody>
-						{office.pacientes?.slice(0,3).map((turn, index) => {
-							const isFirstPatient = index === 0;
-							return (
-								<tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
-									<th scope='row'><p className='mt-2'>{index + 1}</p></th>
-									<td className='h2 text-start'>{turn}</td>
-								</tr>
-							)
-						})}
-					</tbody>
-				</table>
-			</div>
-		</div>
-	)
-})}
-</div> */}
