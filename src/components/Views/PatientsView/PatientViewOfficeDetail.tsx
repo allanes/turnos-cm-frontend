@@ -57,7 +57,7 @@ export const PatientViewOfficeDetail = ({
                                 const isFirstPatient = index === 0;
                                 return (
                                   <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
-                                    <th scope='row'><p className='mt-2'>{turn.split(" ")[0]}</p></th>
+                                    <th scope='row'><p className='mt-1 h3'>{turn.split(" ")[0]}</p></th>
                                     <td className='h2 text-start'>{turn.split(" ").slice(1).join(" ")}</td>
                                   </tr>
                                 );
