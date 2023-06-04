@@ -2,9 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { PatientViewListContainer } from './PatientViewListContainer'
 import { PatientViewOfficeList } from './PatientViewOfficeList'
-// import YouTubePlayer from 'react-player/youtube'
-// import GoogleDrivePlayer from './GoogleDrivePlayer';
-import VideoPlayer from './VideoPlayer';
+import ReactVideoPlayer from './ReactPlayer';
 
 
 export const PatientView = () => {
@@ -17,7 +15,7 @@ export const PatientView = () => {
             <Route path="/patientsView/:roomId" element={
               <div className='mi-contenedor-video-y-carousel'>
                 <PatientViewOfficeList />
-                <VideoPlayer />
+                <ReactVideoPlayer />
               </div>
             } />
           </Routes>
