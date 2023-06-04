@@ -64,19 +64,22 @@ export const PatientViewOfficeDetail = ({
                             <div>
                               <table className="table table-striped table-hover table-xxl table-container-sm table-turns-container">
                                 <tbody>
-                                  {office.pacientes
-                                    ?.slice(0, patientsPerCard)
-                                    .map((turn, index) => {
-                                      const isFirstPatient = index === 0;
-                                      return (
-                                        <tr key={index} className={isFirstPatient ? 'table-warning' : ''}>
-                                          <th scope="row">
-                                            <p className="mt-1 h3">{turn.split(' ')[0]}</p>
-                                          </th>
-                                          <td className="h2 text-start">{turn.split(' ').slice(1).join(' ')}</td>
-                                        </tr>
-                                      );
-                                    })}
+                                  {office.pacientes?.slice(0, patientsPerCard).map((turn, index) => {
+                                    const isFirstPatient = index === 0;
+                                    const patientClassName = isFirstPatient ? 'table-warning' : '';
+                                    const patientTextStyle = isFirstPatient ? 'h2 font-weight-bold' : 'h3 text-muted';
+
+                                    return (
+                                      <tr key={index} className={patientClassName}>
+                                        <th scope="row">
+                                          <p className={`${patientTextStyle}`}>{turn.split(' ')[0]}</p>
+                                        </th>
+                                        <td className={`text-start ${patientTextStyle}`}>
+                                          {turn.split(' ').slice(1).join(' ')}
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
                                   {office.pacientes?.length &&
                                     office.pacientes.length > patientsPerCard && (
                                       <tr>
