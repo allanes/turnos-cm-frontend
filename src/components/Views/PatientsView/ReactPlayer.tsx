@@ -5,7 +5,6 @@ import ReactPlayer from 'react-player'
 const ReactVideoPlayer = () => {
     return (
         <div style={{flex: 1, height: '100vh'}}>
-            {/* <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U' /> */}
             <ReactPlayer
                 className='react-player'
                 url='https://www.youtube.com/watch?v=HPiv1pzIPRc'
