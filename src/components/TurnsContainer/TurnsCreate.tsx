@@ -34,7 +34,7 @@ const keysTabPatients = [
   "Apellido",
   "Email",
   "Telefono",
-  "Turnos"
+  ""
 ]
 
 export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => {
@@ -66,34 +66,29 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
     })
   }
 
-  // const handlePatientSearchSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-  //   evt.preventDefault()
-  //   PacientesService.readPacienteApiV1PatientsIdGet(patientId)
-  //     .then(patients => {
-  //       console.log(patients)
-  //       setPatientsList([patients])
-  //     })
-  //   formSearchRef.current?.reset()
-  // }
-
   const diacriticless = require('diacriticless');
 
   const handlePatientSearchSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
-    // console.log(patientNameToSearch)
 
     const patients = patientsList.filter((el) => {
       // Normalizar y convertir ambos valores a minúsculas
       const normalizedApellido = diacriticless(el.apellido.toLowerCase());
-      console.log(normalizedApellido);
-      
+
       const normalizedPatientName = diacriticless(patientNameToSearch.toLowerCase());
-      console.log(normalizedPatientName);
-      
+
       // Utilizar localeCompare() para comparar los valores normalizados
       return normalizedApellido.includes(normalizedPatientName);
     });
-    setPatientsListFiltered(patients)
+
+    if (patients.length) {
+      patients.length === 1 
+      ? Swal.fire(`Se ha encontrado ${patients.length} paciente`, '', 'success')
+      : Swal.fire(`Se han encontrado ${patients.length} pacientes`, '', 'success')
+      setPatientsListFiltered(patients)
+    }else{
+      Swal.fire('No se han encontrado pacientes', '', 'error')
+    }
     formSearchRef.current?.reset()
   }
 
@@ -123,7 +118,6 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
 
   const handleClear = () => {
     setPatientSelected(INITIAL_STATE)
-    // patientsListFiltered([])
   }
 
   return (
@@ -138,7 +132,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
               <Col>
                 <Form.Group className="mb-3" controlId="id_paciente">
                   <Form.Label>Apellido del paciente que desea buscar</Form.Label>
-                  <Form.Control onChange={handlePatientSearch} type="text" placeholder="Apellido del paciente" />
+                  <Form.Control onChange={handlePatientSearch} type="text" placeholder="Apellido" />
                 </Form.Group>
               </Col>
               <Col>
@@ -148,7 +142,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
             </Row>
             <Row>
               <table className='table table-striped table-hover table-xxl table-container-l'>
-                <thead>
+                <thead className='table-info'>
                   <tr>
                     {keysTabPatients.map((item, index) => {
                       return (
@@ -209,14 +203,14 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
                 </Form.Group>
               </Col>
             </Row>
-
-            <Button variant='outline-warning' type="reset" className="m-2">
-              Borrar
-            </Button>
-
-            <Button type="submit" className="m-2">
-              Guardar
-            </Button>
+            <div>
+              <Button variant='outline-warning' type="reset" className="m-2">
+                Borrar
+              </Button>
+              <Button type="submit" className="m-2">
+                Guardar
+              </Button>
+            </div>
           </Form>
         </div>
       </div>
