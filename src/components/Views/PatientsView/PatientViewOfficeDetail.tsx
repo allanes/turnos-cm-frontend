@@ -48,6 +48,10 @@ export const PatientViewOfficeDetail = ({
                     const isLastSlide = slideIndex === totalSlides - 1;
                     const isEmptyCard = isLastSlide && cardIndex >= cardsToShow - emptyCardCount;
 
+                    if(isEmptyCard){
+                      return null;
+                    }
+
                     return (
                       <div
                         key={officeIndex}
