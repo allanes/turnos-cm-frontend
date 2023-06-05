@@ -5,16 +5,18 @@ import { Medico } from '../../codegen_output'
 import editIcon from '../../assets/icons/outline_edit_white_24dp.png'
 import Swal from 'sweetalert2'
 import { Row, Col, Button, Form } from 'react-bootstrap'
+import { Paciente } from '../../codegen_output'
 
 interface Props {
   onNewTurn: (newPatient: TurnoCreate) => void
   doctorsList: Array<Medico>
+  patientsList: Array<Paciente>
 }
 
 interface TurnsCreateState {
-  patientList: Array<PacienteInDB>
+  patientList: Array<Paciente>
   patientSelected: PacienteInDB
-  idToSearch: number
+  nameToSearch: string
 }
 
 const INITIAL_STATE = {
@@ -32,23 +34,22 @@ const keysTabPatients = [
   "Apellido",
   "Email",
   "Telefono",
-  "Turnos"
+  ""
 ]
 
-export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
+export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => {
 
   const [inputValues, dispatch] = useNewTurnForm()
   const formRef = useRef<HTMLFormElement>(null)
   const formSearchRef = useRef<HTMLFormElement>(null)
 
-  const [patientsList, setPatientsList] = useState<TurnsCreateState["patientList"]>([])
-  const [patientId, setPatientId] = useState<TurnsCreateState["idToSearch"]>(0)
+  const [patientsListFiltered, setPatientsListFiltered] = useState<TurnsCreateState["patientList"]>([])
+  const [patientNameToSearch, setPatientNameToSearch] = useState<TurnsCreateState["nameToSearch"]>("")
   const [patientSelected, setPatientSelected] = useState<TurnsCreateState["patientSelected"]>(INITIAL_STATE)
 
   const handlePatientSearch = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = evt.target
-    console.log(id, +value);
-    setPatientId(parseInt(value))
+    setPatientNameToSearch(value)
   }
 
   const handleSelectedPatient = (patientSelected: TurnsCreateState["patientSelected"]) => {
@@ -63,15 +64,33 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
         inputValue: value
       }
     })
+
+    Swal.fire(`Se ha seleccionado el paciente con éxito`, '', 'success')
   }
+
+  const diacriticless = require('diacriticless');
 
   const handlePatientSearchSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
-    PacientesService.readPacienteApiV1PatientsIdGet(patientId)
-      .then(patients => {
-        console.log(patients)
-        setPatientsList([patients])
-      })
+
+    const patients = patientsList.filter((el) => {
+      // Normalizar y convertir ambos valores a minúsculas
+      const normalizedApellido = diacriticless(el.apellido.toLowerCase());
+
+      const normalizedPatientName = diacriticless(patientNameToSearch.toLowerCase());
+
+      // Utilizar localeCompare() para comparar los valores normalizados
+      return normalizedApellido.includes(normalizedPatientName);
+    });
+
+    if (patients.length) {
+      patients.length === 1
+        ? Swal.fire(`Se ha encontrado ${patients.length} paciente`, '', 'success')
+        : Swal.fire(`Se han encontrado ${patients.length} pacientes`, '', 'success')
+      setPatientsListFiltered(patients)
+    } else {
+      Swal.fire('No se han encontrado pacientes', '', 'error')
+    }
     formSearchRef.current?.reset()
   }
 
@@ -101,7 +120,6 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
 
   const handleClear = () => {
     setPatientSelected(INITIAL_STATE)
-    setPatientsList([])
   }
 
   return (
@@ -115,8 +133,8 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
             <Row className='align-items-center'>
               <Col>
                 <Form.Group className="mb-3" controlId="id_paciente">
-                  <Form.Label>DNI del Paciente</Form.Label>
-                  <Form.Control onChange={handlePatientSearch} type="text" placeholder="Ingrese el DNI del paciente" />
+                  <Form.Label>Apellido del paciente que desea buscar</Form.Label>
+                  <Form.Control onChange={handlePatientSearch} type="text" placeholder="Apellido" />
                 </Form.Group>
               </Col>
               <Col>
@@ -126,7 +144,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
             </Row>
             <Row>
               <table className='table table-striped table-hover table-xxl table-container-l'>
-                <thead>
+                <thead className='table-info'>
                   <tr>
                     {keysTabPatients.map((item, index) => {
                       return (
@@ -136,7 +154,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
                   </tr>
                 </thead>
                 <tbody className='table-group-divider' >
-                  {patientsList.map((patient, index) => {
+                  {patientsListFiltered.map((patient, index) => {
                     return (
                       <tr key={index} >
                         <th scope='row'>{patient.id}</th>
@@ -144,7 +162,6 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
                         <td>{patient.apellido}</td>
                         <td>{patient.email}</td>
                         <td>{patient.telefono}</td>
-                        <td>{(patient.turnos)?.length}</td>
                         <td><button className='icons-border icon--size icon--edit'
                           type='button'
                           onClick={() => { handleSelectedPatient(patient) }} >
@@ -178,7 +195,7 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
               <Col>
                 <Form.Group className="mb-3" controlId="id_paciente">
                   <Form.Label>Nombre del Paciente</Form.Label>
-                  <Form.Control type="text" placeholder={`${patientSelected?.nombre}, ${patientSelected?.apellido}`} disabled/>
+                  <Form.Control type="text" placeholder={`${patientSelected?.nombre}, ${patientSelected?.apellido}`} disabled />
                 </Form.Group>
               </Col>
               <Col>
@@ -188,14 +205,14 @@ export const TurnsCreate = ({ onNewTurn, doctorsList }: Props) => {
                 </Form.Group>
               </Col>
             </Row>
-
-            <Button variant='outline-warning' type="reset" className="m-2">
-              Borrar
-            </Button>
-
-            <Button type="submit" className="m-2">
-              Guardar
-            </Button>
+            <div>
+              <Button variant='outline-warning' type="reset" className="m-2">
+                Borrar
+              </Button>
+              <Button type="submit" className="m-2">
+                Guardar
+              </Button>
+            </div>
           </Form>
         </div>
       </div>

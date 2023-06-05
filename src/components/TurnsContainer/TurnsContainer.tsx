@@ -15,7 +15,7 @@ interface TurnsState {
   turns: Array<Turno>
   turnsCreate: Array<TurnoCreate>
   doctorsList: Array<Medico>
-  patients: Array<Paciente>
+  patientsList: Array<Paciente>
 }
 
 export const TurnsContainer = () => {
@@ -23,7 +23,7 @@ export const TurnsContainer = () => {
   const [turnsList, setTurnsList] = useState<TurnsState["turns"]>([])
   const [turnsCreateList, setTurnsCreateList] = useState<TurnsState["turnsCreate"]>([])
   const [doctorsList, setDoctorList] = useState<TurnsState["doctorsList"]>([])
-  const [patientsList, setPatientsList] = useState<TurnsState["patients"]>([])
+  const [patientsList, setPatientsList] = useState<TurnsState["patientsList"]>([])
 
   useEffect(() => {
     TurnosService.readTurnosApiV1TurnsGet()
@@ -58,7 +58,7 @@ export const TurnsContainer = () => {
 
   return (
     <div>
-      <TurnsCreate onNewTurn={handleNewTurn} doctorsList={doctorsList} />
+      <TurnsCreate onNewTurn={handleNewTurn} doctorsList={doctorsList} patientsList={patientsList}/>
       <TurnsList doctorsList={doctorsList} patientsList={patientsList} turnsList={turnsList} onDeleteTurn={handleDelete} />
     </div>
   )
