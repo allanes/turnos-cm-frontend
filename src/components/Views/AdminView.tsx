@@ -9,6 +9,7 @@ import { PatientsContainer } from '../PatientsContainer/PatientsContainer';
 import { TurnsContainer } from '../TurnsContainer/TurnsContainer';
 import { categoriesList_sidebar, url_waitingRoom } from '../../types/categoriesList_sidebar';
 import { OfficesContainerPatientView } from '../OfficesContainerPatientView/OfficesContainerPatientView';
+import { DownloadsContainer } from '../DownloadsContainer/DownloadsContainer';
 import Error404 from './Error404';
 
 export const AdminView = () => {
@@ -27,6 +28,7 @@ export const AdminView = () => {
               <Route path={categoriesList_sidebar[2].link} element={<PatientsContainer />} />
               <Route path={categoriesList_sidebar[3].link} element={<DoctorsContainer />} />
               <Route path={`${url_waitingRoom}/:query`} element={<OfficesContainerPatientView />} />
+              <Route path={categoriesList_sidebar[7].link} element={<DownloadsContainer />} />
               <Route path='*' element={<Error404 />} />
             </Routes>
           </div>
