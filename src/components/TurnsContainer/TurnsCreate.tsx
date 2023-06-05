@@ -64,6 +64,8 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
         inputValue: value
       }
     })
+
+    Swal.fire(`Se ha seleccionado el paciente con éxito`, '', 'success')
   }
 
   const diacriticless = require('diacriticless');
@@ -82,11 +84,11 @@ export const TurnsCreate = ({ onNewTurn, doctorsList, patientsList }: Props) => 
     });
 
     if (patients.length) {
-      patients.length === 1 
-      ? Swal.fire(`Se ha encontrado ${patients.length} paciente`, '', 'success')
-      : Swal.fire(`Se han encontrado ${patients.length} pacientes`, '', 'success')
+      patients.length === 1
+        ? Swal.fire(`Se ha encontrado ${patients.length} paciente`, '', 'success')
+        : Swal.fire(`Se han encontrado ${patients.length} pacientes`, '', 'success')
       setPatientsListFiltered(patients)
-    }else{
+    } else {
       Swal.fire('No se han encontrado pacientes', '', 'error')
     }
     formSearchRef.current?.reset()
