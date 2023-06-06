@@ -1,7 +1,7 @@
 import React from 'react'
 import qrIcon from '../../assets/icons/qr-code-scan.svg'
 import pdfIcon from '../../assets/icons/filetype-pdf.svg'
-import { QrService } from '../../codegen_output/services/QrService';
+import { DownloadsService } from '../../codegen_output/services/DownloadsService';
 
 export const DownloadsContainer = () => {
 
