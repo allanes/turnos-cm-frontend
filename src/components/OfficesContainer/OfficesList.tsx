@@ -12,7 +12,7 @@ interface Props {
   recordWithDoctor: Array<RegistroConsultorios>
   officesListWithDetails: Array<ConsultorioDetallado>
   onDeleteOffice: (id: number) => void
-  onRelease: (registro: RegistroConsultoriosCreate, turnsRemaining: number | undefined) => void
+  onRelease: (registro: RegistroConsultoriosCreate, doctor: Medico| undefined, turnsRemaining: number | undefined) => void
 }
 
 const keysTabOffices = [
@@ -74,7 +74,7 @@ export const OfficesList = ({ officesList, doctorsList, recordWithDoctor, office
                   <td><button className='btn btn-primary'
                     type='button'
                     onClick={() => { 
-                      onRelease({ id_consultorio: office.id }, searchPatientList(office.id)?.pacientes?.length)}} >
+                      onRelease({ id_consultorio: office.id }, searchDoctor(searchDoctorID(office.id)?.id_medico), searchPatientList(office.id)?.pacientes?.length)}} >
                     <p className='m-0'>Liberar consultorio</p>
                   </button>
                   </td>
