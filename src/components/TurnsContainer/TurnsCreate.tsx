@@ -29,7 +29,7 @@ const INITIAL_STATE = {
 }
 
 const keysTabPatients = [
-  "Id",
+  "Dni",
   "Nombre",
   "Apellido",
   "Email",
