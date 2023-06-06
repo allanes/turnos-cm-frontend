@@ -145,7 +145,7 @@ export const OfficesContainer = () => {
         }
       })
     }else{
-      Swal.fire('Este consultorio no tiene un médico asignado, asigne uno', '', 'error')
+      Swal.fire('Este consultorio no tiene un médico asignado', '', 'error')
     }
   }
 
