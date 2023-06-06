@@ -45,7 +45,7 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-      )
+    )
   }, [])
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-      )
+    )
   }, [refreshFlag])
 
   useEffect(() => {
@@ -77,8 +77,8 @@ export const OfficesContainer = () => {
         )
       )
       .finally(
-      )
-  }, [officesList,refreshFlag])
+    )
+  }, [officesList, refreshFlag])
 
   useEffect(() => {
     MedicosService.readMedicosApiV1DoctorsGet()
@@ -127,10 +127,9 @@ export const OfficesContainer = () => {
     }
   }
 
-  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate, turnsRemaining: number | undefined): void => {
-    
-    { turnsRemaining
-      ? Swal.fire({
+  const handleReleaseOffice = (officeIdToRelease: RegistroConsultoriosCreate, doctor: Medico | undefined, turnsRemaining: number | undefined): void => {
+    if(doctor?.id){
+      Swal.fire({
         title: '¿Estás seguro que deseas liberar el consultorio?',
         html: `Este consultorio ${turnsRemaining ? `tiene ${turnsRemaining}` : 'no tiene'} turnos asignados`,
         showCancelButton: true,
@@ -145,17 +144,17 @@ export const OfficesContainer = () => {
           setOfficesListWithDetails(officesListWithDetails.filter((office) => office.id !== officeIdToRelease.id_consultorio));
         }
       })
-
-      : Swal.fire('Error', 'El consultorio no tiene asignado un médico', 'error');
+    }else{
+      Swal.fire('Este consultorio no tiene un médico asignado, asigne uno', '', 'error')
     }
   }
 
   return (
     <>
       <AssignDoctorToOffice officesList={officesList} doctorsList={doctorsList} onNewAssign={handleNewAssign} />
-      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor} 
-                   officesListWithDetails={officesListWithDetails} onDeleteOffice={handleDelete} 
-                   onRelease={handleReleaseOffice} />
+      <OfficesList officesList={officesList} doctorsList={doctorsList} recordWithDoctor={recordWithDoctor}
+        officesListWithDetails={officesListWithDetails} onDeleteOffice={handleDelete}
+        onRelease={handleReleaseOffice} />
       <OfficesCreate onNewOffice={handleNewOffice} />
     </>
   )
