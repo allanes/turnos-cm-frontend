@@ -31,11 +31,7 @@ export const PatientsCreate = ({ onNewPatient }: Props) => {
     evt.preventDefault()
     onNewPatient(inputValues)
     formRef.current?.reset()
-    Swal.fire(
-      `${inputValues.nombre}, ${inputValues.apellido}`,
-      'ha sido guardado con éxito',
-      'success'
-    )
+
   }
 
   return (
