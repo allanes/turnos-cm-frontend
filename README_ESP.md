@@ -30,7 +30,7 @@ Esta aplicación frontend requiere del backend para funcionar. Por favor, asegú
 git clone https://github.com/allanes/turnos-cm-frontend.git
 
 # Ve al repositorio
-cd https://github.com/allanes/turnos-cm-frontend.git
+cd turnos-cm-frontend
 
 # Instala las dependencias
 npm install
