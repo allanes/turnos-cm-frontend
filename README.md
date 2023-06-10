@@ -6,16 +6,16 @@ Medical Center Appointment Scheduler is a daily appointment management applicati
 
 This versatile application streamlines the management and display of appointments through three different views:
 
-- **Receptionist View**: It allows receptionists to manage appointments efficiently, including operations for registering offices, doctors, and patients, and creating turns for incoming patients.
+- **Receptionist View**: It allows receptionists to manage appointments, including operations for turns, offices, doctors, and patients.
 
   ![Receptionist view screenshot placeholder](public/vista_recepcionistas.png)
 
-- **Doctor View**: It provides doctors with an organized view of their patient list, reasons for visitation, and importantly, they can call the next or previous patient.
+- **Doctor View**: It provides doctors with an organized view of their patient list, reasons for visitation, and more importantly, they can call the next patient.
 
   <img src="public/vista_medicos.jpg" alt="Doctor view screenshot placeholder" width="300"/>
   <!-- ![Doctor view screenshot placeholder](public/vista_medicos.jpg) -->
 
-- **Patient View**: Displayed on TV screens distributed around the waiting room, patients can view the current status of all the offices. It notifies of the next and previous turn events.
+- **Patient View**: Displayed on TV screens distributed around the waiting room, patients can view the current status of all the offices. It notifies patients when a doctor triggers the call (upper-right corner).
 
   ![Patient view screenshot placeholder](public/vista_pacientes.png)
 
@@ -27,7 +27,7 @@ This frontend application requires the backend to function. Please ensure you ha
 
 ```bash
 # Clone this repository
-git clone https://github.com/<your-repo>
+git clone https://github.com/allanes/turnos-cm-frontend.git
 
 # Go into the repository
 cd <your-repo>
