@@ -30,7 +30,7 @@ This frontend application requires the backend to function. Please ensure you ha
 git clone https://github.com/allanes/turnos-cm-frontend.git
 
 # Go into the repository
-cd <your-repo>
+cd https://github.com/allanes/turnos-cm-frontend.git
 
 # Install dependencies
 npm install
