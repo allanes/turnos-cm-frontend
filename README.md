@@ -15,7 +15,7 @@ This versatile application streamlines the management and display of appointment
   <img src="public/vista_medicos.jpg" alt="Doctor view screenshot placeholder" width="300"/>
   <!-- ![Doctor view screenshot placeholder](public/vista_medicos.jpg) -->
 
-- **Patient View**: Displayed on TV screens distributed around the waiting room, patients can view the current status of all the offices. It notifies patients when a doctor triggers the call (upper-right corner).
+- **Patient View**: Displayed on TV screens grouped by waiting room, patients can view the current status of all the offices. It notifies patients when a doctor triggers the call (upper-right corner).
 
   ![Patient view screenshot placeholder](public/vista_pacientes.png)
 
