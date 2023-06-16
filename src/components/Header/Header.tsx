@@ -6,7 +6,7 @@ import { PORT_SERVER } from '../../types/config'
 export const Header = () => {
 
 	const handleAbrirTeles = async () => {
-		await axios.get(`${PORT_SERVER}/restart_ngrok`);
+		await axios.post(`${PORT_SERVER}/restart_ngrok`);
 	}
 
 	return (
