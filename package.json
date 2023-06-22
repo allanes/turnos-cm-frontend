@@ -15,6 +15,7 @@
     "axios": "^1.4.0",
     "bootstrap": "^5.2.3",
     "diacriticless": "^1.0.1",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.4",
     "react-dom": "^18.2.0",
@@ -30,6 +31,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "reverse-proxy": "node src/reverse_proxy_server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

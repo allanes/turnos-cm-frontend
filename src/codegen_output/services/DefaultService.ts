@@ -44,6 +44,42 @@ export class DefaultService {
     }
 
     /**
+     * Start Ngrok
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static startNgrokStartNgrokPost(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/start_ngrok',
+        });
+    }
+
+    /**
+     * Stop Ngrok
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static stopNgrokStopNgrokPost(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/stop_ngrok',
+        });
+    }
+
+    /**
+     * Handle Restart Ngrok
+     * @returns any Successful Response
+     * @throws ApiError
+     */
+    public static handleRestartNgrokRestartNgrokPost(): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/restart_ngrok',
+        });
+    }
+
+    /**
      * Read Videos
      * @returns any Successful Response
      * @throws ApiError
@@ -81,13 +117,13 @@ export class DefaultService {
 
     /**
      * Get Video
-     * @param videoId
+     * @param videoId 
      * @returns any Successful Response
      * @throws ApiError
      */
     public static getVideoVideoVideoIdGet(
-        videoId: string,
-    ): CancelablePromise<any> {
+videoId: string,
+): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/video/{video_id}',

@@ -56,7 +56,7 @@ export { ConsultoriosService } from './services/ConsultoriosService';
 export { DefaultService } from './services/DefaultService';
 export { MedicosService } from './services/MedicosService';
 export { PacientesService } from './services/PacientesService';
-export { QrService } from './services/QrService';
+export { DownloadsService } from './services/DownloadsService';
 export { RecepcionistasService } from './services/RecepcionistasService';
 export { RegistroDeConsultoriosConMDicosService } from './services/RegistroDeConsultoriosConMDicosService';
 export { TurnosService } from './services/TurnosService';
