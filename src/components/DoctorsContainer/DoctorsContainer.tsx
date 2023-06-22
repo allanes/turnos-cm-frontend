@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Medico } from '../../codegen_output'
-import { MedicosService } from '../../codegen_output'
+import { Medico, MedicosService, ApiError, CancelablePromise } from '../../codegen_output'
 import { DoctorsList } from './DoctorsList'
 import { DoctorsCreate } from './DoctorsCreate'
 import Swal from 'sweetalert2'
@@ -21,10 +20,25 @@ export const DoctorsContainer = () => {
     })
   }, [])
 
-  const handleNewDoctor = (newDoctor: Medico): void => {
-    MedicosService.createMedicoApiV1DoctorsPost(newDoctor)
-    console.log(newDoctor);
-    setDoctorsList( doctor => [...doctorsList, newDoctor])
+  const handleNewDoctor = async (newDoctor: Medico): CancelablePromise<void> => {
+    try {
+      await MedicosService.createMedicoApiV1DoctorsPost(newDoctor)
+      Swal.fire(
+        `${newDoctor.nombre}, ${newDoctor.apellido}`,
+        'ha sido guardado con éxito',
+        'success'
+      )
+      setDoctorsList( doctor => [...doctorsList, newDoctor])
+    } catch (error){
+      const err = error as ApiError; // or a custom error type if you know the structure
+      let errorMessage = 'An error occurred.'; // Start with the message property.
+
+      if (err.body && err.body.detail) {
+        // If the body property has a message property, add it to the error message.
+        errorMessage = err.body.detail;
+      }
+      Swal.fire('Error', errorMessage, 'error');
+    }
   } 
 
   const handleDelete = (doctorToDelete: Medico): void => {
