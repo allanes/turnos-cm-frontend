@@ -5,30 +5,31 @@ import { DownloadsService } from '../../codegen_output/services/DownloadsService
 
 export const DownloadsContainer = () => {
 
-  const handleDownloadPdf = async (response: Response, nombre_descarga: string) => {
-    try {
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', nombre_descarga); // or any other filename you want
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-          console.error('An error occurred while fetching the QR code:', error);
-      }
+  const handleDownloadPdf = async (target_url: string, nombre_descarga: string) => {
+    fetch(target_url)
+    .then(response => response.blob())
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = nombre_descarga;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
   }
+
   
   const downloadQR = async () => {
       try {
-          const response = await fetch('/descargar_qr', {
-              method: 'GET',
-              headers: {
-              'Accept': 'application/pdf',
-              },
-          });
-          await handleDownloadPdf(response, "qr_medicos.pdf");
+          await handleDownloadPdf(
+            '/descargas/descargar_qr', 
+            "qr_medicos.pdf"
+          );
       } catch (error) {
           console.error('An error occurred while fetching the QR code:', error);
       }
@@ -36,13 +37,10 @@ export const DownloadsContainer = () => {
 
   const downloadManualIniciarTeles = async () => {
     try {
-        const response = await fetch('/descargar_manual_iniciar_teles', {
-            method: 'GET',
-            headers: {
-            'Accept': 'application/pdf',
-            },
-        });
-        handleDownloadPdf(response, "manual_iniciar_teles.pdf");
+        await handleDownloadPdf(
+          "/descargas/manual_iniciar_teles", 
+          "manual_iniciar_teles.pdf"
+        );
     } catch (error) {
         console.error('An error occurred while fetching the manual:', error);
     }
@@ -50,13 +48,10 @@ export const DownloadsContainer = () => {
 
   const downloadManualApagarTeles = async () => {
     try {
-        const response = await fetch('/descargar_manual_apagar_teles', {
-            method: 'GET',
-            headers: {
-            'Accept': 'application/pdf',
-            },
-        });
-        handleDownloadPdf(response, "manual_apagar_teles.pdf");
+        await handleDownloadPdf(
+          "/descargas/manual_apagar_teles", 
+          "manual_apagar_teles.pdf"
+        );
     } catch (error) {
         console.error('An error occurred while fetching the manual:', error);
     }

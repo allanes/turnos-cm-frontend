@@ -12,10 +12,10 @@ export class DownloadsService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static descargarQrDescargarQrGet(): CancelablePromise<any> {
+    public static descargarQrDescargasDescargarQrGet(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/descargar_qr',
+            url: '/descargas/descargar_qr',
         });
     }
 
@@ -24,10 +24,10 @@ export class DownloadsService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static descargarManualIniciarTelesManualIniciarTelesGet(): CancelablePromise<any> {
+    public static descargarManualIniciarTelesDescargasManualIniciarTelesGet(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/manual_iniciar_teles',
+            url: '/descargas/manual_iniciar_teles',
         });
     }
 
@@ -36,10 +36,10 @@ export class DownloadsService {
      * @returns any Successful Response
      * @throws ApiError
      */
-    public static descargarManualApagarTelesManualApagarTelesGet(): CancelablePromise<any> {
+    public static descargarManualApagarTelesDescargasManualApagarTelesGet(): CancelablePromise<any> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/manual_apagar_teles',
+            url: '/descargas/manual_apagar_teles',
         });
     }
 
