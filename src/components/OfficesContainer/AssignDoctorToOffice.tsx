@@ -3,7 +3,7 @@ import { Row, Col, Button, Form } from 'react-bootstrap'
 import { Medico, RegistroConsultoriosCreate } from '../../codegen_output'
 import { Consultorio } from '../../codegen_output'
 import useNewAssignDoctorToOffice from '../../hooks/useNewAssignDoctorToOffice'
-
+import Swal from 'sweetalert2'
 
 interface Props {
   officesList: Array<Consultorio>
@@ -30,8 +30,16 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault()
-    onNewAssign(inputValues)
-    formRef.current?.reset()
+  
+    // Check if both the office and doctor have been selected
+    if (inputValues.id_consultorio.toString() !== "0" && inputValues.id_medico?.toString() !== "0") {
+      onNewAssign(inputValues)
+      formRef.current?.reset()
+    } else {
+      // Optionally, show an error message if either the office or doctor hasn't been selected
+      const errorMessage = "Por favor, seleccione tanto el consultorio como el médico antes de enviar el formulario."
+      Swal.fire('Error', errorMessage, 'error');
+    }
   }
 
   return (
@@ -45,7 +53,7 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
             <Form.Group className="mb-3" onChange={handleChange} controlId="id_consultorio">
               <Form.Label>Seleccione el consultorio</Form.Label>
               <Form.Select aria-label="Default select example">
-                <option>...</option>
+                <option value={0} >...</option>
                 {officesList.map((office, index) => {
                   return (
                     <option key={index} value={office.id}>{office.descripcion}</option>
@@ -53,12 +61,12 @@ export const AssignDoctorToOffice = ({ officesList, doctorsList, onNewAssign }: 
                 })}
               </Form.Select>
             </Form.Group>
-          </Col>
+              </Col>
           <Col>
             <Form.Group className="mb-3" onChange={handleChange} controlId="id_medico">
               <Form.Label>Seleccione el médico</Form.Label>
               <Form.Select aria-label="Default select example">
-                <option>...</option>
+                <option value={0}>...</option>
                 {doctorsList.map((doctor, index) => {
                   return (
                     <option key={index} value={doctor.id}>{doctor.nombre}, {doctor.apellido} - {doctor.especialidad}</option>
