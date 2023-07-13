@@ -3,28 +3,24 @@ import { useParams } from 'react-router-dom'
 import { MedicoConTurnos } from '../../../codegen_output'
 import { MedicosService } from '../../../codegen_output'
 
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify'
 import Swal from 'sweetalert2'
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 import '../../../styles/base/_pallete.scss'
-
 
 interface DoctorDetailState {
   doctor: MedicoConTurnos
-  flag: Boolean
+  flag: boolean
+  isCallingPatient: boolean
 }
 
-const keysTablePatiens = [
-  "Nro.",
-  "Paciente",
-  "Motivo"
-]
+const keysTablePatiens = ["Nro.", "Paciente", "Motivo"]
 
 export const DoctorsViewDoctorDetail = () => {
-
   const { doctorId } = useParams()
   const [doctor, setDoctor] = useState<DoctorDetailState["doctor"]>()
   const [refreshFlag, setRefreshFlag] = useState<DoctorDetailState["flag"]>(true)
+  const [isCallingPatient, setIsCallingPatient] = useState<DoctorDetailState["isCallingPatient"]>(false)
 
   useEffect(() => {
     MedicosService.readMedicoApiV1DoctorsIdGet(Number(doctorId))
@@ -44,24 +40,34 @@ export const DoctorsViewDoctorDetail = () => {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-  
-  const handlePreviousTurn = (doctorId: Number): void => {
-    MedicosService.handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(Number(doctorId))
-    setRefreshFlag(!refreshFlag)
-    notifyPreviousTurn("Retrocedio un turno")
-  }
-  
-  const handleNextTurn = (doctorId: Number): void => {
-    MedicosService.handleNextTurnApiV1DoctorsIdNextPatientGet(Number(doctorId))
-    setRefreshFlag(!refreshFlag)
-    notifyNextTurn("Avanzó un turno")
-  }
+
+  const disableButtons = () => {
+    setIsCallingPatient(true);
+    setTimeout(() => {
+      setIsCallingPatient(false);
+    }, 5000);
+  };
+
+  const handlePreviousTurn = (doctorId: number): void => {
+    MedicosService.handlePreviousTurnApiV1DoctorsIdPreviousPatientGet(Number(doctorId));
+    setRefreshFlag(!refreshFlag);
+    notifyPreviousTurn('Retrocedio un turno');
+    disableButtons();
+  };
+
+  const handleNextTurn = (doctorId: number): void => {
+    MedicosService.handleNextTurnApiV1DoctorsIdNextPatientGet(Number(doctorId));
+    setRefreshFlag(!refreshFlag);
+    notifyNextTurn('Avanzó un turno');
+    disableButtons();
+  };
 
   const handleRepeatTurn = (doctorId: Number): void => {
     MedicosService.handleRepeatCallForCurrentTurnApiV1DoctorsIdRepeatCallForCurrentPatientGet(Number(doctorId))
     setRefreshFlag(!refreshFlag)
-    notifyNextTurn("Avanzó un turno")
-  }
+    notifyNextTurn('Repitiendo anuncio de paciente');
+    disableButtons()
+  };
 
   const handleMotivo = (motivo: String): void => {
     Swal.fire({
@@ -88,14 +94,24 @@ export const DoctorsViewDoctorDetail = () => {
             <p className='my-1'>Retroceder turno</p>
           </button>
         </div>
-        <div className='px-1'>
-          <button type='button' className="btn btn-sm btn-outline-success px-3" onClick={() => { handleRepeatTurn(Number(doctor?.id)) }} >
-            <p className='my-1'>Volver a llamar</p>
+        <div className="px-1">
+          <button
+            type="button"
+            className="btn btn-sm btn-outline-success px-3"
+            onClick={() => { handleRepeatTurn(Number(doctor?.id)) }}
+            disabled={isCallingPatient}
+          >
+            <p className="my-1">Volver a llamar</p>
           </button>
         </div>
-        <div className='px-1'>
-          <button type='button' className="btn btn-sm btn-success px-3" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
-            <p className='my-1'>Avanzar turno</p>
+        <div className="px-1">
+          <button
+            type="button"
+            className="btn btn-sm btn-success px-3"
+            onClick={() => { handleNextTurn(Number(doctor?.id)) }}
+            disabled={isCallingPatient}
+          >
+            <p className="my-1">Avanzar turno</p>
           </button>
         </div>
       </div>
@@ -140,5 +156,3 @@ export const DoctorsViewDoctorDetail = () => {
     </div>
   )
 }
-
-
