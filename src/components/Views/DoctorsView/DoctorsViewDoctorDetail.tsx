@@ -76,13 +76,22 @@ export const DoctorsViewDoctorDetail = () => {
           <p className='h2 '>{doctor?.nombre}, {doctor?.apellido}</p>
         </blockquote>
       </div>
-      <div className='container-button my-4 '>
-        <button type='button' className="btn btn-outline-warning" onClick={() => { handlePreviousTurn(Number(doctor?.id)) }} >
-          <p className='my-2'>Retroceder turno</p>
-        </button>
-        <button type='button' className="btn btn-success px-4" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
-          <p className='my-2'>Avanzar turno</p>
-        </button>
+      <div className='container-button my-4'>
+        <div className='px-1'>
+          <button type='button' className="btn btn-sm btn-outline-warning px-3" onClick={() => { handlePreviousTurn(Number(doctor?.id)) }} >
+            <p className='my-1'>Retroceder turno</p>
+          </button>
+        </div>
+        <div className='px-1'>
+          <button type='button' className="btn btn-sm btn-outline-success px-3" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
+            <p className='my-1'>Volver a llamar</p>
+          </button>
+        </div>
+        <div className='px-1'>
+          <button type='button' className="btn btn-sm btn-success px-3" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
+            <p className='my-1'>Avanzar turno</p>
+          </button>
+        </div>
       </div>
       {doctor?.turnos?.length === 0
         ? <div>
