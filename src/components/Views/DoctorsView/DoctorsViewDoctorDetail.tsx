@@ -57,6 +57,12 @@ export const DoctorsViewDoctorDetail = () => {
     notifyNextTurn("Avanzó un turno")
   }
 
+  const handleRepeatTurn = (doctorId: Number): void => {
+    MedicosService.handleRepeatCallForCurrentTurnApiV1DoctorsIdRepeatCallForCurrentPatientGet(Number(doctorId))
+    setRefreshFlag(!refreshFlag)
+    notifyNextTurn("Avanzó un turno")
+  }
+
   const handleMotivo = (motivo: String): void => {
     Swal.fire({
       title: 'Motivo de consulta',
@@ -83,7 +89,7 @@ export const DoctorsViewDoctorDetail = () => {
           </button>
         </div>
         <div className='px-1'>
-          <button type='button' className="btn btn-sm btn-outline-success px-3" onClick={() => { handleNextTurn(Number(doctor?.id)) }} >
+          <button type='button' className="btn btn-sm btn-outline-success px-3" onClick={() => { handleRepeatTurn(Number(doctor?.id)) }} >
             <p className='my-1'>Volver a llamar</p>
           </button>
         </div>

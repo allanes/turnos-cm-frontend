@@ -203,4 +203,26 @@ export class MedicosService {
         });
     }
 
+    /**
+     * Handle Repeat Call For Current Turn
+     * Delete an medico.
+     * @param id 
+     * @returns Turno Successful Response
+     * @throws ApiError
+     */
+    public static handleRepeatCallForCurrentTurnApiV1DoctorsIdRepeatCallForCurrentPatientGet(
+id: number,
+): CancelablePromise<Turno> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/api/v1/doctors/{id}/repeatCallForCurrentPatient',
+            path: {
+                'id': id,
+            },
+            errors: {
+                422: `Validation Error`,
+            },
+        });
+    }
+
 }
